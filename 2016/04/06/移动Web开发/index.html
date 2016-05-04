@@ -1,0 +1,583 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>移动Web开发 | PaddyWang</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="PaddyWang">
+    
+
+    
+    <meta name="description" content="移动Web开发viewport用于承载页面的视口，可以进行网页的缩放
+viewport（视口）就相当于一张照片纸，浏览器窗口就相当于一个相框，网页就相当于照片上的图案。viewport又不局限于浏览器可视区域的大小，它可能比浏览器的可视区域要大，也可能比浏览器的可视区域要小。在默认情况下，一般来讲，移动设备上的viewport都是要大于浏览器可视区域的，这是因为考虑到移动设备的分辨率相对于桌面电脑">
+<meta property="og:type" content="article">
+<meta property="og:title" content="移动Web开发">
+<meta property="og:url" content="http://paddywang.github.io/2016/04/06/移动Web开发/index.html">
+<meta property="og:site_name" content="PaddyWang">
+<meta property="og:description" content="移动Web开发viewport用于承载页面的视口，可以进行网页的缩放
+viewport（视口）就相当于一张照片纸，浏览器窗口就相当于一个相框，网页就相当于照片上的图案。viewport又不局限于浏览器可视区域的大小，它可能比浏览器的可视区域要大，也可能比浏览器的可视区域要小。在默认情况下，一般来讲，移动设备上的viewport都是要大于浏览器可视区域的，这是因为考虑到移动设备的分辨率相对于桌面电脑">
+<meta property="og:updated_time" content="2016-05-04T15:46:11.923Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="移动Web开发">
+<meta name="twitter:description" content="移动Web开发viewport用于承载页面的视口，可以进行网页的缩放
+viewport（视口）就相当于一张照片纸，浏览器窗口就相当于一个相框，网页就相当于照片上的图案。viewport又不局限于浏览器可视区域的大小，它可能比浏览器的可视区域要大，也可能比浏览器的可视区域要小。在默认情况下，一般来讲，移动设备上的viewport都是要大于浏览器可视区域的，这是因为考虑到移动设备的分辨率相对于桌面电脑">
+
+    
+    <link rel="alternative" href="/atom.xml" title="PaddyWang" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="PaddyWang" title="PaddyWang"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="PaddyWang">PaddyWang</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives | 归档</a></li>
+					
+						<li><a href="/links">links | 链接</a></li>
+					
+						<li><a href="/about">About | 简介</a></li>
+					
+					<li>
+ 					
+						<form class="search" action="" target="_blank">
+							<label>Search</label>
+						<input name="s" type="hidden" value= null ><input type="text" name="q" size="30" placeholder="搜索"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/04/06/移动Web开发/" title="移动Web开发" itemprop="url">移动Web开发</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="PaddyWang" target="_blank" itemprop="author">PaddyWang</a>
+		
+  <p class="article-time">
+    <time datetime="2016-04-06T15:40:25.000Z" itemprop="datePublished"> 发表于 2016-04-06</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#移动Web开发"><span class="toc-number">1.</span> <span class="toc-text">移动Web开发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#viewport"><span class="toc-number">1.0.1.</span> <span class="toc-text">viewport</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#样式处理"><span class="toc-number">1.0.2.</span> <span class="toc-text">样式处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动端事件"><span class="toc-number">1.0.3.</span> <span class="toc-text">移动端事件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#学习网站"><span class="toc-number">1.0.3.1.</span> <span class="toc-text">学习网站</span></a></li></ol></li></ol></li></ol></li></ol>
+		
+		</div>
+		
+		<h1 id="移动Web开发"><a href="#移动Web开发" class="headerlink" title="移动Web开发"></a>移动Web开发</h1><h3 id="viewport"><a href="#viewport" class="headerlink" title="viewport"></a>viewport</h3><p><em>用于承载页面的视口，可以进行网页的缩放</em></p>
+<p><strong>viewport</strong>（视口）就相当于一张照片纸，浏览器窗口就相当于一个相框，网页就相当于照片上的图案。viewport又不局限于浏览器可视区域的大小，它可能比浏览器的可视区域要大，也可能比浏览器的可视区域要小。在默认情况下，一般来讲，移动设备上的viewport都是要大于浏览器可视区域的，这是因为考虑到移动设备的分辨率相对于桌面电脑来说都比较小，所以为了能在移动设备上正常显示那些传统的为桌面浏览器设计的网站，移动设备上的浏览器都会把自己默认的viewport设为980px或1024px。</p>
+<ul>
+<li>width：宽度设置的是viewport宽度，可以设置device-width特殊值<ul>
+<li><code>width = device-width</code></li>
+</ul>
+</li>
+<li>initial-scale：初始缩放比，大于0的数字<ul>
+<li><code>initial-scale = 1.0</code></li>
+</ul>
+</li>
+<li>maximum-scale：最大缩放比，大于0的数字<ul>
+<li><code>maximum-scale = 1.0</code></li>
+</ul>
+</li>
+<li>minimum-scale：最小缩放比，大于0的数字<ul>
+<li><code>minimum-scale = 1.0</code></li>
+</ul>
+</li>
+<li>user-scalable：用户是否可以缩放，yes或no（1或0）<ul>
+<li><code>user-scalable = no</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>移动端开发 标准模式：</strong></p>
+<pre><code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, user-scalable=no, initial-scale=1.0&quot;&gt;
+</code></pre><h3 id="样式处理"><a href="#样式处理" class="headerlink" title="样式处理"></a>样式处理</h3><ul>
+<li><p>清除点击高亮</p>
+<ul>
+<li><code>-webkit-tap-highlight-color:transparent;</code></li>
+<li><em>在移动端浏览器会遇见点击出现高亮的效果，在某项项目是不需要这个默认的效果的。那么我们通常会把这个点击的颜色设置成透明。</em></li>
+</ul>
+</li>
+<li><p>所有盒子以边框开始计算</p>
+<ul>
+<li><code>-webkit-box-sizing: border-box;</code></li>
+<li><code>box-sizing: border-box;</code></li>
+<li><em>在移动端通常使用的是百分比布局，那么这样的布局如果使用了border或者padding，就会导致容器的宽度超出屏幕的宽度从而产生滚动条。解决方案是：用css3属性 box-sizing设置所有的盒子从边框开始计算宽度。</em></li>
+</ul>
+</li>
+<li>Input清除默认的样式<ul>
+<li><code>border: none;</code></li>
+<li><code>outline: none;</code></li>
+<li><code>-webkit-appearance: none;</code></li>
+<li><em>在移动设备上的浏览器中，表单一般会有默认的属性。通过<code>border:none;outline:none;</code>是无法完全清除的，还是会有一些浏览器默认的属性，比如：内阴影，立体感……可以通过<code>-webkit-appearance</code>这个属性指的是设置成<code>none</code>，来完全清除</em></li>
+</ul>
+</li>
+<li>最小宽度和最大宽度的限制<ul>
+<li><code>max-width: 640px;  /*在行业当中的移动端的设计图一般使用的是640px*/</code></li>
+<li><code>min-width: 300px;  /*在移动设备当中现在最小的尺寸320px*/</code></li>
+<li><em>适用于图片比较多的首页，门户，电商 等</em></li>
+<li><em>作用 ：保证页面在尺寸比较大的设备当中，页面的效果也就是清新度不会受到太大影响，以及页面在小尺寸的设备当中有较好的布局效果。</em></li>
+</ul>
+</li>
+<li>Img的下间隙问题<ul>
+<li>1.<code>display: block;</code></li>
+<li>2.<code>font-size:0;</code></li>
+<li><em>文字基线默认的 baseline 是以字母X的下边开始计算的</em></li>
+<li><em>Img是行内块级元素它也会有默认的基线对齐。那么和文字一样也会距离底部有一定的间隙。</em></li>
+</ul>
+</li>
+<li><p>搜索按钮调用</p>
+<ul>
+<li><figure class="highlight plain"><figcaption><span>action=""><input type="search" placeholder="提示"></span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><em>在移动端调用输入法的时候会弹出小键盘，键盘一般是enter键，那么在搜索框当中我们要求调用是搜索按钮，那么这样的结构才能调用出来。</em></p>
+</li>
+</ul>
+</li>
+<li>全屏单页面布局<ul>
+<li><code>/*满屏*/ html,body{height: 100%;}</code></li>
+</ul>
+</li>
+<li>两栏：其中一栏宽度固定，一栏自适应<ul>
+<li>1.固定宽度盒子绝对定位;自适应盒子width:100% + padding</li>
+<li>2.文本环绕：固定盒子浮动；自适应盒子overflow:hidden;</li>
+</ul>
+</li>
+</ul>
+<h3 id="移动端事件"><a href="#移动端事件" class="headerlink" title="移动端事件"></a>移动端事件</h3><p><em>在移动端不支持on事件，通过addEventListener添加事件</em></p>
+<ul>
+<li>Touch事件<ul>
+<li><strong>touchstart</strong>：当手指触碰屏幕时触发<ul>
+<li><code>dom.addEventListener(&#39;touchstart&#39;,function(e){});</code></li>
+</ul>
+</li>
+<li><strong>touchmove</strong>：当手指在屏幕上滑动时连续触发<ul>
+<li><code>dom.addEventListener(&#39;touchmove&#39;,function(e){});</code></li>
+</ul>
+</li>
+<li><strong>touchend</strong>：当手指离开屏幕时触发<ul>
+<li><code>dom.addEventListener(&#39;touchend&#39;,function(e){});</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>事件返回e对象所包含的基本属性<ul>
+<li><strong>targetTouches</strong> 目标元素的所有当前触摸</li>
+<li><strong>changedTouches</strong> 页面上最新更改的所有触摸 </li>
+<li><strong>touches</strong> 页面上的所有触摸<ul>
+<li><strong>clientX</strong>:  触摸目标在视口中的X坐标</li>
+<li><strong>clientY</strong>:  触摸目标在视口中的Y坐标</li>
+<li><strong>pageX</strong>：触摸目标在页面中的x坐标</li>
+<li><strong>pageY</strong>：触摸目标在页面中的y坐标</li>
+<li><strong>screenX</strong>:  触摸目标在屏幕中的x坐标</li>
+<li><strong>screenY</strong>:  触摸目标在屏幕中的y坐标</li>
+<li><strong><em>在touchend事件的时候event只会记录changedtouches</em></strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>过渡和动画结束事件<ul>
+<li><strong>transitionEnd</strong>  过渡结束后触发<ul>
+<li><code>dom.addEventListener(&#39;webkitTransitionEnd&#39;,function(e){ });</code></li>
+<li><code>dom.addEventListener(&#39;transitionEnd&#39;,function(e){ });</code></li>
+</ul>
+</li>
+<li><strong>animationEnd</strong>  动画结束后触发<ul>
+<li><code>dom.addEventListener(&#39;webkitAnimationEnd&#39;,function(e){ });</code></li>
+<li><code>dom.addEventListener(&#39;animationEnd&#39;,function(e){ });</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="学习网站"><a href="#学习网站" class="headerlink" title="学习网站"></a>学习网站</h4><ul>
+<li>动画网站：<a href="https://daneden.github.io/animate.css/" target="_blank" rel="external">https://daneden.github.io/animate.css/</a><ul>
+<li><em>这个网站可以提供一些常用的动画，可以在做移动开发的时候可以参考这个网站的效果完成动画</em></li>
+</ul>
+</li>
+<li>Zepto：<a href="http://zeptojs.com/" target="_blank" rel="external">http://zeptojs.com/</a><ul>
+<li><em>Zepto是一个轻量级的针对现代高级浏览器的JavaScript库， 它与jquery有着类似的api。 如果你会用jquery，那么你也会用zepto</em></li>
+</ul>
+</li>
+<li>Weiui：<a href="http://weui.github.io/weui/" target="_blank" rel="external">http://weui.github.io/weui/</a><ul>
+<li><em>微信UI库，它是微信前端团队提供给广大的微信开发者的一些ui组件库。方便开发这开发出和微信风格一致的 内嵌应用</em></li>
+</ul>
+</li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/HTML-CSS/">HTML+CSS</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	<div class="share-jiathis">
+	  
+<div class="jiathis_style_24x24">
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_googleplus"></a>
+	<a class="jiathis_button_douban"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+    var jiathis_config={
+    data_track_clickback:true,
+    sm:"copy,renren,cqq",
+    pic:"",
+    summary:"",
+    
+  </script> 
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=
+" charset="utf-8"></script>      
+
+	 </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/05/03/JavaScript中String的高级API/" title="JavaScript中String的高级API">
+  <strong>上一篇：</strong><br/>
+  <span>
+  JavaScript中String的高级API</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/04/05/模板引擎/"  title="模板引擎">
+ <strong>下一篇：</strong><br/> 
+ <span>模板引擎
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#移动Web开发"><span class="toc-number">1.</span> <span class="toc-text">移动Web开发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#viewport"><span class="toc-number">1.0.1.</span> <span class="toc-text">viewport</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#样式处理"><span class="toc-number">1.0.2.</span> <span class="toc-text">样式处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动端事件"><span class="toc-number">1.0.3.</span> <span class="toc-text">移动端事件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#学习网站"><span class="toc-number">1.0.3.1.</span> <span class="toc-text">学习网站</span></a></li></ol></li></ol></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="github-card">
+<p class="asidetitle">Github 名片</p>
+<div class="github-card" data-github="PaddyWang" data-width="220" data-height="119" data-theme="medium">
+<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js" ></script>
+</div>
+  </div>
+
+
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/HTML-CSS/" title="HTML+CSS">HTML+CSS<sup>2</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://github.com/PaddyWang" target="_blank" title="PaddyWang">GitHub</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.gitbook.com/@paddywang" target="_blank" title="PaddyWang">GitBook</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://developer.mozilla.org/zh-CN/" target="_blank" title="MDN">MDN</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.cnblogs.com/PaddyWang/" target="_blank" title="博客园">博客园</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://blog.csdn.net/wolf20150402" target="_blank" title="CSDN">CSDN</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> The harder, more lucky <br/>
+			I will thank now hard to myself in the future</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/PaddyWang" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:paddywang333@163.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="/about" target="_blank" title="PaddyWang">PaddyWang</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
