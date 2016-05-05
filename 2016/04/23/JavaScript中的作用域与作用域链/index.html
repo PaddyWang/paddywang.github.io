@@ -1,0 +1,607 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>JavaScript中的作用域与作用域链 | PaddyWang</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="PaddyWang">
+    
+
+    
+    <meta name="description" content="简介
+作用域是每一门编程语言重要的一部分，它决定了一个变量的有权访问
+在JavaScript 中作用域又是面试常考的一个知识点
+总结一下关于作用域的知识点：
+从字面上来看作用域就是起作用的区域
+即 ：在函数执行时起作用的区域
+
+
+先了解两个概念：
+块级作用域
+词法作用域
+
+
+
+块级作用域
+在 C 系的编程语言中，基本上都有块级作用域
+所谓块级作用域，就是利用代码块来表示一个起作用的范围
+在该范围内">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript中的作用域与作用域链">
+<meta property="og:url" content="http://paddywang.github.io/2016/04/23/JavaScript中的作用域与作用域链/index.html">
+<meta property="og:site_name" content="PaddyWang">
+<meta property="og:description" content="简介
+作用域是每一门编程语言重要的一部分，它决定了一个变量的有权访问
+在JavaScript 中作用域又是面试常考的一个知识点
+总结一下关于作用域的知识点：
+从字面上来看作用域就是起作用的区域
+即 ：在函数执行时起作用的区域
+
+
+先了解两个概念：
+块级作用域
+词法作用域
+
+
+
+块级作用域
+在 C 系的编程语言中，基本上都有块级作用域
+所谓块级作用域，就是利用代码块来表示一个起作用的范围
+在该范围内">
+<meta property="og:updated_time" content="2016-05-05T14:41:36.114Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript中的作用域与作用域链">
+<meta name="twitter:description" content="简介
+作用域是每一门编程语言重要的一部分，它决定了一个变量的有权访问
+在JavaScript 中作用域又是面试常考的一个知识点
+总结一下关于作用域的知识点：
+从字面上来看作用域就是起作用的区域
+即 ：在函数执行时起作用的区域
+
+
+先了解两个概念：
+块级作用域
+词法作用域
+
+
+
+块级作用域
+在 C 系的编程语言中，基本上都有块级作用域
+所谓块级作用域，就是利用代码块来表示一个起作用的范围
+在该范围内">
+
+    
+    <link rel="alternative" href="/atom.xml" title="PaddyWang" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="PaddyWang" title="PaddyWang"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="PaddyWang">PaddyWang</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives | 归档</a></li>
+					
+						<li><a href="/links">links | 链接</a></li>
+					
+						<li><a href="/about">About | 简介</a></li>
+					
+					<li>
+ 					
+						<form class="search" action="" target="_blank">
+							<label>Search</label>
+						<input name="s" type="hidden" value= null ><input type="text" name="q" size="30" placeholder="搜索"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/04/23/JavaScript中的作用域与作用域链/" title="JavaScript中的作用域与作用域链" itemprop="url">JavaScript中的作用域与作用域链</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="PaddyWang" target="_blank" itemprop="author">PaddyWang</a>
+		
+  <p class="article-time">
+    <time datetime="2016-04-23T14:32:42.000Z" itemprop="datePublished"> 发表于 2016-04-23</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#块级作用域"><span class="toc-number">2.</span> <span class="toc-text">块级作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#词法作用域"><span class="toc-number">3.</span> <span class="toc-text">词法作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#作用域链"><span class="toc-number">4.</span> <span class="toc-text">作用域链</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#绘制作用域链"><span class="toc-number">5.</span> <span class="toc-text">绘制作用域链</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#变量搜索原则"><span class="toc-number">6.</span> <span class="toc-text">变量搜索原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#conclusion："><span class="toc-number">7.</span> <span class="toc-text">conclusion：</span></a></li></ol>
+		
+		</div>
+		
+		<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><blockquote>
+<p>作用域是每一门编程语言重要的一部分，它决定了一个变量的有权访问</p>
+<p>在JavaScript 中作用域又是面试常考的一个知识点</p>
+<p>总结一下关于作用域的知识点：</p>
+<p>从字面上来看作用域就是起作用的区域</p>
+<p>即 ：在函数执行时起作用的区域</p>
+</blockquote>
+<ul>
+<li>先了解两个概念：<ul>
+<li>块级作用域</li>
+<li>词法作用域</li>
+</ul>
+</li>
+</ul>
+<h3 id="块级作用域"><a href="#块级作用域" class="headerlink" title="块级作用域"></a>块级作用域</h3><blockquote>
+<p><em>在 C 系的编程语言中，基本上都有块级作用域</em></p>
+<p><em>所谓块级作用域，就是利用代码块来表示一个起作用的范围</em></p>
+<p><em>在该范围内定义的变量，只允许在该范围内使用</em></p>
+<p><em>在该范围外就无权访问该范围内定义的变量</em></p>
+<p><em>这个范围使用花括号<code>{ }</code>来限定</em></p>
+<p>在JS语言中不存在块级作用域</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="keyword">var</span> num = <span class="number">123</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(num);  =&gt; <span class="number">123</span></span><br></pre></td></tr></table></figure>
+<h3 id="词法作用域"><a href="#词法作用域" class="headerlink" title="词法作用域"></a>词法作用域</h3><blockquote>
+<p>在书写代码的时候决定变量的作用域</p>
+<p>与运行时无关</p>
+<p>以函数来划分作用域</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> num = <span class="number">123</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(num);  <span class="comment">// =&gt; 123</span></span><br><span class="line">&#125;</span><br><span class="line">fn();</span><br><span class="line"><span class="built_in">console</span>.log(num);  <span class="comment">// =&gt; Uncaught ReferenceError: num is not defined</span></span><br></pre></td></tr></table></figure>
+<p>既然函数可以划分作用域，那么通过函数的自调用就可以模拟块级作用域了<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> num = <span class="number">123</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(num);  <span class="comment">// =&gt; 123</span></span><br><span class="line"> &#125;)();</span><br><span class="line"> <span class="built_in">console</span>.log(num);  <span class="comment">// =&gt; Uncaught ReferenceError: num is not defined</span></span><br></pre></td></tr></table></figure></p>
+<p>那么在函数内再定义一个函数呢？？？<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">parent</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> num1 = <span class="number">123</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">child</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> num2 = <span class="number">456</span>;</span><br><span class="line">        <span class="built_in">console</span>.log(num1);  <span class="comment">// =&gt; 123</span></span><br><span class="line">        <span class="built_in">console</span>.log(num2);  <span class="comment">// =&gt; 456</span></span><br><span class="line">    &#125;</span><br><span class="line">    child();</span><br><span class="line">    <span class="built_in">console</span>.log(num2);  <span class="comment">// =&gt; Uncaught ReferenceError: num2 is not defined(…)</span></span><br><span class="line">&#125;</span><br><span class="line">parent();</span><br></pre></td></tr></table></figure></p>
+<p><strong>conclusion：</strong></p>
+<blockquote>
+<p>在函数内部可以访问函数外部定义的变量，反之不行</p>
+</blockquote>
+<h3 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a>作用域链</h3><p>那如果在函数内部定义的变量和函数外部定义的名字一样怎么办？？？<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">1</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">parent</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> num = <span class="number">123</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">child</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> num = <span class="number">456</span>;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'1-'</span> + num);  <span class="comment">// =&gt; 1-456</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'2-'</span> + num);      <span class="comment">// =&gt; 2-123</span></span><br><span class="line">    child();</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'3-'</span> + num);      <span class="comment">// =&gt; 3-123</span></span><br><span class="line">&#125;</span><br><span class="line">parent();</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'4-'</span> + num);                   <span class="comment">// =&gt; 4-1</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>可以得出：<ul>
+<li>函数内外定义的变量没有任何关系</li>
+<li>并且函数在访问的时候有一定的查找顺序</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>有了js中的作用域的划分</p>
+<p>那么有联系的作用域就形成了一个链式的结构，即作用域链</p>
+<p>作用域链的作用：保证变量的有序访问</p>
+</blockquote>
+<ul>
+<li>在进行执行JS代码时，分两步执行<ul>
+<li>第一步：JS引擎会先对JS代码进行预解析（变量提升）</li>
+<li>第二步：逐步执行</li>
+</ul>
+</li>
+</ul>
+<h3 id="绘制作用域链"><a href="#绘制作用域链" class="headerlink" title="绘制作用域链"></a>绘制作用域链</h3><ul>
+<li>绘制规则：<ul>
+<li>作用域链就是变量（对象）的数组</li>
+<li>全部的<code>&lt;script&gt;</code>标签看成一个0级链</li>
+<li>每个变量占据一个位置</li>
+<li>因为只有函数划分作用域，所以函数会扩展出新的链，并一级级展开</li>
+<li>由于声明提升，因此绘制时所有声明提到该链的最前面</li>
+<li>在进行变量访问时，首先是查找该链是否有定义</li>
+<li>该链上如果有定义直接获取数据，如果没有查找上一级链，直到0级，再没有则报错</li>
+</ul>
+</li>
+</ul>
+<p>看一个demo：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">1</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> num = <span class="number">2</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">fn2</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> num = <span class="number">3</span>;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'1-'</span> + num);  <span class="comment">// =&gt; 1-3</span></span><br><span class="line">    &#125;</span><br><span class="line">    fn2();</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'2-'</span> + num);  <span class="comment">// =&gt; 2-2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn3</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> num = <span class="number">4</span>;</span><br><span class="line">    fn4();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn4</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'3-'</span> + num);  <span class="comment">// =&gt; 3-5</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> num = <span class="number">5</span>;</span><br><span class="line">fn1();</span><br><span class="line">fn3();</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'4-'</span> + num);  <span class="comment">// =&gt; 4-5</span></span><br></pre></td></tr></table></figure></p>
+<p>一步步分析：</p>
+<blockquote>
+<p>在全局预解析，即0级上的声明有变量<code>num</code>，函数<code>fn1</code>、<code>fn3</code>、<code>fn4</code>，还有一些语句</p>
+<p>这里的<code>var num = 5;</code>中的<code>var</code>无效，相当于<code>num = 5;</code></p>
+<p>函数<code>fn1()</code>又延伸出一条新链，即1级链，该链上的声明有变量<code>num</code>，函数<code>fn2</code>，还有一些语句</p>
+<p>函数<code>fn2()</code>又延伸出一条新链，即2级链，该链上的声明有变量<code>num</code>，和一条语句</p>
+<p>函数<code>fn3()</code>又延伸出一条新链，即1级链，该链上的声明有变量<code>num</code>，和一条语句</p>
+<p>函数<code>fn3()</code>又延伸出一条新链，即1级链，该链上只有一条语句</p>
+</blockquote>
+<p>即得到下面：</p>
+<ul>
+<li><code>num = 1</code></li>
+<li><code>fn1()</code><ul>
+<li><code>num = 2</code></li>
+<li><code>fn2()</code><ul>
+<li><code>num = 3</code></li>
+<li><em><code>console.log(&#39;1-&#39; + num);</code></em></li>
+</ul>
+</li>
+<li><em><code>fn2(); console.log(&#39;2-&#39; + num);</code></em></li>
+</ul>
+</li>
+<li><code>fn3()</code><ul>
+<li><code>num = 4</code></li>
+<li><em><code>fn4();</code></em></li>
+</ul>
+</li>
+<li><code>fn4()</code><ul>
+<li><em><code>console.log(&#39;3-&#39; + num);</code></em></li>
+</ul>
+</li>
+<li><em><code>num = 5; fn1(); fn3(); console.log(&#39;4-&#39; + num);</code></em></li>
+</ul>
+<h3 id="变量搜索原则"><a href="#变量搜索原则" class="headerlink" title="变量搜索原则"></a>变量搜索原则</h3><ul>
+<li>在代码的运行过程中, 如果访问某一个变量</li>
+<li>那么首先在当前链上找(无序), 如果没有,就在上一级找</li>
+<li>( 在函数内部允许访问定义在函数外部的变量 )</li>
+<li>如此往复, 直到 0 级链, 如果还没有 抛出异常</li>
+<li>如果找到, 则结束寻找, 直接获得该链上变量的数据</li>
+</ul>
+<h3 id="conclusion："><a href="#conclusion：" class="headerlink" title="conclusion："></a>conclusion：</h3><ul>
+<li>js中不存在块级作用域，遵循词法作用域原则</li>
+<li>以函数来划分作用域</li>
+<li>在代码书写时就已经决定了其作用域，与代码执行无关</li>
+<li>自调用函数可以模拟块级作用域</li>
+<li>变量提升</li>
+<li>两条同级作用域链之间没有任何关系</li>
+<li>下一级可以访问上一级变量，反之不行</li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/JavaScript/">JavaScript</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	<div class="share-jiathis">
+	  
+<div class="jiathis_style_24x24">
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_googleplus"></a>
+	<a class="jiathis_button_douban"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+    var jiathis_config={
+    data_track_clickback:true,
+    sm:"copy,renren,cqq",
+    pic:"",
+    summary:"",
+    
+  </script> 
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=
+" charset="utf-8"></script>      
+
+	 </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/05/01/JavaScript中的原型/" title="JavaScript中的原型">
+  <strong>上一篇：</strong><br/>
+  <span>
+  JavaScript中的原型</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/04/20/JavaScript中的闭包/"  title="JavaScript中的闭包">
+ <strong>下一篇：</strong><br/> 
+ <span>JavaScript中的闭包
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#简介"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#块级作用域"><span class="toc-number">2.</span> <span class="toc-text">块级作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#词法作用域"><span class="toc-number">3.</span> <span class="toc-text">词法作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#作用域链"><span class="toc-number">4.</span> <span class="toc-text">作用域链</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#绘制作用域链"><span class="toc-number">5.</span> <span class="toc-text">绘制作用域链</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#变量搜索原则"><span class="toc-number">6.</span> <span class="toc-text">变量搜索原则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#conclusion："><span class="toc-number">7.</span> <span class="toc-text">conclusion：</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="github-card">
+<p class="asidetitle">Github 名片</p>
+<div class="github-card" data-github="PaddyWang" data-width="220" data-height="119" data-theme="medium">
+<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js" ></script>
+</div>
+  </div>
+
+
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>14</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/HTML-CSS/" title="HTML+CSS">HTML+CSS<sup>5</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://github.com/PaddyWang" target="_blank" title="PaddyWang">GitHub</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.gitbook.com/@paddywang" target="_blank" title="PaddyWang">GitBook</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://developer.mozilla.org/zh-CN/" target="_blank" title="MDN">MDN</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.cnblogs.com/PaddyWang/" target="_blank" title="博客园">博客园</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://blog.csdn.net/wolf20150402" target="_blank" title="CSDN">CSDN</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> The harder, more lucky <br/>
+			I will thank now hard to myself in the future</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/PaddyWang" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:paddywang333@163.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="/about" target="_blank" title="PaddyWang">PaddyWang</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

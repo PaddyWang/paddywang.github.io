@@ -4,65 +4,53 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>历史管理&amp;Web存储&amp;应用缓存 | PaddyWang</title>
+    <title>JavaScript中的递归 | PaddyWang</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="PaddyWang">
     
 
     
-    <meta name="description" content="1、历史管理
+    <meta name="description" content="所谓递归就是自己调用自己
+递归思想就是：将问题归结为已经解决的问题
+实现递归的过程：
 
-history对象
+什么时候递归
+什么时候跳出
 
-history.back();     // 后退
+知识点：arguments.callee  就是当前函数的引用
+上几个demo：
 
-history.forward();  // 前进 
-
-history.go(n);     // 前进/后退n步
-
-history.length;     // 历史条数
-
-pushState(data,title,url);  // 追加一条历史记录
-
-onpopstate  // 当前进/后退时触发">
+求n!123456function fn(n)&amp;#123;    if(n &amp;lt;= 0) return ;     if(n === 1) return 1;    return argumen">
 <meta property="og:type" content="article">
-<meta property="og:title" content="历史管理&Web存储&应用缓存">
-<meta property="og:url" content="http://paddywang.github.io/2016/03/03/历史管理&Web存储&应用缓存/index.html">
+<meta property="og:title" content="JavaScript中的递归">
+<meta property="og:url" content="http://paddywang.github.io/2016/04/15/JavaScript中的递归/index.html">
 <meta property="og:site_name" content="PaddyWang">
-<meta property="og:description" content="1、历史管理
+<meta property="og:description" content="所谓递归就是自己调用自己
+递归思想就是：将问题归结为已经解决的问题
+实现递归的过程：
 
-history对象
+什么时候递归
+什么时候跳出
 
-history.back();     // 后退
+知识点：arguments.callee  就是当前函数的引用
+上几个demo：
 
-history.forward();  // 前进 
-
-history.go(n);     // 前进/后退n步
-
-history.length;     // 历史条数
-
-pushState(data,title,url);  // 追加一条历史记录
-
-onpopstate  // 当前进/后退时触发">
-<meta property="og:updated_time" content="2016-05-04T15:41:31.601Z">
+求n!123456function fn(n)&amp;#123;    if(n &amp;lt;= 0) return ;     if(n === 1) return 1;    return argumen">
+<meta property="og:updated_time" content="2016-05-05T14:25:56.332Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="历史管理&Web存储&应用缓存">
-<meta name="twitter:description" content="1、历史管理
+<meta name="twitter:title" content="JavaScript中的递归">
+<meta name="twitter:description" content="所谓递归就是自己调用自己
+递归思想就是：将问题归结为已经解决的问题
+实现递归的过程：
 
-history对象
+什么时候递归
+什么时候跳出
 
-history.back();     // 后退
+知识点：arguments.callee  就是当前函数的引用
+上几个demo：
 
-history.forward();  // 前进 
-
-history.go(n);     // 前进/后退n步
-
-history.length;     // 历史条数
-
-pushState(data,title,url);  // 追加一条历史记录
-
-onpopstate  // 当前进/后退时触发">
+求n!123456function fn(n)&amp;#123;    if(n &amp;lt;= 0) return ;     if(n === 1) return 1;    return argumen">
 
     
     <link rel="alternative" href="/atom.xml" title="PaddyWang" type="application/atom+xml">
@@ -123,14 +111,14 @@ onpopstate  // 当前进/后退时触发">
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/03/03/历史管理&Web存储&应用缓存/" title="历史管理&amp;Web存储&amp;应用缓存" itemprop="url">历史管理&amp;Web存储&amp;应用缓存</a>
+      <a href="/2016/04/15/JavaScript中的递归/" title="JavaScript中的递归" itemprop="url">JavaScript中的递归</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="PaddyWang" target="_blank" itemprop="author">PaddyWang</a>
 		
   <p class="article-time">
-    <time datetime="2016-03-03T15:36:53.000Z" itemprop="datePublished"> 发表于 2016-03-03</time>
+    <time datetime="2016-04-15T14:23:19.000Z" itemprop="datePublished"> 发表于 2016-04-15</time>
     
   </p>
 </header>
@@ -139,147 +127,39 @@ onpopstate  // 当前进/后退时触发">
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、历史管理"><span class="toc-number">1.</span> <span class="toc-text">1、历史管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、Web存储"><span class="toc-number">2.</span> <span class="toc-text">2、Web存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、应用缓存"><span class="toc-number">3.</span> <span class="toc-text">3、应用缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#H5轻松创建离线应用-只需要添加一个-appcache文件即可"><span class="toc-number">3.0.1.</span> <span class="toc-text">H5轻松创建离线应用  只需要添加一个.appcache文件即可</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#version-1-0-1"><span class="toc-number"></span> <span class="toc-text">version 1.0.1</span></a>
+			
 		
 		</div>
 		
-		<h3 id="1、历史管理"><a href="#1、历史管理" class="headerlink" title="1、历史管理"></a>1、历史管理</h3><blockquote>
+		<p>所谓递归就是自己调用自己</p>
+<p>递归思想就是：<strong>将问题归结为已经解决的问题</strong></p>
+<p>实现递归的过程：</p>
 <ul>
-<li><p>history对象</p>
+<li>什么时候递归</li>
+<li>什么时候跳出</li>
+</ul>
+<p>知识点：<code>arguments.callee</code>  就是当前函数的引用</p>
+<p>上几个demo：</p>
 <ul>
-<li><p><code>history.back();</code>     <em>// 后退</em></p>
-</li>
-<li><p><code>history.forward();</code>  <em>// 前进</em> </p>
-</li>
-<li><p><code>history.go(n);</code>     <em>// 前进/后退n步</em></p>
-</li>
-<li><p><code>history.length;</code>     <em>// 历史条数</em></p>
-</li>
-<li><p><code>pushState(data,title,url);</code>  <em>// 追加一条历史记录</em></p>
-</li>
-<li><p><code>onpopstate</code>  <em>// 当前进/后退时触发  调用者 window  （浏览器上的按钮）</em></p>
+<li>求<code>n!</code><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">n</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n &lt;= <span class="number">0</span>) <span class="keyword">return</span> ; </span><br><span class="line">    <span class="keyword">if</span>(n === <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">arguments</span>.callee(n - <span class="number">1</span>)*n;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(fn(<span class="number">5</span>));  <span class="comment">//=&gt; 120</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-</li>
-</ul>
-</blockquote>
-<p><strong>example：</strong></p>
-<pre><code>var btn = document.getElementById(&apos;btn&apos;);     
- btn.onclick = function(){
-     history.pushState({name:&apos;haha&apos;},&apos;title&apos;,&apos;demo.html&apos;);
- }
- window.onpopstate = function(e){
-     console.log(e.state);    // Object {name: &quot;haha&quot;}
- }
-</code></pre><h3 id="2、Web存储"><a href="#2、Web存储" class="headerlink" title="2、Web存储"></a>2、Web存储</h3><blockquote>
+<p><strong>analyze：</strong></p>
+<p>将问题归结为已经解决了的问题，求第<code>n</code>项的阶乘</p>
+<p>假定已经有一个用于求阶乘的函数，即：函数本身</p>
+<p>那么现在就可以求出第<code>n - 1</code>项的阶乘</p>
+<p>然后用第<code>n - 1</code>项去乘以<code>n</code>，即<code>fn(n - 1)*n</code>就是<code>fn( n )</code></p>
+<p>结束条件，即：当<code>n</code>等于<code>1</code>的时候</p>
 <ul>
-<li><p>document.cookie  <em>// 存储数据上限4K</em></p>
-</li>
-<li><p>sessionStorage   <em>// 5M</em></p>
-<ul>
-<li><p><code>window.sessionStorage.setItem(key,val);</code> <em>//设置值</em></p>
-</li>
-<li><p><code>window.sessionStorage.getItem(key);</code>   <em>//读取值</em></p>
-</li>
-<li><p><code>window.sessionStorage.removeItem(key);</code> <em>//删除值</em></p>
-</li>
-<li><p><code>window.sessionStorage.clear();</code>         <em>//清空值</em></p>
+<li>求斐波那契数列（兔子数列）<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 0, 1, 2, 3, 4, 5, 6...n</span></span><br><span class="line"><span class="comment">// 1, 1, 2, 3, 5, 8, 13...</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">n</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n &lt; <span class="number">0</span>) <span class="keyword">return</span> ;</span><br><span class="line">    <span class="keyword">if</span>(n === <span class="number">1</span> || n === <span class="number">0</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">arguments</span>.callee(n - <span class="number">2</span>) + <span class="built_in">arguments</span>.callee(n - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(fn(<span class="number">5</span>));  <span class="comment">// =&gt; 8</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p><strong>// 生命周期为：关闭页面</strong></p>
-<p><strong>// 数据共享仅限于本页面使用</strong></p>
-</li>
-<li><p>localStorage  <em>// 20M</em></p>
-<p><em>// 用法同上session</em></p>
-<p><strong>// 永久生效  除非手动清除</strong></p>
-<p><strong>// 数据跨页面共享使用</strong></p>
-</li>
-</ul>
-</blockquote>
-<p><strong>example：</strong></p>
-<pre><code>// 设置
-document.querySelector(&apos;.set&apos;).onclick = function(){
-    window.sessionStorage.setItem(this.parentNode.querySelector(&apos;.key&apos;).value,this.parentNode.querySelector(&apos;.val&apos;).value);
-}
-// 获取
-document.querySelector(&apos;.get&apos;).onclick = function(){
-    this.parentNode.querySelector(&apos;.val&apos;).value = window.sessionStorage.getItem(this.parentNode.querySelector(&apos;.key&apos;).value);
-}
-// 删除
-document.querySelector(&apos;.remove&apos;).onclick = function(){
-    window.sessionStorage.removeItem(this.parentNode.querySelector(&apos;.key&apos;).value);
-}
-// 清空
-document.querySelector(&apos;.clear&apos;).onclick = function(){
-    window.sessionStorage.clear();
-}
-</code></pre><h3 id="3、应用缓存"><a href="#3、应用缓存" class="headerlink" title="3、应用缓存"></a>3、应用缓存</h3><h5 id="H5轻松创建离线应用-只需要添加一个-appcache文件即可"><a href="#H5轻松创建离线应用-只需要添加一个-appcache文件即可" class="headerlink" title="H5轻松创建离线应用  只需要添加一个.appcache文件即可"></a>H5轻松创建离线应用  只需要添加一个.appcache文件即可</h5><blockquote>
-<ul>
-<li><p>第一步</p>
-<ul>
-<li>缓存清单：  文件后缀 =&gt; .appcache</li>
-</ul>
-</li>
-<li><p>第二步</p>
-<ul>
-<li>文件顶行 =&gt; CACHE MANIFEST</li>
-</ul>
-</li>
-<li><p>第三步</p>
-<ul>
-<li><p>CACHE:    <em># 列出需要缓存的内容</em></p>
-</li>
-<li><p>NETWORK:  <em># 指定需要在线访问的资源</em></p>
-</li>
-<li><p>FALLBACK: <em># 当缓存的资源找不到时进行替换</em></p>
-</li>
-</ul>
-</li>
-<li><p>第四步应用</p>
-<ul>
-<li>在将要缓存的页面添加 =&gt; <code>&lt;html manifest=&quot;src&quot; &gt;</code></li>
-</ul>
-</li>
-<li><p>第五步更新</p>
-<ul>
-<li><h1 id="version-1-0-1"><a href="#version-1-0-1" class="headerlink" title="version 1.0.1"></a>version 1.0.1</h1></li>
-</ul>
-<p><em># 自定义版本号 通过改变注释里的内容 重新缓存</em></p>
-</li>
-</ul>
-</blockquote>
-<p><strong>example：</strong></p>
-<pre><code>CACHE MANIFEST
-
-#通过改变活注释内容，达到缓存清单内容发生更改，进而重新缓存资源
-# version 1.0.7
-
-#指定需要在线访问的资源
-NETWORK:
-
-./js/main.js
-
-#列出需要缓存的内容
-CACHE:
-
-./images/img1.jpg
-./images/img2.jpg
-./images/img3.jpg
-./images/img4.jpg
-./images/img5.jpg
-
-#指定需要在线访问的资源
-NETWORK:
-
-./js/main1.js
-
-# 当缓存的资源找不到的情况，会自动替换FALLBACK里的内容
-# 如 ./online.html找不到了，则会替换成 ./offline.html
-FALLBACK:
-
-./css/online.css ./css/offline.css
-./online.html ./offline.html
-</code></pre>  
+<p><strong>analyze：</strong></p>
+<p>将问题归结为已经解决的问题：</p>
+<p>即：已经有一个可以求出第<code>n</code>项的斐波那契数列值</p>
+<p>该数列的规律为：第<code>n</code>项是第<code>n - 1</code>与第<code>n - 2</code>项值的和</p>
+<p>结束条件：第<code>1</code>项与第<code>0</code>项刚好为值<code>1</code></p>
+  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -332,18 +212,18 @@ FALLBACK:
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2016/03/04/字体图标/" title="字体图标">
+ <a href="/2016/04/20/JavaScript中的闭包/" title="JavaScript中的闭包">
   <strong>上一篇：</strong><br/>
   <span>
-  字体图标</span>
+  JavaScript中的闭包</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2016/02/17/函数的四种调用模式/"  title="函数的四种调用模式">
+<a href="/2016/04/06/移动Web开发/"  title="移动Web开发">
  <strong>下一篇：</strong><br/> 
- <span>函数的四种调用模式
+ <span>移动Web开发
 </span>
 </a>
 </div>
@@ -358,7 +238,7 @@ FALLBACK:
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、历史管理"><span class="toc-number">1.</span> <span class="toc-text">1、历史管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、Web存储"><span class="toc-number">2.</span> <span class="toc-text">2、Web存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、应用缓存"><span class="toc-number">3.</span> <span class="toc-text">3、应用缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#H5轻松创建离线应用-只需要添加一个-appcache文件即可"><span class="toc-number">3.0.1.</span> <span class="toc-text">H5轻松创建离线应用  只需要添加一个.appcache文件即可</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#version-1-0-1"><span class="toc-number"></span> <span class="toc-text">version 1.0.1</span></a>
+ 
  
   </div>
 

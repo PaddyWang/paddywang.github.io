@@ -4,65 +4,80 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>历史管理&amp;Web存储&amp;应用缓存 | PaddyWang</title>
+    <title>canvas基本使用 | PaddyWang</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="PaddyWang">
     
 
     
-    <meta name="description" content="1、历史管理
+    <meta name="description" content="绘制形状流程
+创建一个画布 -&amp;gt; &amp;lt;canvas&amp;gt;
+设置画布的尺寸 -&amp;gt; width/height
+默认尺寸 300 X 150
+不带单位
+不要在 style 中设置，直接设置属性
 
-history对象
 
-history.back();     // 后退
+选择绘画工具
+绘制路径
+填充/描边
 
-history.forward();  // 前进 
+绘制环境 context
+获取绘图上下文
+canvasElem.getContext(2d)
 
-history.go(n);     // 前进/后退n步
 
-history.length;     // 历史条数
-
-pushState(data,title,url);  // 追加一条历史记录
-
-onpopstate  // 当前进/后退时触发">
+绘制路径
+moveTo(x, y)
+ lineTo(x">
 <meta property="og:type" content="article">
-<meta property="og:title" content="历史管理&Web存储&应用缓存">
-<meta property="og:url" content="http://paddywang.github.io/2016/03/03/历史管理&Web存储&应用缓存/index.html">
+<meta property="og:title" content="canvas基本使用">
+<meta property="og:url" content="http://paddywang.github.io/2016/02/05/canvas基本使用/index.html">
 <meta property="og:site_name" content="PaddyWang">
-<meta property="og:description" content="1、历史管理
+<meta property="og:description" content="绘制形状流程
+创建一个画布 -&amp;gt; &amp;lt;canvas&amp;gt;
+设置画布的尺寸 -&amp;gt; width/height
+默认尺寸 300 X 150
+不带单位
+不要在 style 中设置，直接设置属性
 
-history对象
 
-history.back();     // 后退
+选择绘画工具
+绘制路径
+填充/描边
 
-history.forward();  // 前进 
+绘制环境 context
+获取绘图上下文
+canvasElem.getContext(2d)
 
-history.go(n);     // 前进/后退n步
 
-history.length;     // 历史条数
-
-pushState(data,title,url);  // 追加一条历史记录
-
-onpopstate  // 当前进/后退时触发">
-<meta property="og:updated_time" content="2016-05-04T15:41:31.601Z">
+绘制路径
+moveTo(x, y)
+ lineTo(x">
+<meta property="og:updated_time" content="2016-05-05T15:26:24.719Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="历史管理&Web存储&应用缓存">
-<meta name="twitter:description" content="1、历史管理
+<meta name="twitter:title" content="canvas基本使用">
+<meta name="twitter:description" content="绘制形状流程
+创建一个画布 -&amp;gt; &amp;lt;canvas&amp;gt;
+设置画布的尺寸 -&amp;gt; width/height
+默认尺寸 300 X 150
+不带单位
+不要在 style 中设置，直接设置属性
 
-history对象
 
-history.back();     // 后退
+选择绘画工具
+绘制路径
+填充/描边
 
-history.forward();  // 前进 
+绘制环境 context
+获取绘图上下文
+canvasElem.getContext(2d)
 
-history.go(n);     // 前进/后退n步
 
-history.length;     // 历史条数
-
-pushState(data,title,url);  // 追加一条历史记录
-
-onpopstate  // 当前进/后退时触发">
+绘制路径
+moveTo(x, y)
+ lineTo(x">
 
     
     <link rel="alternative" href="/atom.xml" title="PaddyWang" type="application/atom+xml">
@@ -123,14 +138,14 @@ onpopstate  // 当前进/后退时触发">
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/03/03/历史管理&Web存储&应用缓存/" title="历史管理&amp;Web存储&amp;应用缓存" itemprop="url">历史管理&amp;Web存储&amp;应用缓存</a>
+      <a href="/2016/02/05/canvas基本使用/" title="canvas基本使用" itemprop="url">canvas基本使用</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="PaddyWang" target="_blank" itemprop="author">PaddyWang</a>
 		
   <p class="article-time">
-    <time datetime="2016-03-03T15:36:53.000Z" itemprop="datePublished"> 发表于 2016-03-03</time>
+    <time datetime="2016-02-05T15:24:09.000Z" itemprop="datePublished"> 发表于 2016-02-05</time>
     
   </p>
 </header>
@@ -139,147 +154,113 @@ onpopstate  // 当前进/后退时触发">
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、历史管理"><span class="toc-number">1.</span> <span class="toc-text">1、历史管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、Web存储"><span class="toc-number">2.</span> <span class="toc-text">2、Web存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、应用缓存"><span class="toc-number">3.</span> <span class="toc-text">3、应用缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#H5轻松创建离线应用-只需要添加一个-appcache文件即可"><span class="toc-number">3.0.1.</span> <span class="toc-text">H5轻松创建离线应用  只需要添加一个.appcache文件即可</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#version-1-0-1"><span class="toc-number"></span> <span class="toc-text">version 1.0.1</span></a>
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#绘制形状"><span class="toc-number">1.</span> <span class="toc-text">绘制形状</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#流程"><span class="toc-number">1.1.</span> <span class="toc-text">流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#绘制环境-context"><span class="toc-number">1.2.</span> <span class="toc-text">绘制环境 context</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#绘制文本"><span class="toc-number">2.</span> <span class="toc-text">绘制文本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#绘制图像"><span class="toc-number">3.</span> <span class="toc-text">绘制图像</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#drawImage"><span class="toc-number">3.1.</span> <span class="toc-text">drawImage</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#扩展"><span class="toc-number">4.</span> <span class="toc-text">扩展</span></a></li></ol>
 		
 		</div>
 		
-		<h3 id="1、历史管理"><a href="#1、历史管理" class="headerlink" title="1、历史管理"></a>1、历史管理</h3><blockquote>
-<ul>
-<li><p>history对象</p>
-<ul>
-<li><p><code>history.back();</code>     <em>// 后退</em></p>
+		<h3 id="绘制形状"><a href="#绘制形状" class="headerlink" title="绘制形状"></a>绘制形状</h3><h4 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h4><ul>
+<li>创建一个画布 -&gt; <code>&lt;canvas&gt;</code></li>
+<li>设置画布的尺寸 -&gt; <code>width/height</code><ul>
+<li>默认尺寸 300 X 150</li>
+<li>不带单位</li>
+<li>不要在 style 中设置，直接设置属性</li>
+</ul>
 </li>
-<li><p><code>history.forward();</code>  <em>// 前进</em> </p>
+<li>选择绘画工具</li>
+<li>绘制路径</li>
+<li>填充/描边</li>
+</ul>
+<h4 id="绘制环境-context"><a href="#绘制环境-context" class="headerlink" title="绘制环境 context"></a>绘制环境 context</h4><ul>
+<li>获取绘图上下文<ul>
+<li><strong>canvasElem.getContext(2d)</strong></li>
+</ul>
 </li>
-<li><p><code>history.go(n);</code>     <em>// 前进/后退n步</em></p>
+<li>绘制路径<ul>
+<li><strong>moveTo(x, y)</strong></li>
+<li><strong> lineTo(x, y)</strong></li>
+<li><strong>closePath()</strong>  -&gt; <em>将起点与终点连接起来</em></li>
+<li><strong>rect(x, y, w, h)</strong> -&gt; <em>绘制矩形路径</em></li>
+<li><strong>arc(x, y, r, startDeg, endDeg, [是否逆时针])</strong> -&gt; <em>绘制弧形路径</em></li>
+<li><strong>beginPath()</strong> -&gt; <em>开启新的路径</em></li>
+</ul>
 </li>
-<li><p><code>history.length;</code>     <em>// 历史条数</em></p>
+<li>渲染函数<ul>
+<li><strong>stroke()</strong> -&gt; <em>描边</em></li>
+<li><strong> fill()</strong> -&gt; <em>填充</em></li>
+<li><strong>strokeRect(x, y, w, h)</strong> -&gt; <em>直接渲染矩形，对路径不造成影响</em></li>
+<li><strong>fillRect(x, y, w, h)</strong>  -&gt; <em>不影响路径</em></li>
+<li><strong>clearRect(x, y, w, h)</strong> -&gt; <em>清空画布</em></li>
+</ul>
 </li>
-<li><p><code>pushState(data,title,url);</code>  <em>// 追加一条历史记录</em></p>
-</li>
-<li><p><code>onpopstate</code>  <em>// 当前进/后退时触发  调用者 window  （浏览器上的按钮）</em></p>
-</li>
+<li>渲染样式<ul>
+<li><strong>strokeStyle</strong></li>
+<li><strong>lineWidth</strong></li>
+<li><strong>fillStyle</strong></li>
 </ul>
 </li>
 </ul>
-</blockquote>
-<p><strong>example：</strong></p>
-<pre><code>var btn = document.getElementById(&apos;btn&apos;);     
- btn.onclick = function(){
-     history.pushState({name:&apos;haha&apos;},&apos;title&apos;,&apos;demo.html&apos;);
- }
- window.onpopstate = function(e){
-     console.log(e.state);    // Object {name: &quot;haha&quot;}
- }
-</code></pre><h3 id="2、Web存储"><a href="#2、Web存储" class="headerlink" title="2、Web存储"></a>2、Web存储</h3><blockquote>
-<ul>
-<li><p>document.cookie  <em>// 存储数据上限4K</em></p>
-</li>
-<li><p>sessionStorage   <em>// 5M</em></p>
-<ul>
-<li><p><code>window.sessionStorage.setItem(key,val);</code> <em>//设置值</em></p>
-</li>
-<li><p><code>window.sessionStorage.getItem(key);</code>   <em>//读取值</em></p>
-</li>
-<li><p><code>window.sessionStorage.removeItem(key);</code> <em>//删除值</em></p>
-</li>
-<li><p><code>window.sessionStorage.clear();</code>         <em>//清空值</em></p>
-</li>
-</ul>
-<p><strong>// 生命周期为：关闭页面</strong></p>
-<p><strong>// 数据共享仅限于本页面使用</strong></p>
-</li>
-<li><p>localStorage  <em>// 20M</em></p>
-<p><em>// 用法同上session</em></p>
-<p><strong>// 永久生效  除非手动清除</strong></p>
-<p><strong>// 数据跨页面共享使用</strong></p>
-</li>
-</ul>
-</blockquote>
-<p><strong>example：</strong></p>
-<pre><code>// 设置
-document.querySelector(&apos;.set&apos;).onclick = function(){
-    window.sessionStorage.setItem(this.parentNode.querySelector(&apos;.key&apos;).value,this.parentNode.querySelector(&apos;.val&apos;).value);
-}
-// 获取
-document.querySelector(&apos;.get&apos;).onclick = function(){
-    this.parentNode.querySelector(&apos;.val&apos;).value = window.sessionStorage.getItem(this.parentNode.querySelector(&apos;.key&apos;).value);
-}
-// 删除
-document.querySelector(&apos;.remove&apos;).onclick = function(){
-    window.sessionStorage.removeItem(this.parentNode.querySelector(&apos;.key&apos;).value);
-}
-// 清空
-document.querySelector(&apos;.clear&apos;).onclick = function(){
-    window.sessionStorage.clear();
-}
-</code></pre><h3 id="3、应用缓存"><a href="#3、应用缓存" class="headerlink" title="3、应用缓存"></a>3、应用缓存</h3><h5 id="H5轻松创建离线应用-只需要添加一个-appcache文件即可"><a href="#H5轻松创建离线应用-只需要添加一个-appcache文件即可" class="headerlink" title="H5轻松创建离线应用  只需要添加一个.appcache文件即可"></a>H5轻松创建离线应用  只需要添加一个.appcache文件即可</h5><blockquote>
-<ul>
-<li><p>第一步</p>
-<ul>
-<li>缓存清单：  文件后缀 =&gt; .appcache</li>
+<h3 id="绘制文本"><a href="#绘制文本" class="headerlink" title="绘制文本"></a>绘制文本</h3><ul>
+<li>渲染函数  <em>原点默认在文字的左下方</em><ul>
+<li><strong>strokeText(text, x, y)</strong></li>
+<li><strong>fillText(text, x, y)</strong></li>
 </ul>
 </li>
-<li><p>第二步</p>
+<li>渲染样式<ul>
+<li><strong>font</strong> -&gt; <em>‘font-size font-family’</em></li>
+<li><strong>textAlign</strong> -&gt; <em>‘start | end | center | left | right ‘ - 文本水平对齐方式</em></li>
+<li><strong>textBaseLine</strong> -&gt; <em>‘top | middle | bottom’  - 文本基线对齐方式，即垂直对齐方式</em></li>
+<li>对齐方式基于原点为参考系，当左对齐的时候，即原点在文字左侧</li>
+<li>所有的样式值为字符串类型</li>
+</ul>
+</li>
+</ul>
+<h3 id="绘制图像"><a href="#绘制图像" class="headerlink" title="绘制图像"></a>绘制图像</h3><h4 id="drawImage"><a href="#drawImage" class="headerlink" title="drawImage"></a><strong>drawImage</strong></h4><ul>
+<li>三参数<ul>
+<li><strong>drawImage(imgElem, dx, dy)</strong></li>
+<li>dx/dy : 目标坐标，即绘制在画布上的坐标</li>
+</ul>
+</li>
+<li>五参数<ul>
+<li><strong>drawImage(imgElem, dx, dy, dw, dh)</strong></li>
+<li>dw/wy : 绘制在画布上尺寸</li>
+</ul>
+</li>
+<li>九参数<ul>
+<li><strong>drawImage(imgElem, sx, sy, sw, sh, dx, dy, dw, dh)</strong></li>
+<li>sx/sy : 在图像上的切割坐标 ; sw/sh : 在图像上的切割尺寸</li>
+</ul>
+</li>
+</ul>
+<h3 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h3><ul>
+<li><p>canvas 抗锯齿</p>
+<p> 由于描边的时候会出现矩形现象，于是进行了颜色透明淡化处理，</p>
+<p> 于是在后面再渲染路径时就会出现颜色叠加现象</p>
+</li>
+<li><p><strong>requestAnimationFrame(fn)</strong>  <em>请求动画帧</em></p>
+<p>不用写时间间隔</p>
+<p>由浏览器决定什么时候绘制下一帧</p>
+<p>现在的浏览器一般在 16.667 毫秒，在浏览器性能差的时候可能时间比这长</p>
+<p>60 HZ  -&gt; 16.667 = 1000 / 60</p>
+</li>
+</ul>
 <ul>
-<li>文件顶行 =&gt; CACHE MANIFEST</li>
-</ul>
+<li><p>绘制直线的小bug</p>
+<p>在进行moveTo和lineTo绘制直线，此时的直线是以2像素来显示的</p>
+<p>并且是以灰色显示的</p>
+<p>因为浏览器在进行渲染的时候进行了处理</p>
+<p><strong>解决办法：</strong></p>
+<p>1&gt; 用矩形来代替，设置矩形的高或宽为1像素</p>
+<p>2&gt; moveTo(0, 10.5)  lineTo(300, 10.5)</p>
 </li>
-<li><p>第三步</p>
-<ul>
-<li><p>CACHE:    <em># 列出需要缓存的内容</em></p>
-</li>
-<li><p>NETWORK:  <em># 指定需要在线访问的资源</em></p>
-</li>
-<li><p>FALLBACK: <em># 当缓存的资源找不到时进行替换</em></p>
-</li>
-</ul>
-</li>
-<li><p>第四步应用</p>
-<ul>
-<li>在将要缓存的页面添加 =&gt; <code>&lt;html manifest=&quot;src&quot; &gt;</code></li>
-</ul>
-</li>
-<li><p>第五步更新</p>
-<ul>
-<li><h1 id="version-1-0-1"><a href="#version-1-0-1" class="headerlink" title="version 1.0.1"></a>version 1.0.1</h1></li>
-</ul>
-<p><em># 自定义版本号 通过改变注释里的内容 重新缓存</em></p>
+<li><p>上传图像</p>
+<p>获取上传的图像信息：</p>
+<p><code>imgData = file.files[0];</code></p>
+<p><code>url = URL.createObjectURL(file.files[0]);</code></p>
+<p>获取画布中指定的图片信息：</p>
+<p><code>url = ctx.getImageData(x, y, w, h);</code>、</p>
 </li>
 </ul>
-</blockquote>
-<p><strong>example：</strong></p>
-<pre><code>CACHE MANIFEST
-
-#通过改变活注释内容，达到缓存清单内容发生更改，进而重新缓存资源
-# version 1.0.7
-
-#指定需要在线访问的资源
-NETWORK:
-
-./js/main.js
-
-#列出需要缓存的内容
-CACHE:
-
-./images/img1.jpg
-./images/img2.jpg
-./images/img3.jpg
-./images/img4.jpg
-./images/img5.jpg
-
-#指定需要在线访问的资源
-NETWORK:
-
-./js/main1.js
-
-# 当缓存的资源找不到的情况，会自动替换FALLBACK里的内容
-# 如 ./online.html找不到了，则会替换成 ./offline.html
-FALLBACK:
-
-./css/online.css ./css/offline.css
-./online.html ./offline.html
-</code></pre>  
+  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -332,21 +313,13 @@ FALLBACK:
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2016/03/04/字体图标/" title="字体图标">
+ <a href="/2016/02/17/函数的四种调用模式/" title="函数的四种调用模式">
   <strong>上一篇：</strong><br/>
   <span>
-  字体图标</span>
+  函数的四种调用模式</span>
 </a>
 </div>
 
-
-<div class="next">
-<a href="/2016/02/17/函数的四种调用模式/"  title="函数的四种调用模式">
- <strong>下一篇：</strong><br/> 
- <span>函数的四种调用模式
-</span>
-</a>
-</div>
 
 </nav>
 
@@ -358,7 +331,7 @@ FALLBACK:
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、历史管理"><span class="toc-number">1.</span> <span class="toc-text">1、历史管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、Web存储"><span class="toc-number">2.</span> <span class="toc-text">2、Web存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、应用缓存"><span class="toc-number">3.</span> <span class="toc-text">3、应用缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#H5轻松创建离线应用-只需要添加一个-appcache文件即可"><span class="toc-number">3.0.1.</span> <span class="toc-text">H5轻松创建离线应用  只需要添加一个.appcache文件即可</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#version-1-0-1"><span class="toc-number"></span> <span class="toc-text">version 1.0.1</span></a>
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#绘制形状"><span class="toc-number">1.</span> <span class="toc-text">绘制形状</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#流程"><span class="toc-number">1.1.</span> <span class="toc-text">流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#绘制环境-context"><span class="toc-number">1.2.</span> <span class="toc-text">绘制环境 context</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#绘制文本"><span class="toc-number">2.</span> <span class="toc-text">绘制文本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#绘制图像"><span class="toc-number">3.</span> <span class="toc-text">绘制图像</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#drawImage"><span class="toc-number">3.1.</span> <span class="toc-text">drawImage</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#扩展"><span class="toc-number">4.</span> <span class="toc-text">扩展</span></a></li></ol>
  
   </div>
 

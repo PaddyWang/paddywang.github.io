@@ -4,65 +4,47 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>历史管理&amp;Web存储&amp;应用缓存 | PaddyWang</title>
+    <title>DOM操作 | PaddyWang</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="PaddyWang">
     
 
     
-    <meta name="description" content="1、历史管理
-
-history对象
-
-history.back();     // 后退
-
-history.forward();  // 前进 
-
-history.go(n);     // 前进/后退n步
-
-history.length;     // 历史条数
-
-pushState(data,title,url);  // 追加一条历史记录
-
-onpopstate  // 当前进/后退时触发">
+    <meta name="description" content="作为前端工程师如果不会 DOM 操作恐怕要被笑掉大牙了
+频繁的 DOM 操作会降低网站的性能
+一个有经验的后台开发和一个没有经验的后台开发在性能上可能不会相差太大
+但是一个有经验的前端开发和一个没有经验的前端开发在性能上可以相差百倍
+因此合理的 DOM 操作非常重要
+DOM节点访问
+获取节点
+getElementById()
+一个节点 = document.getElementById(id)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="历史管理&Web存储&应用缓存">
-<meta property="og:url" content="http://paddywang.github.io/2016/03/03/历史管理&Web存储&应用缓存/index.html">
+<meta property="og:title" content="DOM操作">
+<meta property="og:url" content="http://paddywang.github.io/2016/03/25/DOM操作/index.html">
 <meta property="og:site_name" content="PaddyWang">
-<meta property="og:description" content="1、历史管理
-
-history对象
-
-history.back();     // 后退
-
-history.forward();  // 前进 
-
-history.go(n);     // 前进/后退n步
-
-history.length;     // 历史条数
-
-pushState(data,title,url);  // 追加一条历史记录
-
-onpopstate  // 当前进/后退时触发">
-<meta property="og:updated_time" content="2016-05-04T15:41:31.601Z">
+<meta property="og:description" content="作为前端工程师如果不会 DOM 操作恐怕要被笑掉大牙了
+频繁的 DOM 操作会降低网站的性能
+一个有经验的后台开发和一个没有经验的后台开发在性能上可能不会相差太大
+但是一个有经验的前端开发和一个没有经验的前端开发在性能上可以相差百倍
+因此合理的 DOM 操作非常重要
+DOM节点访问
+获取节点
+getElementById()
+一个节点 = document.getElementById(id)">
+<meta property="og:updated_time" content="2016-05-05T15:07:28.933Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="历史管理&Web存储&应用缓存">
-<meta name="twitter:description" content="1、历史管理
-
-history对象
-
-history.back();     // 后退
-
-history.forward();  // 前进 
-
-history.go(n);     // 前进/后退n步
-
-history.length;     // 历史条数
-
-pushState(data,title,url);  // 追加一条历史记录
-
-onpopstate  // 当前进/后退时触发">
+<meta name="twitter:title" content="DOM操作">
+<meta name="twitter:description" content="作为前端工程师如果不会 DOM 操作恐怕要被笑掉大牙了
+频繁的 DOM 操作会降低网站的性能
+一个有经验的后台开发和一个没有经验的后台开发在性能上可能不会相差太大
+但是一个有经验的前端开发和一个没有经验的前端开发在性能上可以相差百倍
+因此合理的 DOM 操作非常重要
+DOM节点访问
+获取节点
+getElementById()
+一个节点 = document.getElementById(id)">
 
     
     <link rel="alternative" href="/atom.xml" title="PaddyWang" type="application/atom+xml">
@@ -123,14 +105,14 @@ onpopstate  // 当前进/后退时触发">
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/03/03/历史管理&Web存储&应用缓存/" title="历史管理&amp;Web存储&amp;应用缓存" itemprop="url">历史管理&amp;Web存储&amp;应用缓存</a>
+      <a href="/2016/03/25/DOM操作/" title="DOM操作" itemprop="url">DOM操作</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="PaddyWang" target="_blank" itemprop="author">PaddyWang</a>
 		
   <p class="article-time">
-    <time datetime="2016-03-03T15:36:53.000Z" itemprop="datePublished"> 发表于 2016-03-03</time>
+    <time datetime="2016-03-25T15:01:19.000Z" itemprop="datePublished"> 发表于 2016-03-25</time>
     
   </p>
 </header>
@@ -139,147 +121,161 @@ onpopstate  // 当前进/后退时触发">
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、历史管理"><span class="toc-number">1.</span> <span class="toc-text">1、历史管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、Web存储"><span class="toc-number">2.</span> <span class="toc-text">2、Web存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、应用缓存"><span class="toc-number">3.</span> <span class="toc-text">3、应用缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#H5轻松创建离线应用-只需要添加一个-appcache文件即可"><span class="toc-number">3.0.1.</span> <span class="toc-text">H5轻松创建离线应用  只需要添加一个.appcache文件即可</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#version-1-0-1"><span class="toc-number"></span> <span class="toc-text">version 1.0.1</span></a>
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM节点访问"><span class="toc-number">1.</span> <span class="toc-text">DOM节点访问</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM节点操作"><span class="toc-number">2.</span> <span class="toc-text">DOM节点操作</span></a></li></ol>
 		
 		</div>
 		
-		<h3 id="1、历史管理"><a href="#1、历史管理" class="headerlink" title="1、历史管理"></a>1、历史管理</h3><blockquote>
-<ul>
-<li><p>history对象</p>
-<ul>
-<li><p><code>history.back();</code>     <em>// 后退</em></p>
+		<p>作为前端工程师如果不会 DOM 操作恐怕要被笑掉大牙了</p>
+<p>频繁的 DOM 操作会降低网站的性能</p>
+<p>一个有经验的后台开发和一个没有经验的后台开发在性能上可能不会相差太大</p>
+<p>但是一个有经验的前端开发和一个没有经验的前端开发在性能上可以相差百倍</p>
+<p>因此合理的 DOM 操作非常重要</p>
+<h3 id="DOM节点访问"><a href="#DOM节点访问" class="headerlink" title="DOM节点访问"></a>DOM节点访问</h3><ul>
+<li>获取节点<ul>
+<li><strong>getElementById()</strong><ul>
+<li><code>一个节点 = document.getElementById(id)</code></li>
+</ul>
 </li>
-<li><p><code>history.forward();</code>  <em>// 前进</em> </p>
+<li><strong> getElementsByClassName()</strong><ul>
+<li><code>节点数组 = document.getElementsByClassName(class)</code></li>
+</ul>
 </li>
-<li><p><code>history.go(n);</code>     <em>// 前进/后退n步</em></p>
+<li><strong> getElementsByTagName()</strong><ul>
+<li><code>节点数组 = document.getElementsByTagName(tag)</code></li>
+</ul>
 </li>
-<li><p><code>history.length;</code>     <em>// 历史条数</em></p>
+<li><strong> querySelector()</strong><ul>
+<li><code>一个节点 = document.querySelector(selector)</code></li>
+</ul>
 </li>
-<li><p><code>pushState(data,title,url);</code>  <em>// 追加一条历史记录</em></p>
-</li>
-<li><p><code>onpopstate</code>  <em>// 当前进/后退时触发  调用者 window  （浏览器上的按钮）</em></p>
-</li>
+<li><strong> querySelectorAll()   </strong><ul>
+<li><code>节点数组 = document.querySelector(selector)</code></li>
 </ul>
 </li>
 </ul>
-</blockquote>
-<p><strong>example：</strong></p>
-<pre><code>var btn = document.getElementById(&apos;btn&apos;);     
- btn.onclick = function(){
-     history.pushState({name:&apos;haha&apos;},&apos;title&apos;,&apos;demo.html&apos;);
- }
- window.onpopstate = function(e){
-     console.log(e.state);    // Object {name: &quot;haha&quot;}
- }
-</code></pre><h3 id="2、Web存储"><a href="#2、Web存储" class="headerlink" title="2、Web存储"></a>2、Web存储</h3><blockquote>
-<ul>
-<li><p>document.cookie  <em>// 存储数据上限4K</em></p>
 </li>
-<li><p>sessionStorage   <em>// 5M</em></p>
-<ul>
-<li><p><code>window.sessionStorage.setItem(key,val);</code> <em>//设置值</em></p>
-</li>
-<li><p><code>window.sessionStorage.getItem(key);</code>   <em>//读取值</em></p>
-</li>
-<li><p><code>window.sessionStorage.removeItem(key);</code> <em>//删除值</em></p>
-</li>
-<li><p><code>window.sessionStorage.clear();</code>         <em>//清空值</em></p>
-</li>
+<li>访问父节点<ul>
+<li><strong>parentNode</strong><ul>
+<li><code>父节点 = 子节点.parentNode;</code></li>
 </ul>
-<p><strong>// 生命周期为：关闭页面</strong></p>
-<p><strong>// 数据共享仅限于本页面使用</strong></p>
-</li>
-<li><p>localStorage  <em>// 20M</em></p>
-<p><em>// 用法同上session</em></p>
-<p><strong>// 永久生效  除非手动清除</strong></p>
-<p><strong>// 数据跨页面共享使用</strong></p>
-</li>
-</ul>
-</blockquote>
-<p><strong>example：</strong></p>
-<pre><code>// 设置
-document.querySelector(&apos;.set&apos;).onclick = function(){
-    window.sessionStorage.setItem(this.parentNode.querySelector(&apos;.key&apos;).value,this.parentNode.querySelector(&apos;.val&apos;).value);
-}
-// 获取
-document.querySelector(&apos;.get&apos;).onclick = function(){
-    this.parentNode.querySelector(&apos;.val&apos;).value = window.sessionStorage.getItem(this.parentNode.querySelector(&apos;.key&apos;).value);
-}
-// 删除
-document.querySelector(&apos;.remove&apos;).onclick = function(){
-    window.sessionStorage.removeItem(this.parentNode.querySelector(&apos;.key&apos;).value);
-}
-// 清空
-document.querySelector(&apos;.clear&apos;).onclick = function(){
-    window.sessionStorage.clear();
-}
-</code></pre><h3 id="3、应用缓存"><a href="#3、应用缓存" class="headerlink" title="3、应用缓存"></a>3、应用缓存</h3><h5 id="H5轻松创建离线应用-只需要添加一个-appcache文件即可"><a href="#H5轻松创建离线应用-只需要添加一个-appcache文件即可" class="headerlink" title="H5轻松创建离线应用  只需要添加一个.appcache文件即可"></a>H5轻松创建离线应用  只需要添加一个.appcache文件即可</h5><blockquote>
-<ul>
-<li><p>第一步</p>
-<ul>
-<li>缓存清单：  文件后缀 =&gt; .appcache</li>
-</ul>
-</li>
-<li><p>第二步</p>
-<ul>
-<li>文件顶行 =&gt; CACHE MANIFEST</li>
-</ul>
-</li>
-<li><p>第三步</p>
-<ul>
-<li><p>CACHE:    <em># 列出需要缓存的内容</em></p>
-</li>
-<li><p>NETWORK:  <em># 指定需要在线访问的资源</em></p>
-</li>
-<li><p>FALLBACK: <em># 当缓存的资源找不到时进行替换</em></p>
 </li>
 </ul>
 </li>
-<li><p>第四步应用</p>
-<ul>
-<li>在将要缓存的页面添加 =&gt; <code>&lt;html manifest=&quot;src&quot; &gt;</code></li>
+<li>访问兄弟节点<ul>
+<li><strong>nextElementSibling</strong></li>
+<li><strong>nextSibling</strong><ul>
+<li><code>下一个兄弟节点 = 节点.nextElementSibling || 节点.nextSibling;</code></li>
 </ul>
 </li>
-<li><p>第五步更新</p>
-<ul>
-<li><h1 id="version-1-0-1"><a href="#version-1-0-1" class="headerlink" title="version 1.0.1"></a>version 1.0.1</h1></li>
+<li><strong>previousElementSibling</strong></li>
+<li><strong>previousSibling</strong><ul>
+<li><code>前一个兄弟节点 = 节点.previousElementSibling || 节点.previoudSibling;</code></li>
 </ul>
-<p><em># 自定义版本号 通过改变注释里的内容 重新缓存</em></p>
 </li>
 </ul>
-</blockquote>
-<p><strong>example：</strong></p>
-<pre><code>CACHE MANIFEST
-
-#通过改变活注释内容，达到缓存清单内容发生更改，进而重新缓存资源
-# version 1.0.7
-
-#指定需要在线访问的资源
-NETWORK:
-
-./js/main.js
-
-#列出需要缓存的内容
-CACHE:
-
-./images/img1.jpg
-./images/img2.jpg
-./images/img3.jpg
-./images/img4.jpg
-./images/img5.jpg
-
-#指定需要在线访问的资源
-NETWORK:
-
-./js/main1.js
-
-# 当缓存的资源找不到的情况，会自动替换FALLBACK里的内容
-# 如 ./online.html找不到了，则会替换成 ./offline.html
-FALLBACK:
-
-./css/online.css ./css/offline.css
-./online.html ./offline.html
-</code></pre>  
+</li>
+<li>访问子节点<ul>
+<li><strong>firstElementChild</strong></li>
+<li><strong>firstChild</strong><ul>
+<li><code>第一个子节点 = 父节点.firstElementChild || 父节点.firstChild;</code></li>
+</ul>
+</li>
+<li><strong>lastElementChild</strong></li>
+<li><strong>lastChild</strong><ul>
+<li><code>最后一个子节点 = 父节点.lastElementChild || 父节点.lastChild;</code></li>
+</ul>
+</li>
+<li><strong>children</strong><ul>
+<li><code>子节点数组 = 父节点.children;</code></li>
+</ul>
+</li>
+<li><strong>childNodes</strong><ul>
+<li><code>子节点数组 = 父节点.childNodes;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>总结:</strong></p>
+<ul>
+<li>访问任何节点<ul>
+<li><code>节点本身.parentNode.children[index];</code></li>
+</ul>
+</li>
+<li>可以通过<code>nodeType</code>判断是什么节点<ul>
+<li>1 : <code>element</code>标签节点</li>
+<li>2 : <code>attribute</code>属性节点</li>
+<li>3 : <code>text</code>文本节点</li>
+<li>8 : <code>comment</code>注释节点</li>
+<li>9 : <code>document</code>文档节点</li>
+</ul>
+</li>
+</ul>
+<h3 id="DOM节点操作"><a href="#DOM节点操作" class="headerlink" title="DOM节点操作"></a>DOM节点操作</h3><ul>
+<li>创建节点<ul>
+<li><strong>createElement()</strong><ul>
+<li><code>新节点 = document.creatElement(要创建的节点);</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>添加节点<ul>
+<li><strong>appendChild()</strong><ul>
+<li><code>父节点.appendChild(节点);</code></li>
+<li>在父节点最后插入一个节点</li>
+</ul>
+</li>
+<li><strong> insertBefore()</strong><ul>
+<li><code>父节点.insertBefore(节点,参考节点);</code></li>
+<li>在参考节点之前插入节点</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>删除节点<ul>
+<li><strong>removeChild()</strong><ul>
+<li><code>父节点.removeChild(节点);</code></li>
+<li>删除父节点内指定的子节点（必须指定子节点）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>复制节点<ul>
+<li><strong>cloneNode()</strong><ul>
+<li><code>新节点 = 节点.cloneNode(true/false);</code></li>
+<li><code>false</code>：浅复制（不填默认<code>false</code>）</li>
+<li><code>true</code>：深复制</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>属性节点操作<ul>
+<li><strong>getAttribute()</strong><ul>
+<li><code>属性值 = 节点.getAttribute(&quot;属性&quot;);</code></li>
+<li>获取指定属性值</li>
+</ul>
+</li>
+<li><strong>setAttribute()</strong><ul>
+<li><code>节点.setAttritube(属性,值);</code></li>
+<li>修改或添加属性值</li>
+</ul>
+</li>
+<li><strong>removeAttribute()</strong><ul>
+<li><code>节点.removeAttribute(属性);</code></li>
+<li>删除指定属性</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>总结:</strong></p>
+<ul>
+<li>自己删除自己<ul>
+<li><code>节点本身.parentNode.removeChild(节点本身);</code></li>
+</ul>
+</li>
+</ul>
+  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -332,18 +328,18 @@ FALLBACK:
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2016/03/04/字体图标/" title="字体图标">
+ <a href="/2016/04/02/响应式布局/" title="响应式布局">
   <strong>上一篇：</strong><br/>
   <span>
-  字体图标</span>
+  响应式布局</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2016/02/17/函数的四种调用模式/"  title="函数的四种调用模式">
+<a href="/2016/03/15/JavaScript中的数据转换/"  title="JavaScript中的数据转换">
  <strong>下一篇：</strong><br/> 
- <span>函数的四种调用模式
+ <span>JavaScript中的数据转换
 </span>
 </a>
 </div>
@@ -358,7 +354,7 @@ FALLBACK:
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、历史管理"><span class="toc-number">1.</span> <span class="toc-text">1、历史管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、Web存储"><span class="toc-number">2.</span> <span class="toc-text">2、Web存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、应用缓存"><span class="toc-number">3.</span> <span class="toc-text">3、应用缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#H5轻松创建离线应用-只需要添加一个-appcache文件即可"><span class="toc-number">3.0.1.</span> <span class="toc-text">H5轻松创建离线应用  只需要添加一个.appcache文件即可</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#version-1-0-1"><span class="toc-number"></span> <span class="toc-text">version 1.0.1</span></a>
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM节点访问"><span class="toc-number">1.</span> <span class="toc-text">DOM节点访问</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM节点操作"><span class="toc-number">2.</span> <span class="toc-text">DOM节点操作</span></a></li></ol>
  
   </div>
 
