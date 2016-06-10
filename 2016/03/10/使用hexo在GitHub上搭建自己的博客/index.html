@@ -4,62 +4,77 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>JavaScript中String的高级API | PaddyWang</title>
+    <title>使用hexo在GitHub上搭建自己的博客 | PaddyWang</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="PaddyWang">
     
 
     
-    <meta name="description" content="JS中String的高级操作String（高级API）
-字符串索引操作
+    <meta name="description" content="hexo
+author : PaddyWang
 
-charAt()
-指定索引位置字符 = str.charAt(index);
 
-charCodeAt()
-指定索引位置字符ASCII = str.charCodeAt(index);
+分享一个快速、简洁且高效的博客框架
+你看到的这个博客就是通过以下方式搭建的
 
-indexOf()
-指定字符的索引 = indexOf(chr);
-    // 从前开始查找第一个指定字符
+安装 hexo安装前的准备
+hexo 是依赖于 Node 和 Git 环境运行的
+所有在安装 hexo 之前先安装：
+Node
+Git
 
-lastIndexOf()">
+
+
+npm 全局工具安装
+安装好 Node 和 Git 之后，直接通过 npm 即可完成 hexo 的安装
+打开命令台输入：
+npm">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript中String的高级API">
-<meta property="og:url" content="http://paddywang.github.io/2016/05/03/JavaScript中String的高级API/index.html">
+<meta property="og:title" content="使用hexo在GitHub上搭建自己的博客">
+<meta property="og:url" content="http://paddywang.github.io/2016/03/10/使用hexo在GitHub上搭建自己的博客/index.html">
 <meta property="og:site_name" content="PaddyWang">
-<meta property="og:description" content="JS中String的高级操作String（高级API）
-字符串索引操作
+<meta property="og:description" content="hexo
+author : PaddyWang
 
-charAt()
-指定索引位置字符 = str.charAt(index);
 
-charCodeAt()
-指定索引位置字符ASCII = str.charCodeAt(index);
+分享一个快速、简洁且高效的博客框架
+你看到的这个博客就是通过以下方式搭建的
 
-indexOf()
-指定字符的索引 = indexOf(chr);
-    // 从前开始查找第一个指定字符
+安装 hexo安装前的准备
+hexo 是依赖于 Node 和 Git 环境运行的
+所有在安装 hexo 之前先安装：
+Node
+Git
 
-lastIndexOf()">
-<meta property="og:updated_time" content="2016-05-04T15:42:04.202Z">
+
+
+npm 全局工具安装
+安装好 Node 和 Git 之后，直接通过 npm 即可完成 hexo 的安装
+打开命令台输入：
+npm">
+<meta property="og:updated_time" content="2016-06-10T10:25:07.056Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaScript中String的高级API">
-<meta name="twitter:description" content="JS中String的高级操作String（高级API）
-字符串索引操作
+<meta name="twitter:title" content="使用hexo在GitHub上搭建自己的博客">
+<meta name="twitter:description" content="hexo
+author : PaddyWang
 
-charAt()
-指定索引位置字符 = str.charAt(index);
 
-charCodeAt()
-指定索引位置字符ASCII = str.charCodeAt(index);
+分享一个快速、简洁且高效的博客框架
+你看到的这个博客就是通过以下方式搭建的
 
-indexOf()
-指定字符的索引 = indexOf(chr);
-    // 从前开始查找第一个指定字符
+安装 hexo安装前的准备
+hexo 是依赖于 Node 和 Git 环境运行的
+所有在安装 hexo 之前先安装：
+Node
+Git
 
-lastIndexOf()">
+
+
+npm 全局工具安装
+安装好 Node 和 Git 之后，直接通过 npm 即可完成 hexo 的安装
+打开命令台输入：
+npm">
 
     
     <link rel="alternative" href="/atom.xml" title="PaddyWang" type="application/atom+xml">
@@ -120,14 +135,14 @@ lastIndexOf()">
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/05/03/JavaScript中String的高级API/" title="JavaScript中String的高级API" itemprop="url">JavaScript中String的高级API</a>
+      <a href="/2016/03/10/使用hexo在GitHub上搭建自己的博客/" title="使用hexo在GitHub上搭建自己的博客" itemprop="url">使用hexo在GitHub上搭建自己的博客</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="PaddyWang" target="_blank" itemprop="author">PaddyWang</a>
 		
   <p class="article-time">
-    <time datetime="2016-05-03T14:45:43.000Z" itemprop="datePublished"> 发表于 2016-05-03</time>
+    <time datetime="2016-03-10T10:12:57.000Z" itemprop="datePublished"> 发表于 2016-03-10</time>
     
   </p>
 </header>
@@ -136,100 +151,87 @@ lastIndexOf()">
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JS中String的高级操作"><span class="toc-number">1.</span> <span class="toc-text">JS中String的高级操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#String（高级API）"><span class="toc-number">1.0.1.</span> <span class="toc-text">String（高级API）</span></a></li></ol></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#hexo"><span class="toc-number">1.</span> <span class="toc-text">hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装-hexo"><span class="toc-number">1.1.</span> <span class="toc-text">安装 hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装前的准备"><span class="toc-number">1.1.1.</span> <span class="toc-text">安装前的准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#npm-全局工具安装"><span class="toc-number">1.1.2.</span> <span class="toc-text">npm 全局工具安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#搭建个人博客"><span class="toc-number">1.2.</span> <span class="toc-text">搭建个人博客</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#blog"><span class="toc-number">1.2.1.</span> <span class="toc-text">blog</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jacman-主题"><span class="toc-number">1.2.2.</span> <span class="toc-text">jacman 主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#将个人博客部署到-GitHub-上"><span class="toc-number">1.2.3.</span> <span class="toc-text">将个人博客部署到 GitHub 上</span></a></li></ol></li></ol></li></ol>
 		
 		</div>
 		
-		<h1 id="JS中String的高级操作"><a href="#JS中String的高级操作" class="headerlink" title="JS中String的高级操作"></a>JS中String的高级操作</h1><h3 id="String（高级API）"><a href="#String（高级API）" class="headerlink" title="String（高级API）"></a>String（高级API）</h3><ul>
-<li><p>字符串索引操作</p>
+		<h1 id="hexo"><a href="#hexo" class="headerlink" title="hexo"></a>hexo</h1><blockquote>
+<p>author : PaddyWang</p>
+</blockquote>
 <ul>
-<li><p>charAt()</p>
-<pre><code>指定索引位置字符 = str.charAt(index);
-</code></pre></li>
-<li><p>charCodeAt()</p>
-<pre><code>指定索引位置字符ASCII = str.charCodeAt(index);
-</code></pre></li>
-<li><p>indexOf()</p>
-<pre><code>指定字符的索引 = indexOf(chr);
-    // 从前开始查找第一个指定字符
-</code></pre></li>
-<li><p>lastIndexOf()</p>
-<pre><code>指定字符的索引 = lastIndexOf(chr);
-    // 从后查找
-</code></pre></li>
+<li>分享一个快速、简洁且高效的博客框架</li>
+<li>你看到的这个博客就是通过以下方式搭建的</li>
+</ul>
+<h2 id="安装-hexo"><a href="#安装-hexo" class="headerlink" title="安装 hexo"></a>安装 hexo</h2><h3 id="安装前的准备"><a href="#安装前的准备" class="headerlink" title="安装前的准备"></a>安装前的准备</h3><ul>
+<li>hexo 是依赖于 Node 和 Git 环境运行的</li>
+<li>所有在安装 hexo 之前先安装：<ul>
+<li><a href="https://nodejs.org/en/" target="_blank" rel="external">Node</a></li>
+<li><a href="https://git-scm.com/" target="_blank" rel="external">Git</a></li>
 </ul>
 </li>
-<li><p>字符串截取操作</p>
-<ul>
-<li><p>concat()</p>
-<pre><code>newStr = str1.concat(str2);
-    // 将字符串2添加到字符串1后面，并返回新字符串
+</ul>
+<h3 id="npm-全局工具安装"><a href="#npm-全局工具安装" class="headerlink" title="npm 全局工具安装"></a>npm 全局工具安装</h3><ul>
+<li>安装好 Node 和 Git 之后，直接通过 npm 即可完成 hexo 的安装</li>
+<li>打开命令台输入：</li>
+<li><code>npm install hexo-cli -g</code></li>
+</ul>
+<h2 id="搭建个人博客"><a href="#搭建个人博客" class="headerlink" title="搭建个人博客"></a>搭建个人博客</h2><h3 id="blog"><a href="#blog" class="headerlink" title="blog"></a>blog</h3><ul>
+<li>安装完成之后在你想要搭建博客的文件夹里面</li>
+<li>按着 【shift】 右击鼠标，选择在此处打开命令窗口</li>
+<li><p>输入下面的命令：</p>
+<pre><code>hexo init blog  # 初始化一个 blog 会从网上下载一个模板，可能比较慢
+cd blog         # 进入 blog 根目录
+hexo server     # 开启本地服务器 在浏览器中输入 localhost:4000 即可访问
 </code></pre></li>
-<li><p>slice()</p>
-<pre><code>newStr = str.slice(3,6);
-    // 截取两个索引之间的字符串[包左不包右）
-    // （两个参数都代表索引）
-
-newStr = str.slice(3);
-    // 截取指定索引到最后的字符串
-
-newStr = str.slice(-3);
-    // 截取最后三位字符串
-
-newStr = str.slice(6,3);
-    // 返回空
-</code></pre></li>
-<li><p>substr()</p>
-<pre><code>newStr = str.substr(3,6);
-    // 截取从索引3向后6位字符串
-    // （第一个参数代表索引，第二个参数代表截取长度）
-
-newStr = str.substr(3);
-    // 截取指定索引到最后的字符串
-
-newStr = str.substr(-3);
-    // 截取最后三位字符串
-</code></pre></li>
-<li><p>substring()</p>
-<pre><code>newStr = str.substring(3,6);
-    // 截取两个索引之间的字符串[包左不包右）
-    // （两个参数都代表索引）
-
-newStr = str.substring(3);
-    // 截取指定索引到最后的字符串
-
-newStr = str.substring(-3);
-    // 截取整个字符串
-
-newStr = str.substring(6,3);
-    // 智能转换成（3,6）
+<li><p>完成之后文件夹结构为：</p>
+<pre><code>blog/                 // 网站结构
+├── node_module/      // 第三方依赖包
+├── scaffolds/        // 模板文件夹
+├── source/           // 网站源文件
+|   └── _posts/       // 文章列表页
+├── themes/           // 主题文件夹
+|   └── landscape/    // landscape 主题
+├── .gitignore        //
+├── _config.yml       // 网站整体配置文件
+└── package.json      // 网站信息
 </code></pre></li>
 </ul>
-</li>
-<li><p>编码解码</p>
-<ul>
-<li><p>encodeURIComponent()</p>
-<pre><code>enStr = encodeURIComponent(str);
-    // 编码
-</code></pre></li>
-<li><p>decodeURIComponent()</p>
-<pre><code>str = decodeURIComponent(enStr);
-    // 解码
+<h3 id="jacman-主题"><a href="#jacman-主题" class="headerlink" title="jacman 主题"></a>jacman 主题</h3><ul>
+<li>这里默认的主题为 landscape ，不喜欢这个</li>
+<li>换个 jacman 主题</li>
+<li><p>在博客根目录下执行下面命令：</p>
+<pre><code>git clone https://github.com/wuchong/jacman.git themes/jacman
 </code></pre></li>
 </ul>
-</li>
-<li><p>大小写转换</p>
 <ul>
-<li><p>toUpperCase()</p>
-<pre><code>STR = str.toUpperCase();
-    // 小写转换成大写
-</code></pre></li>
-<li><p>toLowerCase()</p>
-<pre><code>str = STR.toLowerCase();
-    // 大写转换成小写
-</code></pre></li>
+<li>启用该主题</li>
+<li>打开博客根目录下的 <code>_config.yml</code> 配置文件</li>
+<li>修改文件中的 <code>theme</code> 属性：</li>
+<li><code>theme: jacman</code></li>
+<li>刷新页面即可看到主题已被修改</li>
+<li>现在本地的 blog 就已经搭建成功</li>
 </ul>
-</li>
+<h3 id="将个人博客部署到-GitHub-上"><a href="#将个人博客部署到-GitHub-上" class="headerlink" title="将个人博客部署到 GitHub 上"></a>将个人博客部署到 GitHub 上</h3><ul>
+<li>GitHub 的注册登录就不多说了</li>
+<li>首先在 在 GitHub 上创建一个仓储</li>
+<li>该仓储的命名有一定的规则 (userName).github.io</li>
+<li>(userName) 是自己的用户名</li>
+<li>仓储创建完成之后，回到本地</li>
+<li>这时需要在本地博客根目录下执行下面一句代码</li>
+<li>为了是生成静态页面，因为 GitHub 只支持静态页面的搭建</li>
+<li><code>hexo generate</code></li>
+<li>执行完之后就会多一个 public 文件夹，该文件夹就是生成的所有博客的静态资源</li>
+<li>这时就可以进入 public 文件夹，将该目录下的所有文件上传 GitHub 下刚才创建的仓储</li>
+<li>上传完成之后</li>
+<li>通过访问 <code>http://(userName).github.io/</code></li>
+<li>此时就完成了 blog 基本框架就搭建完成了</li>
+<li>接下来就是创建自己文章了</li>
+<li>进入 blog 根目录，运行 CMD</li>
+<li>输入 <code>hexo new (postName)</code> # postName 为文章名</li>
+<li>输入 <code>hexo new page (pageName)</code>  # 新建一个页面（列表页）</li>
+<li>创建完新文章之后就可以进行 MarkDown 编辑了</li>
+<li>完成之后，继续执行 <code>hexo generate</code></li>
+<li>最后再 push 到 GitHub 上，就完成了</li>
 </ul>
   
 	</div>
@@ -239,7 +241,7 @@ newStr = str.substring(6,3);
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/JavaScript/">JavaScript</a>
+  <span></span> <a href="/tags/hexo/">hexo</a>
   </div>
 
 </div>
@@ -284,18 +286,18 @@ newStr = str.substring(6,3);
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2016/05/05/less的基本使用/" title="less的基本使用">
+ <a href="/2016/03/11/值类型与引用类型/" title="值类型与引用类型">
   <strong>上一篇：</strong><br/>
   <span>
-  less的基本使用</span>
+  值类型与引用类型</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2016/05/01/JavaScript中的原型/"  title="JavaScript中的原型">
+<a href="/2016/03/06/git的基本使用/"  title="git的基本使用">
  <strong>下一篇：</strong><br/> 
- <span>JavaScript中的原型
+ <span>git的基本使用
 </span>
 </a>
 </div>
@@ -310,7 +312,7 @@ newStr = str.substring(6,3);
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JS中String的高级操作"><span class="toc-number">1.</span> <span class="toc-text">JS中String的高级操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#String（高级API）"><span class="toc-number">1.0.1.</span> <span class="toc-text">String（高级API）</span></a></li></ol></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#hexo"><span class="toc-number">1.</span> <span class="toc-text">hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装-hexo"><span class="toc-number">1.1.</span> <span class="toc-text">安装 hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装前的准备"><span class="toc-number">1.1.1.</span> <span class="toc-text">安装前的准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#npm-全局工具安装"><span class="toc-number">1.1.2.</span> <span class="toc-text">npm 全局工具安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#搭建个人博客"><span class="toc-number">1.2.</span> <span class="toc-text">搭建个人博客</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#blog"><span class="toc-number">1.2.1.</span> <span class="toc-text">blog</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jacman-主题"><span class="toc-number">1.2.2.</span> <span class="toc-text">jacman 主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#将个人博客部署到-GitHub-上"><span class="toc-number">1.2.3.</span> <span class="toc-text">将个人博客部署到 GitHub 上</span></a></li></ol></li></ol></li></ol>
  
   </div>
 
