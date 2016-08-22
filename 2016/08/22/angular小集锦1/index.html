@@ -4,59 +4,29 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>日期对象（Date）和定时器 | PaddyWang</title>
+    <title>angular小集锦1 | PaddyWang</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="PaddyWang">
     
 
     
-    <meta name="description" content="可以说日期对象在前端开发过程中是个至关重要的对象
-时间就是一个标识
-日期对象（Date）
-日期对象创建
+    <meta name="description" content="author: PaddyWang
 
-var date = new Date();
-本地当前日期
-=&amp;gt; Fri Jan 29 2016 11:01:20 GMT+0800 (中国标准时间)
-
-
-var date = new Date(&amp;quot;2016/01/29 00:00:00&amp;quot;);
-指定的日期
-=&amp;gt;">
+监听路由跳转在一个控制器里做业务逻辑处理时，遇到一个需求需要定时向服务器请求数据，于是自然就用到了定时器可是问题又来了，当进行路由跳转时，虽然已经清除了之前的控制器然而并没有清除该控制器中的定时器angular 自然会想到这个问题于是用到了监听路由跳转机制123$scope.$on(&apos;$destroy&apos;, function(event)&amp;#123;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="日期对象（Date）和定时器">
-<meta property="og:url" content="http://paddywang.github.io/2016/03/12/日期对象（Date）和定时器/index.html">
+<meta property="og:title" content="angular小集锦1">
+<meta property="og:url" content="http://paddywang.github.io/2016/08/22/angular小集锦1/index.html">
 <meta property="og:site_name" content="PaddyWang">
-<meta property="og:description" content="可以说日期对象在前端开发过程中是个至关重要的对象
-时间就是一个标识
-日期对象（Date）
-日期对象创建
+<meta property="og:description" content="author: PaddyWang
 
-var date = new Date();
-本地当前日期
-=&amp;gt; Fri Jan 29 2016 11:01:20 GMT+0800 (中国标准时间)
-
-
-var date = new Date(&amp;quot;2016/01/29 00:00:00&amp;quot;);
-指定的日期
-=&amp;gt;">
-<meta property="og:updated_time" content="2016-05-05T15:00:23.768Z">
+监听路由跳转在一个控制器里做业务逻辑处理时，遇到一个需求需要定时向服务器请求数据，于是自然就用到了定时器可是问题又来了，当进行路由跳转时，虽然已经清除了之前的控制器然而并没有清除该控制器中的定时器angular 自然会想到这个问题于是用到了监听路由跳转机制123$scope.$on(&apos;$destroy&apos;, function(event)&amp;#123;">
+<meta property="og:updated_time" content="2016-08-22T15:30:51.603Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="日期对象（Date）和定时器">
-<meta name="twitter:description" content="可以说日期对象在前端开发过程中是个至关重要的对象
-时间就是一个标识
-日期对象（Date）
-日期对象创建
+<meta name="twitter:title" content="angular小集锦1">
+<meta name="twitter:description" content="author: PaddyWang
 
-var date = new Date();
-本地当前日期
-=&amp;gt; Fri Jan 29 2016 11:01:20 GMT+0800 (中国标准时间)
-
-
-var date = new Date(&amp;quot;2016/01/29 00:00:00&amp;quot;);
-指定的日期
-=&amp;gt;">
+监听路由跳转在一个控制器里做业务逻辑处理时，遇到一个需求需要定时向服务器请求数据，于是自然就用到了定时器可是问题又来了，当进行路由跳转时，虽然已经清除了之前的控制器然而并没有清除该控制器中的定时器angular 自然会想到这个问题于是用到了监听路由跳转机制123$scope.$on(&apos;$destroy&apos;, function(event)&amp;#123;">
 
     
     <link rel="alternative" href="/atom.xml" title="PaddyWang" type="application/atom+xml">
@@ -117,14 +87,14 @@ var date = new Date(&amp;quot;2016/01/29 00:00:00&amp;quot;);
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/03/12/日期对象（Date）和定时器/" title="日期对象（Date）和定时器" itemprop="url">日期对象（Date）和定时器</a>
+      <a href="/2016/08/22/angular小集锦1/" title="angular小集锦1" itemprop="url">angular小集锦1</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="PaddyWang" target="_blank" itemprop="author">PaddyWang</a>
 		
   <p class="article-time">
-    <time datetime="2016-03-12T14:51:35.000Z" itemprop="datePublished"> 发表于 2016-03-12</time>
+    <time datetime="2016-08-22T13:56:42.000Z" itemprop="datePublished"> 发表于 2016-08-22</time>
     
   </p>
 </header>
@@ -133,105 +103,16 @@ var date = new Date(&amp;quot;2016/01/29 00:00:00&amp;quot;);
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#日期对象（Date）"><span class="toc-number">1.</span> <span class="toc-text">日期对象（Date）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定时器"><span class="toc-number">2.</span> <span class="toc-text">定时器</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#监听路由跳转"><span class="toc-number">1.</span> <span class="toc-text">监听路由跳转</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#强制使-angular-将值进行绑定"><span class="toc-number">2.</span> <span class="toc-text">强制使 angular 将值进行绑定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解除-angular-不信任"><span class="toc-number">3.</span> <span class="toc-text">解除 angular 不信任</span></a></li></ol>
 		
 		</div>
 		
-		<p>可以说日期对象在前端开发过程中是个至关重要的对象</p>
-<p>时间就是一个标识</p>
-<h3 id="日期对象（Date）"><a href="#日期对象（Date）" class="headerlink" title="日期对象（Date）"></a>日期对象（Date）</h3><ul>
-<li><p>日期对象创建</p>
-<ul>
-<li><code>var date = new Date();</code><ul>
-<li>本地当前日期</li>
-<li><code>=&gt; Fri Jan 29 2016 11:01:20 GMT+0800 (中国标准时间)</code></li>
-</ul>
-</li>
-<li><code>var date = new Date(&quot;2016/01/29 00:00:00&quot;);</code><ul>
-<li>指定的日期</li>
-<li><code>=&gt; Fri Jan 29 2016 00:00:00 GMT+0800 (中国标准时间)</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>日期对象方法</p>
-</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>getDate()</td>
-<td>获取天（1-31）</td>
-</tr>
-<tr>
-<td>getDay()</td>
-<td>获取星期（0-6）0代表周天</td>
-</tr>
-<tr>
-<td>getFullYear()</td>
-<td>获取完整年份</td>
-</tr>
-<tr>
-<td>getMonth()</td>
-<td>获取月份（0-11）1月份从0开始</td>
-</tr>
-<tr>
-<td>getHours()</td>
-<td>获取小时</td>
-</tr>
-<tr>
-<td>getMinutes()</td>
-<td>获取分钟</td>
-</tr>
-<tr>
-<td>getSeconds()</td>
-<td>获取秒钟</td>
-</tr>
-<tr>
-<td>getMilliseconds()</td>
-<td>获取毫秒（1s=1000ms）</td>
-</tr>
-<tr>
-<td>getTime()</td>
-<td>获取累计毫秒数（从1970/01/01 00:00:00:000算起）</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>获取累计毫秒数<ul>
-<li><code>var sumMs1 = Date.now();</code></li>
-<li><code>var sumMs2 =+new Date();</code></li>
-<li><code>var sumMs3 = new Date().getTime();</code> （最常用）</li>
-<li><code>var sumMs4 = new Date().valueOf();</code></li>
-</ul>
-</li>
-</ul>
-<h3 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h3><ul>
-<li>循环定时器<ul>
-<li><code>setInterval(fun,1000);</code></li>
-<li><code>setInterval(&quot;fun()&quot;,1000);</code></li>
-<li><code>setInterval(function(){  },1000);</code></li>
-</ul>
-</li>
-<li>一次性定时器（炸弹定时器）<ul>
-<li><code>setTimeout(fun,1000);</code></li>
-</ul>
-</li>
-<li>清除定时器<ul>
-<li><code>clearInterval(timer);</code></li>
-<li><code>clearTimeout(timer);</code><ul>
-<li>timer:要清除的定时器名</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+		<blockquote>
+<p>author: PaddyWang</p>
+</blockquote>
+<h3 id="监听路由跳转"><a href="#监听路由跳转" class="headerlink" title="监听路由跳转"></a>监听路由跳转</h3><p>在一个控制器里做业务逻辑处理时，遇到一个需求<br>需要定时向服务器请求数据，于是自然就用到了定时器<br>可是问题又来了，当进行路由跳转时，虽然已经清除了之前的控制器<br>然而并没有清除该控制器中的定时器<br>angular 自然会想到这个问题<br>于是用到了监听路由跳转机制<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$scope.$on(<span class="string">'$destroy'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">      $interval.cancel($scope.timer);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h3 id="强制使-angular-将值进行绑定"><a href="#强制使-angular-将值进行绑定" class="headerlink" title="强制使 angular 将值进行绑定"></a>强制使 angular 将值进行绑定</h3><p>有时候在控制中处理业务逻辑时<br>动态改变 $scope 上绑定的值，然而页面上过了一会才进行渲染<br>于是就需要进行改变值强制改变<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$scope.$apply(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 需要强制绑定的值</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h3 id="解除-angular-不信任"><a href="#解除-angular-不信任" class="headerlink" title="解除 angular 不信任"></a>解除 angular 不信任</h3><p>有时候需要进行动态获取并添加 html 字符串<br>首先想到的就是 ng-bind-html<br>这时候 angular 就有一个防 XSS 的解析机制<br>对于 angular 不信任的 html 字符串无法进行绑定<br>就需要手动解除不信任<br>具体什么原理，不晓得<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> html = <span class="string">'&lt;div&gt;不信任的html字符串&lt;/div&gt;'</span>;</span><br><span class="line">$sce.trustAsHtml(html);</span><br></pre></td></tr></table></figure></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -240,7 +121,7 @@ var date = new Date(&amp;quot;2016/01/29 00:00:00&amp;quot;);
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/JavaScript/">JavaScript</a>
+  <span></span> <a href="/tags/angular/">angular</a>
   </div>
 
 </div>
@@ -284,19 +165,11 @@ var date = new Date(&amp;quot;2016/01/29 00:00:00&amp;quot;);
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/03/15/JavaScript中的数据转换/" title="JavaScript中的数据转换">
-  <strong>上一篇：</strong><br/>
-  <span>
-  JavaScript中的数据转换</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2016/03/11/值类型与引用类型/"  title="值类型与引用类型">
+<a href="/2016/07/14/JavaScript语言精粹-随笔/"  title="JavaScript语言精粹-随笔">
  <strong>下一篇：</strong><br/> 
- <span>值类型与引用类型
+ <span>JavaScript语言精粹-随笔
 </span>
 </a>
 </div>
@@ -311,7 +184,7 @@ var date = new Date(&amp;quot;2016/01/29 00:00:00&amp;quot;);
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#日期对象（Date）"><span class="toc-number">1.</span> <span class="toc-text">日期对象（Date）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定时器"><span class="toc-number">2.</span> <span class="toc-text">定时器</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#监听路由跳转"><span class="toc-number">1.</span> <span class="toc-text">监听路由跳转</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#强制使-angular-将值进行绑定"><span class="toc-number">2.</span> <span class="toc-text">强制使 angular 将值进行绑定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解除-angular-不信任"><span class="toc-number">3.</span> <span class="toc-text">解除 angular 不信任</span></a></li></ol>
  
   </div>
 
