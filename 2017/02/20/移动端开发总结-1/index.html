@@ -1,0 +1,592 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>移动端开发总结-1 | PaddyWang</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="PaddyWang">
+    
+
+    
+    <meta name="description" content="添加到主屏后的标题（IOS）1&amp;lt;meta name=&quot;apple-mobile-web-app-title&quot; content=&quot;标题&quot;&amp;gt;
+启用 WebApp 全屏模式（IOS）当网站添加到主屏幕后再点击进行启动时，可隐藏地址栏（从浏览器跳转或输入链接进入并没有此效果）12&amp;lt;meta name=&quot;apple-mobile-web-app-capable&quot; content=&quot;yes&quot;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="移动端开发总结-1">
+<meta property="og:url" content="http://paddywang.github.io/2017/02/20/移动端开发总结-1/index.html">
+<meta property="og:site_name" content="PaddyWang">
+<meta property="og:description" content="添加到主屏后的标题（IOS）1&amp;lt;meta name=&quot;apple-mobile-web-app-title&quot; content=&quot;标题&quot;&amp;gt;
+启用 WebApp 全屏模式（IOS）当网站添加到主屏幕后再点击进行启动时，可隐藏地址栏（从浏览器跳转或输入链接进入并没有此效果）12&amp;lt;meta name=&quot;apple-mobile-web-app-capable&quot; content=&quot;yes&quot;">
+<meta property="og:updated_time" content="2017-02-20T14:59:19.990Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="移动端开发总结-1">
+<meta name="twitter:description" content="添加到主屏后的标题（IOS）1&amp;lt;meta name=&quot;apple-mobile-web-app-title&quot; content=&quot;标题&quot;&amp;gt;
+启用 WebApp 全屏模式（IOS）当网站添加到主屏幕后再点击进行启动时，可隐藏地址栏（从浏览器跳转或输入链接进入并没有此效果）12&amp;lt;meta name=&quot;apple-mobile-web-app-capable&quot; content=&quot;yes&quot;">
+
+    
+    <link rel="alternative" href="/atom.xml" title="PaddyWang" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="PaddyWang" title="PaddyWang"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="PaddyWang">PaddyWang</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives | 归档</a></li>
+					
+						<li><a href="/links">links | 链接</a></li>
+					
+						<li><a href="/about">About | 简介</a></li>
+					
+					<li>
+ 					
+						<form class="search" action="" target="_blank">
+							<label>Search</label>
+						<input name="s" type="hidden" value= null ><input type="text" name="q" size="30" placeholder="搜索"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/02/20/移动端开发总结-1/" title="移动端开发总结-1" itemprop="url">移动端开发总结-1</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="PaddyWang" target="_blank" itemprop="author">PaddyWang</a>
+		
+  <p class="article-time">
+    <time datetime="2017-02-20T13:06:00.000Z" itemprop="datePublished"> 发表于 2017-02-20</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#添加到主屏后的标题（IOS）"><span class="toc-number">1.</span> <span class="toc-text">添加到主屏后的标题（IOS）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#启用-WebApp-全屏模式（IOS）"><span class="toc-number">2.</span> <span class="toc-text">启用 WebApp 全屏模式（IOS）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#百度禁止转码"><span class="toc-number">3.</span> <span class="toc-text">百度禁止转码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置状态栏的背景颜色（IOS）"><span class="toc-number">4.</span> <span class="toc-text">设置状态栏的背景颜色（IOS）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动端手机号码识别（IOS）"><span class="toc-number">5.</span> <span class="toc-text">移动端手机号码识别（IOS）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开启电话功能"><span class="toc-number">6.</span> <span class="toc-text">开启电话功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开启短信功能"><span class="toc-number">7.</span> <span class="toc-text">开启短信功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动端邮箱识别（Android）"><span class="toc-number">8.</span> <span class="toc-text">移动端邮箱识别（Android）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加智能-App-广告条（IOS-6-Safari）"><span class="toc-number">9.</span> <span class="toc-text">添加智能 App 广告条（IOS 6+ Safari）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IOS-Web-app启动动画"><span class="toc-number">10.</span> <span class="toc-text">IOS Web app启动动画</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加到主屏后的APP图标"><span class="toc-number">11.</span> <span class="toc-text">添加到主屏后的APP图标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#优先使用最新版本-IE-和-Chrome"><span class="toc-number">12.</span> <span class="toc-text">优先使用最新版本 IE 和 Chrome</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动端如何定义字体f-ont-family"><span class="toc-number">13.</span> <span class="toc-text">移动端如何定义字体f ont-family</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动端字体单位font-size"><span class="toc-number">14.</span> <span class="toc-text">移动端字体单位font-size</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动端touch事件-区分webkit-和-winphone"><span class="toc-number">15.</span> <span class="toc-text">移动端touch事件(区分webkit 和 winphone)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动端click屏幕产生200-300-ms的延迟响应"><span class="toc-number">16.</span> <span class="toc-text">移动端click屏幕产生200-300 ms的延迟响应</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是Retina-显示屏"><span class="toc-number">17.</span> <span class="toc-text">什么是Retina 显示屏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ios系统中元素被触摸时产生的半透明灰色遮罩"><span class="toc-number">18.</span> <span class="toc-text">ios系统中元素被触摸时产生的半透明灰色遮罩</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#部分android系统中元素被点击时产生的边框"><span class="toc-number">19.</span> <span class="toc-text">部分android系统中元素被点击时产生的边框</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#wp系统a、input标签被点击时产生的半透明灰色背景"><span class="toc-number">20.</span> <span class="toc-text">wp系统a、input标签被点击时产生的半透明灰色背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#webkit表单元素的默认外观重置"><span class="toc-number">21.</span> <span class="toc-text">webkit表单元素的默认外观重置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#webkit表单输入框placeholder的颜色"><span class="toc-number">22.</span> <span class="toc-text">webkit表单输入框placeholder的颜色</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关闭iOS键盘首字母自动大写"><span class="toc-number">23.</span> <span class="toc-text">关闭iOS键盘首字母自动大写</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关闭iOS输入自动修正"><span class="toc-number">24.</span> <span class="toc-text">关闭iOS输入自动修正</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#禁止文本缩放"><span class="toc-number">25.</span> <span class="toc-text">禁止文本缩放</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动端如何清除输入框内阴影"><span class="toc-number">26.</span> <span class="toc-text">移动端如何清除输入框内阴影</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快速回弹滚动"><span class="toc-number">27.</span> <span class="toc-text">快速回弹滚动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动端禁止选中内容"><span class="toc-number">28.</span> <span class="toc-text">移动端禁止选中内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动端取消touch高亮效果"><span class="toc-number">29.</span> <span class="toc-text">移动端取消touch高亮效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何禁止保存或拷贝图像（IOS）"><span class="toc-number">30.</span> <span class="toc-text">如何禁止保存或拷贝图像（IOS）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模拟按钮hover效果"><span class="toc-number">31.</span> <span class="toc-text">模拟按钮hover效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#屏幕旋转的事件和样式"><span class="toc-number">32.</span> <span class="toc-text">屏幕旋转的事件和样式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#audio元素和video元素在ios和andriod中无法自动播放"><span class="toc-number">33.</span> <span class="toc-text">audio元素和video元素在ios和andriod中无法自动播放</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#手机拍照和上传图片"><span class="toc-number">34.</span> <span class="toc-text">手机拍照和上传图片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#消除transition闪屏"><span class="toc-number">35.</span> <span class="toc-text">消除transition闪屏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#android-上去掉语音输入按钮"><span class="toc-number">36.</span> <span class="toc-text">android 上去掉语音输入按钮</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#阻止滚动"><span class="toc-number">37.</span> <span class="toc-text">阻止滚动</span></a></li></ol>
+		
+		</div>
+		
+		<h3 id="添加到主屏后的标题（IOS）"><a href="#添加到主屏后的标题（IOS）" class="headerlink" title="添加到主屏后的标题（IOS）"></a>添加到主屏后的标题（IOS）</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"apple-mobile-web-app-title"</span> <span class="attr">content</span>=<span class="string">"标题"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="启用-WebApp-全屏模式（IOS）"><a href="#启用-WebApp-全屏模式（IOS）" class="headerlink" title="启用 WebApp 全屏模式（IOS）"></a>启用 WebApp 全屏模式（IOS）</h3><p>当网站添加到主屏幕后再点击进行启动时，可隐藏地址栏（从浏览器跳转或输入链接进入并没有此效果）<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"apple-mobile-web-app-capable"</span> <span class="attr">content</span>=<span class="string">"yes"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"apple-touch-fullscreen"</span> <span class="attr">content</span>=<span class="string">"yes"</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="百度禁止转码"><a href="#百度禁止转码" class="headerlink" title="百度禁止转码"></a>百度禁止转码</h3><p>通过百度手机打开网页时，百度可能会对你的网页进行转码，往你页面贴上它的广告, 通过 meta 禁用掉<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Cache-Control"</span> <span class="attr">content</span>=<span class="string">"no-siteapp"</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="设置状态栏的背景颜色（IOS）"><a href="#设置状态栏的背景颜色（IOS）" class="headerlink" title="设置状态栏的背景颜色（IOS）"></a>设置状态栏的背景颜色（IOS）</h3><p>设置状态栏的背景颜色，只有在 “apple-mobile-web-app-capable” content=”yes” 时生效<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"apple-mobile-web-app-status-bar-style"</span> <span class="attr">content</span>=</span><br><span class="line"><span class="string">"black-translucent"</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>content 参数：<ul>
+<li><code>default</code> ：状态栏背景是白色</li>
+<li><code>black</code> ：状态栏背景是黑色</li>
+<li><code>black-translucent</code> ：状态栏背景是半透明<br>如果设置为 default 或 black ,网页内容从状态栏底部开始<br>如果设置为 black-translucent ,网页内容充满整个屏幕，顶部会被状态栏遮挡</li>
+</ul>
+</li>
+</ul>
+<h3 id="移动端手机号码识别（IOS）"><a href="#移动端手机号码识别（IOS）" class="headerlink" title="移动端手机号码识别（IOS）"></a>移动端手机号码识别（IOS）</h3><p>在 iOS Safari （其他浏览器和Android均不会）上会对那些看起来像是电话号码的数字处理为电话链接，比如：</p>
+<ul>
+<li>7位数字，形如：1234567</li>
+<li>带括号及加号的数字，形如：(+86)123456789</li>
+<li>双连接线的数字，形如：00-00-00111</li>
+<li>11位数字，形如：13800138000<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 可能还有其他类型的数字也会被识别。我们可以通过如下的meta来关闭电话号码的自动识别 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"format-detection"</span> <span class="attr">content</span>=<span class="string">"telephone=no"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="开启电话功能"><a href="#开启电话功能" class="headerlink" title="开启电话功能"></a>开启电话功能</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://camnpr.com/html-css/tel:123456"</span>&gt;</span>123456<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="开启短信功能"><a href="#开启短信功能" class="headerlink" title="开启短信功能"></a>开启短信功能</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://camnpr.com/html-css/sms:123456"</span>&gt;</span>123456<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="移动端邮箱识别（Android）"><a href="#移动端邮箱识别（Android）" class="headerlink" title="移动端邮箱识别（Android）"></a>移动端邮箱识别（Android）</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 与电话号码的识别一样，在安卓上会对符合邮箱格式的字符串进行识别,通过 meta 来禁用 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">content</span>=<span class="string">"email=no"</span> <span class="attr">name</span>=<span class="string">"format-detection"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 我们也可以通过标签属性来开启长按邮箱地址弹出邮件发送的功能 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">mailto:dooyoe</span>@<span class="attr">gmail.com</span>"&gt;</span>dooyoe@gmail.com<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="添加智能-App-广告条（IOS-6-Safari）"><a href="#添加智能-App-广告条（IOS-6-Safari）" class="headerlink" title="添加智能 App 广告条（IOS 6+ Safari）"></a>添加智能 App 广告条（IOS 6+ Safari）</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"apple-itunes-app"</span> <span class="attr">content</span>=<span class="string">"app-id=myAppStoreID, affiliate-data=myAffiliateData, app-argument=myURL"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="IOS-Web-app启动动画"><a href="#IOS-Web-app启动动画" class="headerlink" title="IOS Web app启动动画"></a>IOS Web app启动动画</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- （landscape：横屏 | portrait：竖屏） --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- iPhone --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"http://fe.com/imgs/320x460.png"</span> <span class="attr">media</span>=<span class="string">"(device-width: 320px)"</span> <span class="attr">rel</span>=<span class="string">"apple-touch-startup-image"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- iPhone (Retina) --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"http://fe.com/imgs/640x960.png"</span> <span class="attr">media</span>=<span class="string">"(device-width: 320px) and (-webkit-device-pixel-ratio: 2)"</span> <span class="attr">rel</span>=<span class="string">"apple-touch-startup-image"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- iPad (portrait) --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"http://fe.com/imgs/768x1004.png"</span> <span class="attr">media</span>=<span class="string">"(device-width: 768px) and (orientation: portrait)"</span> <span class="attr">rel</span>=<span class="string">"apple-touch-startup-image"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- iPad (landscape) --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"http://fe.com/imgs/748x1024.png"</span> <span class="attr">media</span>=<span class="string">"(device-width: 768px) and (orientation: landscape)"</span> <span class="attr">rel</span>=<span class="string">"apple-touch-startup-image"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- iPad (Retina, portrait) --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"http://fe.com/imgs/1536x2008.png"</span> <span class="attr">media</span>=<span class="string">"(device-width: 1536px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)"</span> <span class="attr">rel</span>=<span class="string">"apple-touch-startup-image"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- iPad (Retina, landscape) --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"http://fe.com/imgs/2048x1496.png"</span> <span class="attr">media</span>=<span class="string">"(device-width: 1536px)  and (orientation: landscape) and (-webkit-device-pixel-ratio: 2)"</span> <span class="attr">rel</span>=<span class="string">"apple-touch-startup-image"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="添加到主屏后的APP图标"><a href="#添加到主屏后的APP图标" class="headerlink" title="添加到主屏后的APP图标"></a>添加到主屏后的APP图标</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 设计原图 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"http://fe.com/imgs/114x114.png"</span> <span class="attr">rel</span>=<span class="string">"apple-touch-icon-precomposed"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 添加高光效果 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"http://fe.com/imgs/114x114.png"</span> <span class="attr">rel</span>=<span class="string">"apple-touch-icon"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>apple-touch-icon</code>：在IOS6及以下的版本会自动为图标添加一层高光效果（IOS7开始已使用扁平化的设计风格）</li>
+<li><code>apple-touch-icon-precomposed</code>：使用“设计原图图标”</li>
+<li>可通过指定size属性来为不同的设备提供不同的图标（但通常来说，我们只需提供一个114 x 114 pixels大小的图标即可 ）</li>
+</ul>
+<h3 id="优先使用最新版本-IE-和-Chrome"><a href="#优先使用最新版本-IE-和-Chrome" class="headerlink" title="优先使用最新版本 IE 和 Chrome"></a>优先使用最新版本 IE 和 Chrome</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=edge,chrome=1"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="移动端如何定义字体f-ont-family"><a href="#移动端如何定义字体f-ont-family" class="headerlink" title="移动端如何定义字体f ont-family"></a>移动端如何定义字体f ont-family</h3><ul>
+<li>ios 系统<ul>
+<li>默认中文字体是Heiti SC</li>
+<li>默认英文字体是Helvetica</li>
+<li>默认数字字体是HelveticaNeue</li>
+<li>无微软雅黑字体</li>
+</ul>
+</li>
+<li>android 系统<ul>
+<li>默认中文字体是Droidsansfallback</li>
+<li>默认英文和数字字体是Droid Sans</li>
+<li>无微软雅黑字体</li>
+</ul>
+</li>
+<li>winphone 系统<ul>
+<li>默认中文字体是Dengxian(方正等线体)</li>
+<li>默认英文和数字字体是Segoe</li>
+<li>无微软雅黑字体<br>各个手机系统有自己的默认字体，且都不支持微软雅黑 如无特殊需求，手机端无需定义中文字体，使用系统默认 英文字体和数字字体可使用 Helvetica ，三种系统都支持<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 移动端定义字体的代码 */</span></span><br><span class="line"><span class="selector-tag">body</span>&#123;<span class="attribute">font-family</span>:Helvetica;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="移动端字体单位font-size"><a href="#移动端字体单位font-size" class="headerlink" title="移动端字体单位font-size"></a>移动端字体单位font-size</h3><p>对于只需要适配手机设备，使用px即可<br>对于需要适配各种移动设备，使用rem，例如只需要适配iPhone和iPad等分辨率差别比较挺大的设备<br>rem配置参考：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">html</span> &#123;<span class="attribute">font-size</span>:<span class="number">10px</span>&#125;</span><br><span class="line">@<span class="keyword">media</span> screen and (min-width:<span class="number">480px</span>) and (max-width:<span class="number">639px</span>) &#123;    </span><br><span class="line">    <span class="selector-tag">html</span> &#123;</span><br><span class="line">        <span class="attribute">font-size</span>: <span class="number">15px</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">@<span class="keyword">media</span> screen and (min-width:<span class="number">640px</span>) and (max-width:<span class="number">719px</span>) &#123;</span><br><span class="line">    <span class="selector-tag">html</span> &#123;</span><br><span class="line">        <span class="attribute">font-size</span>: <span class="number">20px</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">@<span class="keyword">media</span> screen and (min-width:<span class="number">720px</span>) and (max-width:<span class="number">749px</span>) &#123;</span><br><span class="line">    <span class="selector-tag">html</span> &#123;</span><br><span class="line">        <span class="attribute">font-size</span>: <span class="number">22.5px</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">@<span class="keyword">media</span> screen and (min-width:<span class="number">750px</span>) and (max-width:<span class="number">799px</span>) &#123;</span><br><span class="line">    <span class="selector-tag">html</span> &#123;</span><br><span class="line">        <span class="attribute">font-size</span>: <span class="number">23.5px</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">@<span class="keyword">media</span> screen and (min-width:<span class="number">800px</span>) and (max-width:<span class="number">959px</span>) &#123;</span><br><span class="line">    <span class="selector-tag">html</span> &#123;</span><br><span class="line">        <span class="attribute">font-size</span>: <span class="number">25px</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">@<span class="keyword">media</span> screen and (min-width:<span class="number">960px</span>) and (max-width:<span class="number">1079px</span>) &#123;</span><br><span class="line">    <span class="selector-tag">html</span> &#123;</span><br><span class="line">        <span class="attribute">font-size</span>: <span class="number">30px</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">@<span class="keyword">media</span> screen and (min-width:<span class="number">1080px</span>) &#123;</span><br><span class="line">    <span class="selector-tag">html</span> &#123;</span><br><span class="line">        <span class="attribute">font-size</span>: <span class="number">32px</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="移动端touch事件-区分webkit-和-winphone"><a href="#移动端touch事件-区分webkit-和-winphone" class="headerlink" title="移动端touch事件(区分webkit 和 winphone)"></a>移动端touch事件(区分webkit 和 winphone)</h3><p>当用户手指放在移动设备在屏幕上滑动会触发的touch事件</p>
+<ul>
+<li>以下支持webkit<ul>
+<li>touchstart——当手指触碰屏幕时候发生。不管当前有多少只手指</li>
+<li>touchmove——当手指在屏幕上滑动时连续触发。通常我们再滑屏页面，会调用event的preventDefault()可以阻止默认情况的发生：阻止页面滚动</li>
+<li>touchend——当手指离开屏幕时触发</li>
+<li>touchcancel——系统停止跟踪触摸时候会触发。例如在触摸过程中突然页面alert()一个提示框，此时会触发该事件，这个事件比较少用</li>
+</ul>
+</li>
+<li>以下支持winphone 8<ul>
+<li>MSPointerDown——当手指触碰屏幕时候发生。不管当前有多少只手指</li>
+<li>MSPointerMove——当手指在屏幕上滑动时连续触发。通常我们再滑屏页面，会调用css的html{-ms-touch-action: none;}可以阻止默认情况的发生：阻止页面滚动</li>
+<li>MSPointerUp——当手指离开屏幕时触发</li>
+</ul>
+</li>
+</ul>
+<h3 id="移动端click屏幕产生200-300-ms的延迟响应"><a href="#移动端click屏幕产生200-300-ms的延迟响应" class="headerlink" title="移动端click屏幕产生200-300 ms的延迟响应"></a>移动端click屏幕产生200-300 ms的延迟响应</h3><p>zepto的touch模块，tap事件也是为了解决在click的延迟问题<br>解决300ms延迟的问题，也可以通过绑定ontouchstart事件，加快对事件的响应</p>
+<ul>
+<li>触摸事件的响应顺序<ul>
+<li>ontouchstart</li>
+<li>ontouchmove </li>
+<li>ontouchend </li>
+<li>onclick</li>
+</ul>
+</li>
+</ul>
+<h3 id="什么是Retina-显示屏"><a href="#什么是Retina-显示屏" class="headerlink" title="什么是Retina 显示屏"></a>什么是Retina 显示屏</h3><p>retina：一种具备超高像素密度的液晶屏，同样大小的屏幕上显示的像素点由1个变为多个，如在同样带下的屏幕上，苹果设备的retina显示屏中，像素点1个变为4个</p>
+<p>在高清显示屏中的位图被放大，图片会变得模糊，因此移动端的视觉稿通常会设计为传统PC的2倍</p>
+<p>那么，前端的应对方案是：</p>
+<p>设计稿切出来的图片长宽保证为偶数，并使用backgroud-size把图片缩小为原来的1/2<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 例如图片宽高为：200px*200px，那么写法如下 */</span></span><br><span class="line"><span class="selector-class">.css</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>:<span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">height</span>:<span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">background-size</span>:<span class="number">100px</span> <span class="number">100px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 其它元素的取值为原来的1/2，例如视觉稿40px的字体，使用样式的写法为20px */</span></span><br><span class="line"><span class="selector-class">.css</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>:<span class="number">20px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="ios系统中元素被触摸时产生的半透明灰色遮罩"><a href="#ios系统中元素被触摸时产生的半透明灰色遮罩" class="headerlink" title="ios系统中元素被触摸时产生的半透明灰色遮罩"></a>ios系统中元素被触摸时产生的半透明灰色遮罩</h3><p>ios用户点击一个链接，会出现一个半透明灰色遮罩, 如果想要禁用，可设置-webkit-tap-highlight-color的alpha值为0，也就是属性值的最后一位设置为0就可以去除半透明灰色遮罩<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">a</span>, <span class="selector-tag">button</span>, <span class="selector-tag">input</span>, <span class="selector-tag">textarea</span> &#123;</span><br><span class="line">    <span class="attribute">-webkit-tap-highlight-color</span>: <span class="built_in">rgba</span>(0, 0, 0, 0);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="部分android系统中元素被点击时产生的边框"><a href="#部分android系统中元素被点击时产生的边框" class="headerlink" title="部分android系统中元素被点击时产生的边框"></a>部分android系统中元素被点击时产生的边框</h3><p>android用户点击一个链接，会出现一个边框或者半透明灰色遮罩, 不同生产商定义出来额效果不一样，可设置-webkit-tap-highlight-color的alpha值为0去除部分机器自带的效果<br>-webkit-user-modify有个副作用，就是输入法不再能够输入多个字符<br>另外，有些机型去除不了，如小米2<br>对于按钮类还有个办法，不使用a或者input标签，直接用div标签<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">a</span>, <span class="selector-tag">button</span>, <span class="selector-tag">input</span>, <span class="selector-tag">textarea</span> &#123;</span><br><span class="line">    <span class="attribute">-webkit-tap-highlight-color</span>: <span class="built_in">rgba</span>(0, 0, 0, 0);</span><br><span class="line">    <span class="attribute">-webkit-user-modify</span>: read-write-plaintext-only;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="wp系统a、input标签被点击时产生的半透明灰色背景"><a href="#wp系统a、input标签被点击时产生的半透明灰色背景" class="headerlink" title="wp系统a、input标签被点击时产生的半透明灰色背景"></a>wp系统a、input标签被点击时产生的半透明灰色背景</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"msapplication-tap-highlight"</span> <span class="attr">content</span>=<span class="string">"no"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="webkit表单元素的默认外观重置"><a href="#webkit表单元素的默认外观重置" class="headerlink" title="webkit表单元素的默认外观重置"></a>webkit表单元素的默认外观重置</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.css</span> &#123;</span><br><span class="line">    <span class="attribute">-webkit-appearance</span>:none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="webkit表单输入框placeholder的颜色"><a href="#webkit表单输入框placeholder的颜色" class="headerlink" title="webkit表单输入框placeholder的颜色"></a>webkit表单输入框placeholder的颜色</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">input</span><span class="selector-pseudo">::-webkit-input-placeholder</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#AAAAAA</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">input</span><span class="selector-pseudo">:focus</span><span class="selector-pseudo">::-webkit-input-placeholder</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#EEEEEE</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="关闭iOS键盘首字母自动大写"><a href="#关闭iOS键盘首字母自动大写" class="headerlink" title="关闭iOS键盘首字母自动大写"></a>关闭iOS键盘首字母自动大写</h3><p>在iOS中，默认情况下键盘是开启首字母大写的功能的，如果启用这个功能，可以这样：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">autocapitalize</span>=<span class="string">"off"</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="关闭iOS输入自动修正"><a href="#关闭iOS输入自动修正" class="headerlink" title="关闭iOS输入自动修正"></a>关闭iOS输入自动修正</h3><p>和英文输入默认自动首字母大写那样，IOS还做了一个功能，默认输入法会开启自动修正输入内容，这样的话，用户经常要操作两次。如果不希望开启此功能，我们可以通过input标签属性来关闭掉：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">autocorrect</span>=<span class="string">"off"</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="禁止文本缩放"><a href="#禁止文本缩放" class="headerlink" title="禁止文本缩放"></a>禁止文本缩放</h3><p>当移动设备横竖屏切换时，文本的大小会重新计算，进行相应的缩放，当我们不需要这种情况时，可以选择禁止：<br>需要注意的是，PC端的该属性已经被移除，该属性在移动端要生效，必须设置 ‘meta viewport’。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">html</span> &#123;</span><br><span class="line">    <span class="attribute">-webkit-text-size-adjust</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="移动端如何清除输入框内阴影"><a href="#移动端如何清除输入框内阴影" class="headerlink" title="移动端如何清除输入框内阴影"></a>移动端如何清除输入框内阴影</h3><p>在iOS上，输入框默认有内部阴影，但无法使用 box-shadow 来清除，如果不需要阴影，可以这样关闭：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">input</span>,<span class="selector-tag">textarea</span> &#123;</span><br><span class="line">　　<span class="attribute">border</span>: <span class="number">0</span>; <span class="comment">/* 方法1 */</span></span><br><span class="line">　　<span class="attribute">-webkit-appearance</span>: none; <span class="comment">/* 方法2 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="快速回弹滚动"><a href="#快速回弹滚动" class="headerlink" title="快速回弹滚动"></a>快速回弹滚动</h3><p>我们先来看看回弹滚动在手机浏览器发展的历史：</p>
+<ul>
+<li>早期的时候，移动端的浏览器都不支持非body元素的滚动条，所以一般都借助 iScroll;</li>
+<li>Android 3.0/iOS解决了非body元素的滚动问题，但滚动条不可见，同时iOS上只能通过2个手指进行滚动；</li>
+<li>Android 4.0解决了滚动条不可见及增加了快速回弹滚动效果，不过随后这个特性又被移除；</li>
+<li>iOS从5.0开始解决了滚动条不可见及增加了快速回弹滚动效果<br>在iOS上如果你想让一个元素拥有像 Native 的滚动效果，你可以这样做：<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.xxx</span> &#123;</span><br><span class="line">    <span class="attribute">overflow</span>: auto; <span class="comment">/* auto | scroll */</span></span><br><span class="line">    <span class="attribute">-webkit-overflow-scrolling</span>: touch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="移动端禁止选中内容"><a href="#移动端禁止选中内容" class="headerlink" title="移动端禁止选中内容"></a>移动端禁止选中内容</h3><p>如果你不想用户可以选中页面中的内容，那么你可以在css中禁掉：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.user-select-none</span> &#123;</span><br><span class="line">  <span class="attribute">-webkit-user-select</span>: none;  <span class="comment">/* Chrome all / Safari all */</span></span><br><span class="line">  <span class="attribute">-moz-user-select</span>: none;     <span class="comment">/* Firefox all （移动端不需要） */</span></span><br><span class="line">  <span class="attribute">-ms-user-select</span>: none;      <span class="comment">/* IE 10+ */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="移动端取消touch高亮效果"><a href="#移动端取消touch高亮效果" class="headerlink" title="移动端取消touch高亮效果"></a>移动端取消touch高亮效果</h3><p>在做移动端页面时，会发现所有a标签在触发点击时或者所有设置了伪类 :active 的元素，默认都会在激活状态时，显示高亮框，如果不想要这个高亮，那么你可以通过css以下方法来进行全局的禁止：<br>(但这个方法在三星的机子上无效，有一种妥协的方法是把页面非真实跳转链接的a标签换成其它标签，可以解决这个问题)<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">html</span> &#123;</span><br><span class="line">    <span class="attribute">-webkit-tap-highlight-color</span>: <span class="built_in">rgba</span>(0, 0, 0, 0);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="如何禁止保存或拷贝图像（IOS）"><a href="#如何禁止保存或拷贝图像（IOS）" class="headerlink" title="如何禁止保存或拷贝图像（IOS）"></a>如何禁止保存或拷贝图像（IOS）</h3><p>通常当你在手机或者pad上长按图像 img ，会弹出选项 存储图像 或者 拷贝图像，如果你不想让用户这么操作，那么你可以通过以下方法来禁止：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">img</span> &#123;</span><br><span class="line">    <span class="attribute">-webkit-touch-callout</span>: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="模拟按钮hover效果"><a href="#模拟按钮hover效果" class="headerlink" title="模拟按钮hover效果"></a>模拟按钮hover效果</h3><p>移动端触摸按钮的效果，可明示用户有些事情正要发生，是一个比较好体验，但是移动设备中并没有鼠标指针，使用css的hover并不能满足我们的需求，还好国外有个激活css的active效果，代码如下:<br>(兼容性ios5+、部分android 4+、winphone 8)<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">content</span>=<span class="string">"width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"</span> <span class="attr">name</span>=<span class="string">"viewport"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">content</span>=<span class="string">"yes"</span> <span class="attr">name</span>=<span class="string">"apple-mobile-web-app-capable"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">content</span>=<span class="string">"black"</span> <span class="attr">name</span>=<span class="string">"apple-mobile-web-app-status-bar-style"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">content</span>=<span class="string">"telephone=no"</span> <span class="attr">name</span>=<span class="string">"format-detection"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">content</span>=<span class="string">"email=no"</span> <span class="attr">name</span>=<span class="string">"format-detection"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span><br><span class="line">            <span class="selector-tag">a</span> &#123;</span><br><span class="line">                <span class="attribute">-webkit-tap-highlight-color</span>: <span class="built_in">rgba</span>(0, 0, 0, 0);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="selector-class">.btn-blue</span> &#123;</span><br><span class="line">                <span class="attribute">display</span>: block;</span><br><span class="line">                <span class="attribute">height</span>: <span class="number">42px</span>;</span><br><span class="line">                <span class="attribute">line-height</span>: <span class="number">42px</span>;</span><br><span class="line">                <span class="attribute">text-align</span>: center;</span><br><span class="line">                <span class="attribute">border-radius</span>: <span class="number">4px</span>;</span><br><span class="line">                <span class="attribute">font-size</span>: <span class="number">18px</span>;</span><br><span class="line">                <span class="attribute">color</span>: <span class="number">#FFFFFF</span>;</span><br><span class="line">                <span class="attribute">background-color</span>: <span class="number">#4185F3</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="selector-class">.btn-blue</span><span class="selector-pseudo">:active</span> &#123;</span><br><span class="line">                <span class="attribute">background-color</span>: <span class="number">#357AE8</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"btn-blue"</span>&gt;</span>按钮<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span><br><span class="line">            document.addEventListener('touchstart', function()&#123;&#125;, true);</span><br><span class="line">        </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>要做到全兼容的办法，可通过绑定ontouchstart和ontouchend来控制按钮的类名<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">content</span>=<span class="string">"width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"</span> <span class="attr">name</span>=<span class="string">"viewport"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">content</span>=<span class="string">"yes"</span> <span class="attr">name</span>=<span class="string">"apple-mobile-web-app-capable"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">content</span>=<span class="string">"black"</span> <span class="attr">name</span>=<span class="string">"apple-mobile-web-app-status-bar-style"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">content</span>=<span class="string">"telephone=no"</span> <span class="attr">name</span>=<span class="string">"format-detection"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">meta</span> <span class="attr">content</span>=<span class="string">"email=no"</span> <span class="attr">name</span>=<span class="string">"format-detection"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span><br><span class="line">            <span class="selector-tag">a</span> &#123;</span><br><span class="line">                <span class="attribute">-webkit-tap-highlight-color</span>: <span class="built_in">rgba</span>(0, 0, 0, 0);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="selector-class">.btn-blue</span> &#123;</span><br><span class="line">                <span class="attribute">display</span>: block;</span><br><span class="line">                <span class="attribute">height</span>: <span class="number">42px</span>;</span><br><span class="line">                <span class="attribute">line-height</span>: <span class="number">42px</span>;</span><br><span class="line">                <span class="attribute">text-align</span>: center;</span><br><span class="line">                <span class="attribute">border-radius</span>: <span class="number">4px</span>;</span><br><span class="line">                <span class="attribute">font-size</span>: <span class="number">18px</span>;</span><br><span class="line">                <span class="attribute">color</span>: <span class="number">#FFFFFF</span>;</span><br><span class="line">                <span class="attribute">background-color</span>: <span class="number">#4185F3</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="selector-class">.btn-blue-on</span> &#123;</span><br><span class="line">                <span class="attribute">background-color</span>: <span class="number">#357AE8</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"btn-blue"</span>&gt;</span>按钮<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span><br><span class="line">            var btnBlue = document.querySelector(".btn-blue");</span><br><span class="line">            btnBlue.ontouchstart = function()&#123;</span><br><span class="line">                this.className = "btn-blue btn-blue-on"</span><br><span class="line">            &#125;</span><br><span class="line">            btnBlue.ontouchend = function()&#123;</span><br><span class="line">                this.className = "btn-blue"</span><br><span class="line">            &#125;</span><br><span class="line">        </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="屏幕旋转的事件和样式"><a href="#屏幕旋转的事件和样式" class="headerlink" title="屏幕旋转的事件和样式"></a>屏幕旋转的事件和样式</h3><p><strong>事件</strong><br>window.orientation，取值：正负90表示横屏模式、0和180表现为竖屏模式；<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onorientationchange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">switch</span>(<span class="built_in">window</span>.orientation)&#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">-90</span>:</span><br><span class="line">        <span class="keyword">case</span> <span class="number">90</span>:</span><br><span class="line">            alert(<span class="string">"横屏:"</span> + <span class="built_in">window</span>.orientation);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">case</span> <span class="number">180</span>:</span><br><span class="line">            alert(<span class="string">"竖屏:"</span> + <span class="built_in">window</span>.orientation);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>样式</strong><br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 竖屏时使用的样式 */</span></span><br><span class="line">@<span class="keyword">media</span> all and (orientation:portrait) &#123;</span><br><span class="line">    <span class="selector-class">.css</span>&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 横屏时使用的样式 */</span></span><br><span class="line">@<span class="keyword">media</span> all and (orientation:landscape) &#123;</span><br><span class="line">    <span class="selector-class">.css</span>&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="audio元素和video元素在ios和andriod中无法自动播放"><a href="#audio元素和video元素在ios和andriod中无法自动播放" class="headerlink" title="audio元素和video元素在ios和andriod中无法自动播放"></a>audio元素和video元素在ios和andriod中无法自动播放</h3><p>应对方案：触屏即播<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'html'</span>).on(<span class="string">'touchstart'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    audio.play();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h3 id="手机拍照和上传图片"><a href="#手机拍照和上传图片" class="headerlink" title="手机拍照和上传图片"></a>手机拍照和上传图片</h3><ul>
+<li>使用总结：<ul>
+<li>ios 有拍照、录像、选取本地图片功能</li>
+<li>部分android只有选取本地图片功能</li>
+<li>winphone不支持</li>
+<li>input控件默认外观丑陋<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 选择照片 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">file</span> <span class="attr">accept</span>=<span class="string">"image/*"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 选择视频 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">file</span> <span class="attr">accept</span>=<span class="string">"video/*"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="消除transition闪屏"><a href="#消除transition闪屏" class="headerlink" title="消除transition闪屏"></a>消除transition闪屏</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.css</span>&#123;    </span><br><span class="line">    <span class="comment">/*设置内嵌的元素在 3D 空间如何呈现：保留 3D*/</span></span><br><span class="line">    <span class="attribute">-webkit-transform-style</span>: preserve-<span class="number">3</span>d;    </span><br><span class="line">    <span class="comment">/*（设置进行转换的元素的背面在面对用户时是否可见：隐藏）*/</span></span><br><span class="line">    <span class="attribute">-webkit-backface-visibility</span>: hidden;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>开启硬件加速</strong></p>
+<ul>
+<li>解决页面闪白</li>
+<li><p>保证动画流畅</p>
+</li>
+<li><p>设计高性能CSS3动画的几个要素</p>
+<ul>
+<li>尽可能地使用合成属性transform和opacity来设计CSS3动画</li>
+<li>不使用position的left和top来定位</li>
+<li>利用translate3D开启GPU加速<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.css</span> &#123;</span><br><span class="line">   <span class="attribute">-webkit-transform</span>: <span class="built_in">translate3d</span>(0, 0, 0);</span><br><span class="line">   <span class="attribute">-moz-transform</span>: <span class="built_in">translate3d</span>(0, 0, 0);</span><br><span class="line">   <span class="attribute">-ms-transform</span>: <span class="built_in">translate3d</span>(0, 0, 0);</span><br><span class="line">   <span class="attribute">transform</span>: <span class="built_in">translate3d</span>(0, 0, 0);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="android-上去掉语音输入按钮"><a href="#android-上去掉语音输入按钮" class="headerlink" title="android 上去掉语音输入按钮"></a>android 上去掉语音输入按钮</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">input</span><span class="selector-pseudo">::-webkit-input-speech-button</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="阻止滚动"><a href="#阻止滚动" class="headerlink" title="阻止滚动"></a>阻止滚动</h3><p>一些移动设备有缺省的touchmove行为，比如说经典的iOS overscroll效果，当滚动超出了内容的界限时就引发视图反弹。这种做法在许多多点触控应用中会带来混乱，但要禁用它很容易。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.body.addEventListener(<span class="string">'touchmove'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123; </span><br><span class="line">    event.preventDefault(); </span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure></p>
+<p><a href="http://ju.outofmemory.cn/entry/216241" target="_blank" rel="external">原文出自：http://ju.outofmemory.cn/entry/216241</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/移动web/">移动web</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	<div class="share-jiathis">
+	  
+<div class="jiathis_style_24x24">
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_googleplus"></a>
+	<a class="jiathis_button_douban"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+    var jiathis_config={
+    data_track_clickback:true,
+    sm:"copy,renren,cqq",
+    pic:"",
+    summary:"",
+    
+  </script> 
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=
+" charset="utf-8"></script>      
+
+	 </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2016/08/22/angular小集锦1/"  title="angular小集锦1">
+ <strong>下一篇：</strong><br/> 
+ <span>angular小集锦1
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#添加到主屏后的标题（IOS）"><span class="toc-number">1.</span> <span class="toc-text">添加到主屏后的标题（IOS）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#启用-WebApp-全屏模式（IOS）"><span class="toc-number">2.</span> <span class="toc-text">启用 WebApp 全屏模式（IOS）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#百度禁止转码"><span class="toc-number">3.</span> <span class="toc-text">百度禁止转码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置状态栏的背景颜色（IOS）"><span class="toc-number">4.</span> <span class="toc-text">设置状态栏的背景颜色（IOS）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动端手机号码识别（IOS）"><span class="toc-number">5.</span> <span class="toc-text">移动端手机号码识别（IOS）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开启电话功能"><span class="toc-number">6.</span> <span class="toc-text">开启电话功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开启短信功能"><span class="toc-number">7.</span> <span class="toc-text">开启短信功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动端邮箱识别（Android）"><span class="toc-number">8.</span> <span class="toc-text">移动端邮箱识别（Android）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加智能-App-广告条（IOS-6-Safari）"><span class="toc-number">9.</span> <span class="toc-text">添加智能 App 广告条（IOS 6+ Safari）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IOS-Web-app启动动画"><span class="toc-number">10.</span> <span class="toc-text">IOS Web app启动动画</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加到主屏后的APP图标"><span class="toc-number">11.</span> <span class="toc-text">添加到主屏后的APP图标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#优先使用最新版本-IE-和-Chrome"><span class="toc-number">12.</span> <span class="toc-text">优先使用最新版本 IE 和 Chrome</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动端如何定义字体f-ont-family"><span class="toc-number">13.</span> <span class="toc-text">移动端如何定义字体f ont-family</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动端字体单位font-size"><span class="toc-number">14.</span> <span class="toc-text">移动端字体单位font-size</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动端touch事件-区分webkit-和-winphone"><span class="toc-number">15.</span> <span class="toc-text">移动端touch事件(区分webkit 和 winphone)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动端click屏幕产生200-300-ms的延迟响应"><span class="toc-number">16.</span> <span class="toc-text">移动端click屏幕产生200-300 ms的延迟响应</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是Retina-显示屏"><span class="toc-number">17.</span> <span class="toc-text">什么是Retina 显示屏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ios系统中元素被触摸时产生的半透明灰色遮罩"><span class="toc-number">18.</span> <span class="toc-text">ios系统中元素被触摸时产生的半透明灰色遮罩</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#部分android系统中元素被点击时产生的边框"><span class="toc-number">19.</span> <span class="toc-text">部分android系统中元素被点击时产生的边框</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#wp系统a、input标签被点击时产生的半透明灰色背景"><span class="toc-number">20.</span> <span class="toc-text">wp系统a、input标签被点击时产生的半透明灰色背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#webkit表单元素的默认外观重置"><span class="toc-number">21.</span> <span class="toc-text">webkit表单元素的默认外观重置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#webkit表单输入框placeholder的颜色"><span class="toc-number">22.</span> <span class="toc-text">webkit表单输入框placeholder的颜色</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关闭iOS键盘首字母自动大写"><span class="toc-number">23.</span> <span class="toc-text">关闭iOS键盘首字母自动大写</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关闭iOS输入自动修正"><span class="toc-number">24.</span> <span class="toc-text">关闭iOS输入自动修正</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#禁止文本缩放"><span class="toc-number">25.</span> <span class="toc-text">禁止文本缩放</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动端如何清除输入框内阴影"><span class="toc-number">26.</span> <span class="toc-text">移动端如何清除输入框内阴影</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快速回弹滚动"><span class="toc-number">27.</span> <span class="toc-text">快速回弹滚动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动端禁止选中内容"><span class="toc-number">28.</span> <span class="toc-text">移动端禁止选中内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动端取消touch高亮效果"><span class="toc-number">29.</span> <span class="toc-text">移动端取消touch高亮效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何禁止保存或拷贝图像（IOS）"><span class="toc-number">30.</span> <span class="toc-text">如何禁止保存或拷贝图像（IOS）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模拟按钮hover效果"><span class="toc-number">31.</span> <span class="toc-text">模拟按钮hover效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#屏幕旋转的事件和样式"><span class="toc-number">32.</span> <span class="toc-text">屏幕旋转的事件和样式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#audio元素和video元素在ios和andriod中无法自动播放"><span class="toc-number">33.</span> <span class="toc-text">audio元素和video元素在ios和andriod中无法自动播放</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#手机拍照和上传图片"><span class="toc-number">34.</span> <span class="toc-text">手机拍照和上传图片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#消除transition闪屏"><span class="toc-number">35.</span> <span class="toc-text">消除transition闪屏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#android-上去掉语音输入按钮"><span class="toc-number">36.</span> <span class="toc-text">android 上去掉语音输入按钮</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#阻止滚动"><span class="toc-number">37.</span> <span class="toc-text">阻止滚动</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="github-card">
+<p class="asidetitle">Github 名片</p>
+<div class="github-card" data-github="PaddyWang" data-width="220" data-height="119" data-theme="medium">
+<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js" ></script>
+</div>
+  </div>
+
+
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>16</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/HTML-CSS/" title="HTML+CSS">HTML+CSS<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/大前端/" title="大前端">大前端<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/angular/" title="angular">angular<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/移动web/" title="移动web">移动web<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://github.com/PaddyWang" target="_blank" title="PaddyWang">GitHub</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://www.gitbook.com/@paddywang" target="_blank" title="PaddyWang">GitBook</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://developer.mozilla.org/zh-CN/" target="_blank" title="MDN">MDN</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.cnblogs.com/PaddyWang/" target="_blank" title="博客园">博客园</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://blog.csdn.net/wolf20150402" target="_blank" title="CSDN">CSDN</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> The harder, more lucky <br/>
+			I will thank now hard to myself in the future</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		<a href="https://github.com/PaddyWang" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:paddywang333@163.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2017 
+		
+		<a href="/about" target="_blank" title="PaddyWang">PaddyWang</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
