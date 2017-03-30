@@ -4,38 +4,32 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Bootstrap的发展史 | PaddyWang</title>
+    <title>判断回文数 | PaddyWang</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="PaddyWang">
     
 
     
-    <meta name="description" content="整理了一下最喜欢的前端 UI 框架 Bootstrap 的发展史从开始接触到现在一直都是 3.x还不知道短短不到 5 年的时间竟发生了翻天覆地的变换期待着 4.x 的完善Bootstrap 可以说是前端开发人员比较喜欢的 UI 框架，同样也受后台的欢迎
+    <meta name="description" content="判断一个整数是否是回文数
+@param {number} x@return {boolean}
 
-Bootstrap
-Bootstrap 的更新日志
-Bootstrap 是 Twitter 在2011年8月推出的开源 WEB 前端框架
-在B">
+12345678910111213141516var isPalindrome = function(x) &amp;#123;    /**     * 首先将数字反转 然后判断是否相等     */    var tempX = x;    var reverseX = 0;    if(x &amp;lt;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Bootstrap的发展史">
-<meta property="og:url" content="http://paddywang.github.io/2016/05/22/Bootstrap的发展史/index.html">
+<meta property="og:title" content="判断回文数">
+<meta property="og:url" content="http://paddywang.github.io/2017/03/30/【算法】判断回文数/index.html">
 <meta property="og:site_name" content="PaddyWang">
-<meta property="og:description" content="整理了一下最喜欢的前端 UI 框架 Bootstrap 的发展史从开始接触到现在一直都是 3.x还不知道短短不到 5 年的时间竟发生了翻天覆地的变换期待着 4.x 的完善Bootstrap 可以说是前端开发人员比较喜欢的 UI 框架，同样也受后台的欢迎
+<meta property="og:description" content="判断一个整数是否是回文数
+@param {number} x@return {boolean}
 
-Bootstrap
-Bootstrap 的更新日志
-Bootstrap 是 Twitter 在2011年8月推出的开源 WEB 前端框架
-在B">
-<meta property="og:updated_time" content="2016-05-22T10:28:22.802Z">
+12345678910111213141516var isPalindrome = function(x) &amp;#123;    /**     * 首先将数字反转 然后判断是否相等     */    var tempX = x;    var reverseX = 0;    if(x &amp;lt;">
+<meta property="og:updated_time" content="2017-03-30T14:47:29.482Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bootstrap的发展史">
-<meta name="twitter:description" content="整理了一下最喜欢的前端 UI 框架 Bootstrap 的发展史从开始接触到现在一直都是 3.x还不知道短短不到 5 年的时间竟发生了翻天覆地的变换期待着 4.x 的完善Bootstrap 可以说是前端开发人员比较喜欢的 UI 框架，同样也受后台的欢迎
+<meta name="twitter:title" content="判断回文数">
+<meta name="twitter:description" content="判断一个整数是否是回文数
+@param {number} x@return {boolean}
 
-Bootstrap
-Bootstrap 的更新日志
-Bootstrap 是 Twitter 在2011年8月推出的开源 WEB 前端框架
-在B">
+12345678910111213141516var isPalindrome = function(x) &amp;#123;    /**     * 首先将数字反转 然后判断是否相等     */    var tempX = x;    var reverseX = 0;    if(x &amp;lt;">
 
     
     <link rel="alternative" href="/atom.xml" title="PaddyWang" type="application/atom+xml">
@@ -96,14 +90,14 @@ Bootstrap 是 Twitter 在2011年8月推出的开源 WEB 前端框架
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/05/22/Bootstrap的发展史/" title="Bootstrap的发展史" itemprop="url">Bootstrap的发展史</a>
+      <a href="/2017/03/30/【算法】判断回文数/" title="判断回文数" itemprop="url">判断回文数</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="PaddyWang" target="_blank" itemprop="author">PaddyWang</a>
 		
   <p class="article-time">
-    <time datetime="2016-05-22T10:14:13.000Z" itemprop="datePublished"> 发表于 2016-05-22</time>
+    <time datetime="2017-03-30T14:43:15.000Z" itemprop="datePublished"> 发表于 2017-03-30</time>
     
   </p>
 </header>
@@ -112,63 +106,25 @@ Bootstrap 是 Twitter 在2011年8月推出的开源 WEB 前端框架
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Bootstrap"><span class="toc-number">1.</span> <span class="toc-text">Bootstrap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bootstrap-2"><span class="toc-number">2.</span> <span class="toc-text">Bootstrap 2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bootstrap-3"><span class="toc-number">3.</span> <span class="toc-text">Bootstrap 3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bootstrap-4"><span class="toc-number">4.</span> <span class="toc-text">Bootstrap 4</span></a></li></ol>
+			
 		
 		</div>
 		
 		<blockquote>
-<p>整理了一下最喜欢的前端 UI 框架 Bootstrap 的发展史<br>从开始接触到现在一直都是 3.x<br>还不知道短短不到 5 年的时间竟发生了翻天覆地的变换<br>期待着 4.x 的完善<br>Bootstrap 可以说是前端开发人员比较喜欢的 UI 框架，同样也受后台的欢迎</p>
+<p>判断一个整数是否是回文数</p>
+<p>@param {number} x<br>@return {boolean}</p>
 </blockquote>
-<h3 id="Bootstrap"><a href="#Bootstrap" class="headerlink" title="Bootstrap"></a>Bootstrap</h3><ul>
-<li><a href="http://blog.getbootstrap.com/" target="_blank" rel="external">Bootstrap 的更新日志</a></li>
-<li>Bootstrap 是 Twitter 在2011年8月推出的开源 WEB 前端框架</li>
-<li>在Bootstrap 2 中，对框架中的某些关键部分增加了对移动设备友好的样式</li>
-<li>Bootstrap 3 中，重写了整个框架，使其一开始就是对移动设备友好的</li>
-<li>这次不是简单的增加一些可选的针对移动设备的样式，而是直接融合进了框架的内核中</li>
-<li>Bootstrap3 是移动设备优先的</li>
-<li>目前 Bootstrap 4 还处于 alpha 测试版，官方文档都是预览版</li>
-</ul>
-<h3 id="Bootstrap-2"><a href="#Bootstrap-2" class="headerlink" title="Bootstrap 2"></a>Bootstrap 2</h3><ul>
-<li><a href="http://www.infoq.com/cn/news/2012/02/bootstrap-2.0.1-released" target="_blank" rel="external">发布2.0.1版</a></li>
-<li>2012年2月份就再次放出新版本2.0</li>
-<li>jquery/</li>
-<li>基于 Less 框架构建的 CSS</li>
-<li>2.0.1 支持几乎所有的主流浏览器，包括Safari、Chrome，Firefox、IE7.0及以上，最新版本还支持智能手机 WebUI</li>
-<li>2.0版本采用了更灵活也更受欢迎的12栏网格布局，并以此来实现其各种布局框架</li>
-<li>增加了响应式设计，以适应各种移动终端的需求</li>
-<li>完善和改进原有样式库，并提供更丰富的新样式，包括样式繁多的图标（icon），漂亮易用的进度条等</li>
-<li>改进和增加了自定义 jQuery 插件，完善文档，修复 bug</li>
-<li>同时还提供了很多基于 Bootstrap 构建的网站样例</li>
-</ul>
-<h3 id="Bootstrap-3"><a href="#Bootstrap-3" class="headerlink" title="Bootstrap 3"></a>Bootstrap 3</h3><ul>
-<li><a href="http://blog.getbootstrap.com/2013/08/19/bootstrap-3-released/" target="_blank" rel="external">Bootstrap 3 发布</a></li>
-<li>2013年8月19日发布</li>
-<li>jquery/1.11.3</li>
-<li>Bootstrap 3并不向后兼容Bootstrap v2.x</li>
-<li>再见，IE7！及Firefox3.6 。最低从IE8开始支持。而且因为设计已经变成移动优先，所以对IE8的支持也需要respond.js</li>
-<li>所有元素默认盒模型（box model）使用了 border-box，注意，实现的方法是非常暴力的设置 * { box-sizing: border-box; }，理由呢，就是方便计算，这也是它可能会和其他第三方框架发生冲突的主要原因</li>
-</ul>
-<h3 id="Bootstrap-4"><a href="#Bootstrap-4" class="headerlink" title="Bootstrap 4"></a>Bootstrap 4</h3><ul>
-<li><a href="http://blog.getbootstrap.com/2015/08/19/bootstrap-4-alpha/" target="_blank" rel="external">Bootstrap-4-alpha</a></li>
-<li>在2015年8月19日发布</li>
-<li>jquery/2.1.4</li>
-<li>从 Less 迁移到 Sass</li>
-<li>改进栅栏系统</li>
-<li>缺省弹性框支持</li>
-<li>缩略图、卡片面板</li>
-<li>合并所有 HTML resets 到一个新的模块中：Reboot</li>
-<li>全新自定义选项</li>
-<li>彻底不再支持 IE8</li>
-<li>重写所有的 JavaScript 插件</li>
-<li>改进工具提示和 popovers 的自动定位</li>
-<li>改进文档</li>
-<li>其他大量改进</li>
-</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> isPalindrome = <span class="function"><span class="keyword">function</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * 首先将数字反转 然后判断是否相等</span><br><span class="line">     */</span></span><br><span class="line">    <span class="keyword">var</span> tempX = x;</span><br><span class="line">    <span class="keyword">var</span> reverseX = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(x &lt; <span class="number">1e+32</span>)&#123;</span><br><span class="line">        <span class="keyword">while</span>(x &gt; <span class="number">1</span> || x &lt; <span class="number">-1</span>)&#123;</span><br><span class="line">            reverseX = reverseX * <span class="number">10</span> + <span class="built_in">parseInt</span>(x % <span class="number">10</span>);</span><br><span class="line">            x /= <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> tempX === reverseX;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(isPalindrome(<span class="number">-1234321</span>));</span><br></pre></td></tr></table></figure>
   
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/算法/">算法</a>
+  </div>
 
 </div>
 
@@ -211,19 +167,11 @@ Bootstrap 是 Twitter 在2011年8月推出的开源 WEB 前端框架
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/07/06/前端兼容性/" title="前端兼容性">
-  <strong>上一篇：</strong><br/>
-  <span>
-  前端兼容性</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2016/05/05/less的基本使用/"  title="less的基本使用">
+<a href="/2017/03/30/【算法】乘积最大的三个数/"  title="乘积最大的三个数">
  <strong>下一篇：</strong><br/> 
- <span>less的基本使用
+ <span>乘积最大的三个数
 </span>
 </a>
 </div>
@@ -238,7 +186,7 @@ Bootstrap 是 Twitter 在2011年8月推出的开源 WEB 前端框架
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Bootstrap"><span class="toc-number">1.</span> <span class="toc-text">Bootstrap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bootstrap-2"><span class="toc-number">2.</span> <span class="toc-text">Bootstrap 2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bootstrap-3"><span class="toc-number">3.</span> <span class="toc-text">Bootstrap 3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bootstrap-4"><span class="toc-number">4.</span> <span class="toc-text">Bootstrap 4</span></a></li></ol>
+ 
  
   </div>
 
