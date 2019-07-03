@@ -19,14 +19,12 @@
 <meta property="og:site_name" content="PaddyWang">
 <meta property="og:description" content="前端系统开发月报开发背景1234对之前的系统更新升级目前有几套不同端的系统不同的入口，不同的前端页面，统一的接口，统一的数据库单页面应用系统
 路由设计12345678URL -&amp;gt; 先由服务端统一路由 -&amp;gt; 然后交给前端处理目前设计了两种路由：    /t 开头的有导航路由，统一的操作界面，有权限    /x 开头的无导航路由，独立页面，一部分无权限考虑到代码的复用，以及减少当前系统的代">
-<meta property="og:updated_time" content="2019-03-02T09:07:24.029Z">
+<meta property="og:updated_time" content="2019-03-02T09:07:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="20190302-随笔-前端系统开发月报">
 <meta name="twitter:description" content="前端系统开发月报开发背景1234对之前的系统更新升级目前有几套不同端的系统不同的入口，不同的前端页面，统一的接口，统一的数据库单页面应用系统
 路由设计12345678URL -&amp;gt; 先由服务端统一路由 -&amp;gt; 然后交给前端处理目前设计了两种路由：    /t 开头的有导航路由，统一的操作界面，有权限    /x 开头的无导航路由，独立页面，一部分无权限考虑到代码的复用，以及减少当前系统的代">
 
-    
-    <link rel="alternative" href="/atom.xml" title="PaddyWang" type="application/atom+xml">
     
     
     <link rel="icon" href="/img/favicon.ico">
@@ -49,7 +47,7 @@
 			
 			<div id="textlogo">
 				<h1 class="site-name"><a href="/" title="PaddyWang">PaddyWang</a></h1>
-				<h2 class="blog-motto"></h2>
+				<h2 class="blog-motto">Blog</h2>
 			</div>
 			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
 			</a></div>
@@ -59,18 +57,17 @@
 					 
 						<li><a href="/">Home</a></li>
 					
-						<li><a href="/archives">Archives | 归档</a></li>
+						<li><a href="/links">Links | 链接</a></li>
 					
-						<li><a href="/links">links | 链接</a></li>
-					
-						<li><a href="/about">About | 简介</a></li>
+						<li><a href="/about">Introduction | 简介</a></li>
 					
 					<li>
  					
-						<form class="search" action="" target="_blank">
-							<label>Search</label>
-						<input name="s" type="hidden" value= null ><input type="text" name="q" size="30" placeholder="搜索"><br>
-						</form>
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:paddywang.github.io">
+					</form>
 					
 					</li>
 				</ul>
@@ -97,13 +94,6 @@
 </header>
 	<div class="article-content">
 		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
-		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前端系统开发月报"><span class="toc-number">1.</span> <span class="toc-text">前端系统开发月报</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#开发背景"><span class="toc-number">1.0.1.</span> <span class="toc-text">开发背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#路由设计"><span class="toc-number">1.0.2.</span> <span class="toc-text">路由设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#页面的统一化设计"><span class="toc-number">1.0.3.</span> <span class="toc-text">页面的统一化设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#页面结构化设计"><span class="toc-number">1.0.4.</span> <span class="toc-text">页面结构化设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#系统的前端架构设计"><span class="toc-number">1.0.5.</span> <span class="toc-text">系统的前端架构设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">1.0.6.</span> <span class="toc-text">总结</span></a></li></ol></li></ol></li></ol>
-		
-		</div>
-		
 		<h1 id="前端系统开发月报"><a href="#前端系统开发月报" class="headerlink" title="前端系统开发月报"></a>前端系统开发月报</h1><h3 id="开发背景"><a href="#开发背景" class="headerlink" title="开发背景"></a>开发背景</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">对之前的系统更新升级</span><br><span class="line">目前有几套不同端的系统</span><br><span class="line">不同的入口，不同的前端页面，统一的接口，统一的数据库</span><br><span class="line">单页面应用系统</span><br></pre></td></tr></table></figure>
 <h3 id="路由设计"><a href="#路由设计" class="headerlink" title="路由设计"></a>路由设计</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">URL -&gt; 先由服务端统一路由 -&gt; 然后交给前端处理</span><br><span class="line"></span><br><span class="line">目前设计了两种路由：</span><br><span class="line">    /t 开头的有导航路由，统一的操作界面，有权限</span><br><span class="line">    /x 开头的无导航路由，独立页面，一部分无权限</span><br><span class="line"></span><br><span class="line">考虑到代码的复用，以及减少当前系统的代码体量</span><br><span class="line">对于用到的以前系统的页面全部加载到 /x 路由下</span><br></pre></td></tr></table></figure>
 <h3 id="页面的统一化设计"><a href="#页面的统一化设计" class="headerlink" title="页面的统一化设计"></a>页面的统一化设计</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">在样式里面沿用了以前系统的一些样式风格</span><br><span class="line">另外加了一些的新的样式</span><br><span class="line">保证在一个系统里面尽量做到样式的统一化</span><br><span class="line">尽量减少样式的多样性</span><br><span class="line">统一的基础模块：</span><br><span class="line">    模态框</span><br><span class="line">    表单元素</span><br><span class="line">        按钮、输入框、下拉框、复选框、单选框。。。</span><br><span class="line">    加载层</span><br><span class="line">    面包屑</span><br><span class="line">    分页器</span><br><span class="line">    表格</span><br><span class="line">    。。。</span><br><span class="line">不同尺寸的字体、表单元素、加载层。。。</span><br><span class="line">不同内容的排版设计</span><br><span class="line">不同的内外边距的阀值</span><br><span class="line">。。。</span><br><span class="line">比较赞成蚂蚁金服的一些设计理念</span><br><span class="line">    辅助用户有效决策、减少用户额外操作，从而节省用户脑力和体力，让人机交互行为更自然；</span><br><span class="line">    在感知和认知中，视觉系统扮演着最重要的角色，通过提炼自然界中的客观规律并运用到界面设计中，从而创建更有层次产品体验。</span><br></pre></td></tr></table></figure>
@@ -127,30 +117,8 @@
 
 	<div class="article-share" id="share">
 	
-	<div class="share-jiathis">
-	  
-<div class="jiathis_style_24x24">
-	<a class="jiathis_button_tsina"></a>
-	<a class="jiathis_button_weixin"></a>
-	<a class="jiathis_button_renren"></a>
-	<a class="jiathis_button_qzone"></a>
-	<a class="jiathis_button_googleplus"></a>
-	<a class="jiathis_button_douban"></a>
-	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-	<a class="jiathis_counter_style"></a>
-</div>
-<script type="text/javascript" >
-    var jiathis_config={
-    data_track_clickback:true,
-    sm:"copy,renren,cqq",
-    pic:"",
-    summary:"",
-    
-  </script> 
-<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=
-" charset="utf-8"></script>      
-
-	 </div>
+	  <div data-url="http://paddywang.github.io/2019/03/02/20190302-随笔/" data-title="20190302-随笔-前端系统开发月报 | PaddyWang" data-tsina="null" class="share clearfix">
+	  </div>
 	
 	</div>
 
@@ -162,11 +130,19 @@
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/2019/07/03/【Angular】之 $q 实现 promise 源码分析-01/" title="【Angular】之 $q 实现 promise 源码分析 (01)">
+  <strong>上一篇：</strong><br/>
+  <span>
+  【Angular】之 $q 实现 promise 源码分析 (01)</span>
+</a>
+</div>
+
 
 <div class="next">
-<a href="/2017/03/30/【算法】判断回文数/"  title="判断回文数">
+<a href="/2017/03/30/【算法】判断回文数/"  title="【算法】判断回文数">
  <strong>下一篇：</strong><br/> 
- <span>判断回文数
+ <span>【算法】判断回文数
 </span>
 </a>
 </div>
@@ -190,28 +166,16 @@
 <aside class="clearfix">
 
   
-<div class="github-card">
-<p class="asidetitle">Github 名片</p>
-<div class="github-card" data-github="PaddyWang" data-width="220" data-height="119" data-theme="medium">
-<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js" ></script>
-</div>
-  </div>
-
-
-
-  
-
-  
 <div class="tagslist">
 	<p class="asidetitle">标签</p>
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>17</sup></a></li>
+				<li><a href="/tags/JS/" title="JS">JS<sup>18</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/HTML-CSS/" title="HTML+CSS">HTML+CSS<sup>5</sup></a></li>
+				<li><a href="/tags/CSS/" title="CSS">CSS<sup>5</sup></a></li>
 			
 		
 			
@@ -223,65 +187,46 @@
 			
 		
 			
-				<li><a href="/tags/随笔/" title="随笔">随笔<sup>1</sup></a></li>
+				<li><a href="/tags/随笔/" title="随笔">随笔<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/angular/" title="angular">angular<sup>1</sup></a></li>
+				<li><a href="/tags/Git/" title="Git">Git<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+				<li><a href="/tags/总结/" title="总结">总结<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+				<li><a href="/tags/Canvas/" title="Canvas">Canvas<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/移动web/" title="移动web">移动web<sup>1</sup></a></li>
+				<li><a href="/tags/Angular/" title="Angular">Angular<sup>1</sup></a></li>
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
 			
 		
 		</ul>
 </div>
 
-
-  <div class="linkslist">
-  <p class="asidetitle">友情链接</p>
-    <ul>
-        
-          <li>
-            
-            	<a href="https://github.com/PaddyWang" target="_blank" title="PaddyWang">GitHub</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="https://www.gitbook.com/@paddywang" target="_blank" title="PaddyWang">GitBook</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="https://developer.mozilla.org/zh-CN/" target="_blank" title="MDN">MDN</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://www.cnblogs.com/PaddyWang/" target="_blank" title="博客园">博客园</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://blog.csdn.net/wolf20150402" target="_blank" title="CSDN">CSDN</a>
-            
-          </li>
-        
-    </ul>
-</div>
 
 </aside>
 </div>
@@ -363,6 +308,11 @@ $(document).ready(function(){
     o.css("top",Math.max(80,260-$(this).scrollTop()));
   });
   
+        getSize();
+        if (myWidth >= 1024) {
+          c.click();
+        }
+  
   $(window).resize(function(){
     getSize(); 
     if (myWidth >= 1024) {
@@ -405,6 +355,55 @@ $(document).ready(function(){
 });
 </script>
 
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
 
 
 
@@ -456,6 +455,35 @@ $(document).ready(function(){
 
 <!-- MathJax Begin -->
 <!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 
 
 <!-- MathJax End -->

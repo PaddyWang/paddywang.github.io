@@ -19,14 +19,12 @@ viewport（视口）就相当于一张照片纸，浏览器窗口就相当于一
 <meta property="og:site_name" content="PaddyWang">
 <meta property="og:description" content="viewport用于承载页面的视口，可以进行网页的缩放
 viewport（视口）就相当于一张照片纸，浏览器窗口就相当于一个相框，网页就相当于照片上的图案。viewport又不局限于浏览器可视区域的大小，它可能比浏览器的可视区域要大，也可能比浏览器的可视区域要小。在默认情况下，一般来讲，移动设备上的viewport都是要大于浏览器可视区域的，这是因为考虑到移动设备的分辨率相对于桌面电脑来说都比较小，">
-<meta property="og:updated_time" content="2016-05-05T14:30:42.046Z">
+<meta property="og:updated_time" content="2019-07-03T08:16:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="移动Web开发">
 <meta name="twitter:description" content="viewport用于承载页面的视口，可以进行网页的缩放
 viewport（视口）就相当于一张照片纸，浏览器窗口就相当于一个相框，网页就相当于照片上的图案。viewport又不局限于浏览器可视区域的大小，它可能比浏览器的可视区域要大，也可能比浏览器的可视区域要小。在默认情况下，一般来讲，移动设备上的viewport都是要大于浏览器可视区域的，这是因为考虑到移动设备的分辨率相对于桌面电脑来说都比较小，">
 
-    
-    <link rel="alternative" href="/atom.xml" title="PaddyWang" type="application/atom+xml">
     
     
     <link rel="icon" href="/img/favicon.ico">
@@ -49,7 +47,7 @@ viewport（视口）就相当于一张照片纸，浏览器窗口就相当于一
 			
 			<div id="textlogo">
 				<h1 class="site-name"><a href="/" title="PaddyWang">PaddyWang</a></h1>
-				<h2 class="blog-motto"></h2>
+				<h2 class="blog-motto">Blog</h2>
 			</div>
 			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
 			</a></div>
@@ -59,18 +57,17 @@ viewport（视口）就相当于一张照片纸，浏览器窗口就相当于一
 					 
 						<li><a href="/">Home</a></li>
 					
-						<li><a href="/archives">Archives | 归档</a></li>
+						<li><a href="/links">Links | 链接</a></li>
 					
-						<li><a href="/links">links | 链接</a></li>
-					
-						<li><a href="/about">About | 简介</a></li>
+						<li><a href="/about">Introduction | 简介</a></li>
 					
 					<li>
  					
-						<form class="search" action="" target="_blank">
-							<label>Search</label>
-						<input name="s" type="hidden" value= null ><input type="text" name="q" size="30" placeholder="搜索"><br>
-						</form>
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:paddywang.github.io">
+					</form>
 					
 					</li>
 				</ul>
@@ -96,13 +93,6 @@ viewport（视口）就相当于一张照片纸，浏览器窗口就相当于一
   </p>
 </header>
 	<div class="article-content">
-		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
-		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#viewport"><span class="toc-number">1.</span> <span class="toc-text">viewport</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#样式处理"><span class="toc-number">2.</span> <span class="toc-text">样式处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动端事件"><span class="toc-number">3.</span> <span class="toc-text">移动端事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#学习网站"><span class="toc-number">4.</span> <span class="toc-text">学习网站</span></a></li></ol>
-		
-		</div>
 		
 		<h3 id="viewport"><a href="#viewport" class="headerlink" title="viewport"></a>viewport</h3><p><em>用于承载页面的视口，可以进行网页的缩放</em></p>
 <p><strong>viewport</strong>（视口）就相当于一张照片纸，浏览器窗口就相当于一个相框，网页就相当于照片上的图案。viewport又不局限于浏览器可视区域的大小，它可能比浏览器的可视区域要大，也可能比浏览器的可视区域要小。在默认情况下，一般来讲，移动设备上的viewport都是要大于浏览器可视区域的，这是因为考虑到移动设备的分辨率相对于桌面电脑来说都比较小，所以为了能在移动设备上正常显示那些传统的为桌面浏览器设计的网站，移动设备上的浏览器都会把自己默认的viewport设为980px或1024px。</p>
@@ -250,7 +240,7 @@ viewport（视口）就相当于一张照片纸，浏览器窗口就相当于一
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/HTML-CSS/">HTML+CSS</a>
+  <span></span> <a href="/tags/CSS/">CSS</a>
   </div>
 
 </div>
@@ -259,30 +249,8 @@ viewport（视口）就相当于一张照片纸，浏览器窗口就相当于一
 
 	<div class="article-share" id="share">
 	
-	<div class="share-jiathis">
-	  
-<div class="jiathis_style_24x24">
-	<a class="jiathis_button_tsina"></a>
-	<a class="jiathis_button_weixin"></a>
-	<a class="jiathis_button_renren"></a>
-	<a class="jiathis_button_qzone"></a>
-	<a class="jiathis_button_googleplus"></a>
-	<a class="jiathis_button_douban"></a>
-	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-	<a class="jiathis_counter_style"></a>
-</div>
-<script type="text/javascript" >
-    var jiathis_config={
-    data_track_clickback:true,
-    sm:"copy,renren,cqq",
-    pic:"",
-    summary:"",
-    
-  </script> 
-<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=
-" charset="utf-8"></script>      
-
-	 </div>
+	  <div data-url="http://paddywang.github.io/2016/04/06/移动Web开发/" data-title="移动Web开发 | PaddyWang" data-tsina="null" class="share clearfix">
+	  </div>
 	
 	</div>
 
@@ -295,18 +263,18 @@ viewport（视口）就相当于一张照片纸，浏览器窗口就相当于一
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2016/04/15/JavaScript中的递归/" title="JavaScript中的递归">
+ <a href="/2016/04/15/【JS】中的递归/" title="JS 中的【递归】">
   <strong>上一篇：</strong><br/>
   <span>
-  JavaScript中的递归</span>
+  JS 中的【递归】</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2016/04/06/数组的操作/"  title="数组的操作">
+<a href="/2016/04/06/【JS】数组的操作/"  title="【数组】的操作">
  <strong>下一篇：</strong><br/> 
- <span>数组的操作
+ <span>【数组】的操作
 </span>
 </a>
 </div>
@@ -330,28 +298,16 @@ viewport（视口）就相当于一张照片纸，浏览器窗口就相当于一
 <aside class="clearfix">
 
   
-<div class="github-card">
-<p class="asidetitle">Github 名片</p>
-<div class="github-card" data-github="PaddyWang" data-width="220" data-height="119" data-theme="medium">
-<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js" ></script>
-</div>
-  </div>
-
-
-
-  
-
-  
 <div class="tagslist">
 	<p class="asidetitle">标签</p>
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>17</sup></a></li>
+				<li><a href="/tags/JS/" title="JS">JS<sup>18</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/HTML-CSS/" title="HTML+CSS">HTML+CSS<sup>5</sup></a></li>
+				<li><a href="/tags/CSS/" title="CSS">CSS<sup>5</sup></a></li>
 			
 		
 			
@@ -363,65 +319,46 @@ viewport（视口）就相当于一张照片纸，浏览器窗口就相当于一
 			
 		
 			
-				<li><a href="/tags/随笔/" title="随笔">随笔<sup>1</sup></a></li>
+				<li><a href="/tags/随笔/" title="随笔">随笔<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/angular/" title="angular">angular<sup>1</sup></a></li>
+				<li><a href="/tags/Git/" title="Git">Git<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+				<li><a href="/tags/总结/" title="总结">总结<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+				<li><a href="/tags/Canvas/" title="Canvas">Canvas<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/移动web/" title="移动web">移动web<sup>1</sup></a></li>
+				<li><a href="/tags/Angular/" title="Angular">Angular<sup>1</sup></a></li>
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
 			
 		
 		</ul>
 </div>
 
-
-  <div class="linkslist">
-  <p class="asidetitle">友情链接</p>
-    <ul>
-        
-          <li>
-            
-            	<a href="https://github.com/PaddyWang" target="_blank" title="PaddyWang">GitHub</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="https://www.gitbook.com/@paddywang" target="_blank" title="PaddyWang">GitBook</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="https://developer.mozilla.org/zh-CN/" target="_blank" title="MDN">MDN</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://www.cnblogs.com/PaddyWang/" target="_blank" title="博客园">博客园</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://blog.csdn.net/wolf20150402" target="_blank" title="CSDN">CSDN</a>
-            
-          </li>
-        
-    </ul>
-</div>
 
 </aside>
 </div>
@@ -503,6 +440,11 @@ $(document).ready(function(){
     o.css("top",Math.max(80,260-$(this).scrollTop()));
   });
   
+        getSize();
+        if (myWidth >= 1024) {
+          c.click();
+        }
+  
   $(window).resize(function(){
     getSize(); 
     if (myWidth >= 1024) {
@@ -545,6 +487,55 @@ $(document).ready(function(){
 });
 </script>
 
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
 
 
 
@@ -596,6 +587,35 @@ $(document).ready(function(){
 
 <!-- MathJax Begin -->
 <!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 
 
 <!-- MathJax End -->

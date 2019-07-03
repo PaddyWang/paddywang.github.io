@@ -19,14 +19,12 @@
 <meta property="og:site_name" content="PaddyWang">
 <meta property="og:description" content="添加到主屏后的标题（IOS）1&amp;lt;meta name=&quot;apple-mobile-web-app-title&quot; content=&quot;标题&quot;&amp;gt;
 启用 WebApp 全屏模式（IOS）当网站添加到主屏幕后再点击进行启动时，可隐藏地址栏（从浏览器跳转或输入链接进入并没有此效果）12&amp;lt;meta name=&quot;apple-mobile-web-app-capable&quot; content=&quot;yes&quot;">
-<meta property="og:updated_time" content="2017-02-20T14:59:19.991Z">
+<meta property="og:updated_time" content="2019-07-03T08:17:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="移动端开发总结-1">
 <meta name="twitter:description" content="添加到主屏后的标题（IOS）1&amp;lt;meta name=&quot;apple-mobile-web-app-title&quot; content=&quot;标题&quot;&amp;gt;
 启用 WebApp 全屏模式（IOS）当网站添加到主屏幕后再点击进行启动时，可隐藏地址栏（从浏览器跳转或输入链接进入并没有此效果）12&amp;lt;meta name=&quot;apple-mobile-web-app-capable&quot; content=&quot;yes&quot;">
 
-    
-    <link rel="alternative" href="/atom.xml" title="PaddyWang" type="application/atom+xml">
     
     
     <link rel="icon" href="/img/favicon.ico">
@@ -49,7 +47,7 @@
 			
 			<div id="textlogo">
 				<h1 class="site-name"><a href="/" title="PaddyWang">PaddyWang</a></h1>
-				<h2 class="blog-motto"></h2>
+				<h2 class="blog-motto">Blog</h2>
 			</div>
 			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
 			</a></div>
@@ -59,18 +57,17 @@
 					 
 						<li><a href="/">Home</a></li>
 					
-						<li><a href="/archives">Archives | 归档</a></li>
+						<li><a href="/links">Links | 链接</a></li>
 					
-						<li><a href="/links">links | 链接</a></li>
-					
-						<li><a href="/about">About | 简介</a></li>
+						<li><a href="/about">Introduction | 简介</a></li>
 					
 					<li>
  					
-						<form class="search" action="" target="_blank">
-							<label>Search</label>
-						<input name="s" type="hidden" value= null ><input type="text" name="q" size="30" placeholder="搜索"><br>
-						</form>
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:paddywang.github.io">
+					</form>
 					
 					</li>
 				</ul>
@@ -96,13 +93,6 @@
   </p>
 </header>
 	<div class="article-content">
-		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
-		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#添加到主屏后的标题（IOS）"><span class="toc-number">1.</span> <span class="toc-text">添加到主屏后的标题（IOS）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#启用-WebApp-全屏模式（IOS）"><span class="toc-number">2.</span> <span class="toc-text">启用 WebApp 全屏模式（IOS）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#百度禁止转码"><span class="toc-number">3.</span> <span class="toc-text">百度禁止转码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置状态栏的背景颜色（IOS）"><span class="toc-number">4.</span> <span class="toc-text">设置状态栏的背景颜色（IOS）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动端手机号码识别（IOS）"><span class="toc-number">5.</span> <span class="toc-text">移动端手机号码识别（IOS）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开启电话功能"><span class="toc-number">6.</span> <span class="toc-text">开启电话功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开启短信功能"><span class="toc-number">7.</span> <span class="toc-text">开启短信功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动端邮箱识别（Android）"><span class="toc-number">8.</span> <span class="toc-text">移动端邮箱识别（Android）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加智能-App-广告条（IOS-6-Safari）"><span class="toc-number">9.</span> <span class="toc-text">添加智能 App 广告条（IOS 6+ Safari）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IOS-Web-app启动动画"><span class="toc-number">10.</span> <span class="toc-text">IOS Web app启动动画</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加到主屏后的APP图标"><span class="toc-number">11.</span> <span class="toc-text">添加到主屏后的APP图标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#优先使用最新版本-IE-和-Chrome"><span class="toc-number">12.</span> <span class="toc-text">优先使用最新版本 IE 和 Chrome</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动端如何定义字体f-ont-family"><span class="toc-number">13.</span> <span class="toc-text">移动端如何定义字体f ont-family</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动端字体单位font-size"><span class="toc-number">14.</span> <span class="toc-text">移动端字体单位font-size</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动端touch事件-区分webkit-和-winphone"><span class="toc-number">15.</span> <span class="toc-text">移动端touch事件(区分webkit 和 winphone)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动端click屏幕产生200-300-ms的延迟响应"><span class="toc-number">16.</span> <span class="toc-text">移动端click屏幕产生200-300 ms的延迟响应</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是Retina-显示屏"><span class="toc-number">17.</span> <span class="toc-text">什么是Retina 显示屏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ios系统中元素被触摸时产生的半透明灰色遮罩"><span class="toc-number">18.</span> <span class="toc-text">ios系统中元素被触摸时产生的半透明灰色遮罩</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#部分android系统中元素被点击时产生的边框"><span class="toc-number">19.</span> <span class="toc-text">部分android系统中元素被点击时产生的边框</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#wp系统a、input标签被点击时产生的半透明灰色背景"><span class="toc-number">20.</span> <span class="toc-text">wp系统a、input标签被点击时产生的半透明灰色背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#webkit表单元素的默认外观重置"><span class="toc-number">21.</span> <span class="toc-text">webkit表单元素的默认外观重置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#webkit表单输入框placeholder的颜色"><span class="toc-number">22.</span> <span class="toc-text">webkit表单输入框placeholder的颜色</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关闭iOS键盘首字母自动大写"><span class="toc-number">23.</span> <span class="toc-text">关闭iOS键盘首字母自动大写</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关闭iOS输入自动修正"><span class="toc-number">24.</span> <span class="toc-text">关闭iOS输入自动修正</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#禁止文本缩放"><span class="toc-number">25.</span> <span class="toc-text">禁止文本缩放</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动端如何清除输入框内阴影"><span class="toc-number">26.</span> <span class="toc-text">移动端如何清除输入框内阴影</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快速回弹滚动"><span class="toc-number">27.</span> <span class="toc-text">快速回弹滚动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动端禁止选中内容"><span class="toc-number">28.</span> <span class="toc-text">移动端禁止选中内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动端取消touch高亮效果"><span class="toc-number">29.</span> <span class="toc-text">移动端取消touch高亮效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何禁止保存或拷贝图像（IOS）"><span class="toc-number">30.</span> <span class="toc-text">如何禁止保存或拷贝图像（IOS）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模拟按钮hover效果"><span class="toc-number">31.</span> <span class="toc-text">模拟按钮hover效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#屏幕旋转的事件和样式"><span class="toc-number">32.</span> <span class="toc-text">屏幕旋转的事件和样式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#audio元素和video元素在ios和andriod中无法自动播放"><span class="toc-number">33.</span> <span class="toc-text">audio元素和video元素在ios和andriod中无法自动播放</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#手机拍照和上传图片"><span class="toc-number">34.</span> <span class="toc-text">手机拍照和上传图片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#消除transition闪屏"><span class="toc-number">35.</span> <span class="toc-text">消除transition闪屏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#android-上去掉语音输入按钮"><span class="toc-number">36.</span> <span class="toc-text">android 上去掉语音输入按钮</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#阻止滚动"><span class="toc-number">37.</span> <span class="toc-text">阻止滚动</span></a></li></ol>
-		
-		</div>
 		
 		<h3 id="添加到主屏后的标题（IOS）"><a href="#添加到主屏后的标题（IOS）" class="headerlink" title="添加到主屏后的标题（IOS）"></a>添加到主屏后的标题（IOS）</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"apple-mobile-web-app-title"</span> <span class="attr">content</span>=<span class="string">"标题"</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <h3 id="启用-WebApp-全屏模式（IOS）"><a href="#启用-WebApp-全屏模式（IOS）" class="headerlink" title="启用 WebApp 全屏模式（IOS）"></a>启用 WebApp 全屏模式（IOS）</h3><p>当网站添加到主屏幕后再点击进行启动时，可隐藏地址栏（从浏览器跳转或输入链接进入并没有此效果）<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"apple-mobile-web-app-capable"</span> <span class="attr">content</span>=<span class="string">"yes"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"apple-touch-fullscreen"</span> <span class="attr">content</span>=<span class="string">"yes"</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
@@ -248,41 +238,14 @@
 <div class="article-catetags">
 
 
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/移动web/">移动web</a>
-  </div>
-
 </div>
 
 
 
 	<div class="article-share" id="share">
 	
-	<div class="share-jiathis">
-	  
-<div class="jiathis_style_24x24">
-	<a class="jiathis_button_tsina"></a>
-	<a class="jiathis_button_weixin"></a>
-	<a class="jiathis_button_renren"></a>
-	<a class="jiathis_button_qzone"></a>
-	<a class="jiathis_button_googleplus"></a>
-	<a class="jiathis_button_douban"></a>
-	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-	<a class="jiathis_counter_style"></a>
-</div>
-<script type="text/javascript" >
-    var jiathis_config={
-    data_track_clickback:true,
-    sm:"copy,renren,cqq",
-    pic:"",
-    summary:"",
-    
-  </script> 
-<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=
-" charset="utf-8"></script>      
-
-	 </div>
+	  <div data-url="http://paddywang.github.io/2017/02/20/移动端开发总结-1/" data-title="移动端开发总结-1 | PaddyWang" data-tsina="null" class="share clearfix">
+	  </div>
 	
 	</div>
 
@@ -295,7 +258,7 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2017/02/24/JS-循环性能测试/" title="JS-循环性能测试">
+ <a href="/2017/02/24/【JS】循环性能测试/" title="JS-循环性能测试">
   <strong>上一篇：</strong><br/>
   <span>
   JS-循环性能测试</span>
@@ -304,9 +267,9 @@
 
 
 <div class="next">
-<a href="/2016/08/22/angular小集锦1/"  title="angular小集锦1">
+<a href="/2016/07/14/JavaScript语言精粹-随笔/"  title="JavaScript语言精粹-随笔">
  <strong>下一篇：</strong><br/> 
- <span>angular小集锦1
+ <span>JavaScript语言精粹-随笔
 </span>
 </a>
 </div>
@@ -330,28 +293,16 @@
 <aside class="clearfix">
 
   
-<div class="github-card">
-<p class="asidetitle">Github 名片</p>
-<div class="github-card" data-github="PaddyWang" data-width="220" data-height="119" data-theme="medium">
-<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js" ></script>
-</div>
-  </div>
-
-
-
-  
-
-  
 <div class="tagslist">
 	<p class="asidetitle">标签</p>
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/JavaScript/" title="JavaScript">JavaScript<sup>17</sup></a></li>
+				<li><a href="/tags/JS/" title="JS">JS<sup>18</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/HTML-CSS/" title="HTML+CSS">HTML+CSS<sup>5</sup></a></li>
+				<li><a href="/tags/CSS/" title="CSS">CSS<sup>5</sup></a></li>
 			
 		
 			
@@ -363,65 +314,46 @@
 			
 		
 			
-				<li><a href="/tags/随笔/" title="随笔">随笔<sup>1</sup></a></li>
+				<li><a href="/tags/随笔/" title="随笔">随笔<sup>2</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/angular/" title="angular">angular<sup>1</sup></a></li>
+				<li><a href="/tags/Git/" title="Git">Git<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+				<li><a href="/tags/总结/" title="总结">总结<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+				<li><a href="/tags/Canvas/" title="Canvas">Canvas<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/移动web/" title="移动web">移动web<sup>1</sup></a></li>
+				<li><a href="/tags/Angular/" title="Angular">Angular<sup>1</sup></a></li>
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
 			
 		
 		</ul>
 </div>
 
-
-  <div class="linkslist">
-  <p class="asidetitle">友情链接</p>
-    <ul>
-        
-          <li>
-            
-            	<a href="https://github.com/PaddyWang" target="_blank" title="PaddyWang">GitHub</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="https://www.gitbook.com/@paddywang" target="_blank" title="PaddyWang">GitBook</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="https://developer.mozilla.org/zh-CN/" target="_blank" title="MDN">MDN</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://www.cnblogs.com/PaddyWang/" target="_blank" title="博客园">博客园</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://blog.csdn.net/wolf20150402" target="_blank" title="CSDN">CSDN</a>
-            
-          </li>
-        
-    </ul>
-</div>
 
 </aside>
 </div>
@@ -503,6 +435,11 @@ $(document).ready(function(){
     o.css("top",Math.max(80,260-$(this).scrollTop()));
   });
   
+        getSize();
+        if (myWidth >= 1024) {
+          c.click();
+        }
+  
   $(window).resize(function(){
     getSize(); 
     if (myWidth >= 1024) {
@@ -545,6 +482,55 @@ $(document).ready(function(){
 });
 </script>
 
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
 
 
 
@@ -596,6 +582,35 @@ $(document).ready(function(){
 
 <!-- MathJax Begin -->
 <!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 
 
 <!-- MathJax End -->
