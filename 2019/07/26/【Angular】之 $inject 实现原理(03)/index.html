@@ -4,68 +4,59 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>使用hexo在GitHub上搭建自己的博客 | Paddy的前端随笔</title>
+    <title>【Angular】之 $inject 实现原理(03) | Paddy的前端随笔</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Paddy">
     
 
     
-    <meta name="description" content="hexo
-分享一个快速、简洁且高效的博客框架
-你看到的这个博客就是通过以下方式搭建的
+    <meta name="description" content="@license AngularJS v1.4.8本次没有涉及到源码只是对源码的梳理
 
-安装 hexo安装前的准备
-hexo 是依赖于 Node 和 Git 环境运行的
-所有在安装 hexo 之前先安装：
-Node
-Git
+Angular 实现依赖注入的基本思路是这样的:  
+
+首先有个用于存依赖项和依赖值的映射表  
+有个专门获取函数参数的方法 annotate  
+统一处理依赖注入的多种方式  
+
+从函数的参数中提取依赖项 function MyController($scope, $route){}
 
 
 
-npm 全局工具安装
-安装好 Node 和 Git 之后，直接通过 npm 即可完成 hexo 的安装
-打开命令台输入：
-npm install hexo-cli -g">
+通过 $inje">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用hexo在GitHub上搭建自己的博客">
-<meta property="og:url" content="https://paddywang.github.io/2016/03/10/使用hexo在GitHub上搭建自己的博客/index.html">
+<meta property="og:title" content="【Angular】之 $inject 实现原理(03)">
+<meta property="og:url" content="https://paddywang.github.io/2019/07/26/【Angular】之 $inject 实现原理(03)/index.html">
 <meta property="og:site_name" content="Paddy的前端随笔">
-<meta property="og:description" content="hexo
-分享一个快速、简洁且高效的博客框架
-你看到的这个博客就是通过以下方式搭建的
+<meta property="og:description" content="@license AngularJS v1.4.8本次没有涉及到源码只是对源码的梳理
 
-安装 hexo安装前的准备
-hexo 是依赖于 Node 和 Git 环境运行的
-所有在安装 hexo 之前先安装：
-Node
-Git
+Angular 实现依赖注入的基本思路是这样的:  
+
+首先有个用于存依赖项和依赖值的映射表  
+有个专门获取函数参数的方法 annotate  
+统一处理依赖注入的多种方式  
+
+从函数的参数中提取依赖项 function MyController($scope, $route){}
 
 
 
-npm 全局工具安装
-安装好 Node 和 Git 之后，直接通过 npm 即可完成 hexo 的安装
-打开命令台输入：
-npm install hexo-cli -g">
-<meta property="og:updated_time" content="2019-07-03T08:53:22.000Z">
+通过 $inje">
+<meta property="og:updated_time" content="2019-07-26T01:20:08.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用hexo在GitHub上搭建自己的博客">
-<meta name="twitter:description" content="hexo
-分享一个快速、简洁且高效的博客框架
-你看到的这个博客就是通过以下方式搭建的
+<meta name="twitter:title" content="【Angular】之 $inject 实现原理(03)">
+<meta name="twitter:description" content="@license AngularJS v1.4.8本次没有涉及到源码只是对源码的梳理
 
-安装 hexo安装前的准备
-hexo 是依赖于 Node 和 Git 环境运行的
-所有在安装 hexo 之前先安装：
-Node
-Git
+Angular 实现依赖注入的基本思路是这样的:  
+
+首先有个用于存依赖项和依赖值的映射表  
+有个专门获取函数参数的方法 annotate  
+统一处理依赖注入的多种方式  
+
+从函数的参数中提取依赖项 function MyController($scope, $route){}
 
 
 
-npm 全局工具安装
-安装好 Node 和 Git 之后，直接通过 npm 即可完成 hexo 的安装
-打开命令台输入：
-npm install hexo-cli -g">
+通过 $inje">
 
     
     
@@ -123,99 +114,71 @@ npm install hexo-cli -g">
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/03/10/使用hexo在GitHub上搭建自己的博客/" title="使用hexo在GitHub上搭建自己的博客" itemprop="url">使用hexo在GitHub上搭建自己的博客</a>
+      <a href="/2019/07/26/【Angular】之 $inject 实现原理(03)/" title="【Angular】之 $inject 实现原理(03)" itemprop="url">【Angular】之 $inject 实现原理(03)</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Paddy" target="_blank" itemprop="author">Paddy</a>
 		
   <p class="article-time">
-    <time datetime="2016-03-10T10:12:57.000Z" itemprop="datePublished"> 发表于 2016-03-10</time>
+    <time datetime="2019-07-26T01:15:00.000Z" itemprop="datePublished"> 发表于 2019-07-26</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<h1 id="hexo"><a href="#hexo" class="headerlink" title="hexo"></a>hexo</h1><ul>
-<li>分享一个快速、简洁且高效的博客框架</li>
-<li>你看到的这个博客就是通过以下方式搭建的</li>
+		<blockquote>
+<p>@license AngularJS v1.4.8<br>本次没有涉及到源码<br>只是对源码的梳理</p>
+</blockquote>
+<p>Angular 实现依赖注入的基本思路是这样的:  </p>
+<ul>
+<li>首先有个用于存依赖项和依赖值的映射表  </li>
+<li>有个专门获取函数参数的方法 <code>annotate</code>  </li>
+<li>统一处理依赖注入的多种方式  <ul>
+<li><ol>
+<li>从函数的参数中提取依赖项 <code>function MyController($scope, $route){}</code></li>
+</ol>
+</li>
+<li><ol>
+<li>通过 <code>$inject</code> 注入 <code>MyController.$inject = [&#39;$scope&#39;, &#39;$route&#39;];</code></li>
+</ol>
+</li>
+<li><ol>
+<li>数组内联注入式 <code>[&#39;$scope&#39;, &#39;$route&#39;, function($scope, $route){}]</code></li>
+</ol>
+</li>
 </ul>
-<h2 id="安装-hexo"><a href="#安装-hexo" class="headerlink" title="安装 hexo"></a>安装 hexo</h2><h3 id="安装前的准备"><a href="#安装前的准备" class="headerlink" title="安装前的准备"></a>安装前的准备</h3><ul>
-<li>hexo 是依赖于 Node 和 Git 环境运行的</li>
-<li>所有在安装 hexo 之前先安装：<ul>
-<li><a href="https://nodejs.org/en/" target="_blank" rel="external">Node</a></li>
-<li><a href="https://git-scm.com/" target="_blank" rel="external">Git</a></li>
+</li>
+<li>最后进行依赖注入，同时改了函数的 this 指向 <code>fn.apply(self, args);</code></li>
+</ul>
+<h3 id="核心方法"><a href="#核心方法" class="headerlink" title="核心方法"></a>核心方法</h3><ul>
+<li><code>createInjector</code>  </li>
+<li>有两个映射表<ul>
+<li><code>providerCache</code> 主要用于缓存原始服务对象  名字结尾默认会加 <code>Provide</code></li>
+<li><code>instanceCache</code> 主要用于缓存服务实例对象</li>
+</ul>
+</li>
+<li>核心方法 <code>createInternalInjector</code><ul>
+<li><code>getService</code> 用于获取服务实例对象</li>
+<li><code>invoke</code> 调用执行函数并进行依赖项注入</li>
+<li><code>annotate</code> 获取依赖项</li>
+<li><code>instantiate</code> 实例化服务对象</li>
 </ul>
 </li>
 </ul>
-<h3 id="npm-全局工具安装"><a href="#npm-全局工具安装" class="headerlink" title="npm 全局工具安装"></a>npm 全局工具安装</h3><ul>
-<li>安装好 Node 和 Git 之后，直接通过 npm 即可完成 hexo 的安装</li>
-<li>打开命令台输入：</li>
-<li><code>npm install hexo-cli -g</code></li>
-</ul>
-<h2 id="搭建个人博客"><a href="#搭建个人博客" class="headerlink" title="搭建个人博客"></a>搭建个人博客</h2><h3 id="blog"><a href="#blog" class="headerlink" title="blog"></a>blog</h3><ul>
-<li>安装完成之后在你想要搭建博客的文件夹里面</li>
-<li>按着 【shift】 右击鼠标，选择在此处打开命令窗口</li>
-<li><p>输入下面的命令：</p>
-<pre><code>hexo init blog  # 初始化一个 blog 会从网上下载一个模板，可能比较慢
-cd blog         # 进入 blog 根目录
-hexo server     # 开启本地服务器 在浏览器中输入 localhost:4000 即可访问
-</code></pre></li>
-<li><p>完成之后文件夹结构为：</p>
-<pre><code>blog/                 // 网站结构
-├── node_module/      // 第三方依赖包
-├── scaffolds/        // 模板文件夹
-├── source/           // 网站源文件
-|   └── _posts/       // 文章列表页
-├── themes/           // 主题文件夹
-|   └── landscape/    // landscape 主题
-├── .gitignore        //
-├── _config.yml       // 网站整体配置文件
-└── package.json      // 网站信息
-</code></pre></li>
-</ul>
-<h3 id="jacman-主题"><a href="#jacman-主题" class="headerlink" title="jacman 主题"></a>jacman 主题</h3><ul>
-<li>这里默认的主题为 landscape ，不喜欢这个</li>
-<li>换个 jacman 主题</li>
-<li><p>在博客根目录下执行下面命令：</p>
-<pre><code>git clone https://github.com/wuchong/jacman.git themes/jacman
-</code></pre></li>
-</ul>
-<ul>
-<li>启用该主题</li>
-<li>打开博客根目录下的 <code>_config.yml</code> 配置文件</li>
-<li>修改文件中的 <code>theme</code> 属性：</li>
-<li><code>theme: jacman</code></li>
-<li>刷新页面即可看到主题已被修改</li>
-<li>现在本地的 blog 就已经搭建成功</li>
-</ul>
-<h3 id="将个人博客部署到-GitHub-上"><a href="#将个人博客部署到-GitHub-上" class="headerlink" title="将个人博客部署到 GitHub 上"></a>将个人博客部署到 GitHub 上</h3><ul>
-<li>GitHub 的注册登录就不多说了</li>
-<li>首先在 在 GitHub 上创建一个仓储</li>
-<li>该仓储的命名有一定的规则 (userName).github.io</li>
-<li>(userName) 是自己的用户名</li>
-<li>仓储创建完成之后，回到本地</li>
-<li>这时需要在本地博客根目录下执行下面一句代码</li>
-<li>为了是生成静态页面，因为 GitHub 只支持静态页面的搭建</li>
-<li><code>hexo generate</code></li>
-<li>执行完之后就会多一个 public 文件夹，该文件夹就是生成的所有博客的静态资源</li>
-<li>这时就可以进入 public 文件夹，将该目录下的所有文件上传 GitHub 下刚才创建的仓储</li>
-<li>上传完成之后</li>
-<li>通过访问 <code>http://(userName).github.io/</code></li>
-<li>此时就完成了 blog 基本框架就搭建完成了</li>
-<li>接下来就是创建自己文章了</li>
-<li>进入 blog 根目录，运行 CMD</li>
-<li>输入 <code>hexo new (postName)</code> # postName 为文章名</li>
-<li>输入 <code>hexo new page (pageName)</code>  # 新建一个页面（列表页）</li>
-<li>创建完新文章之后就可以进行 MarkDown 编辑了</li>
-<li>完成之后，继续执行 <code>hexo generate</code></li>
-<li>最后再 push 到 GitHub 上，就完成了</li>
-</ul>
+<h3 id="从函数的参数中提取依赖项"><a href="#从函数的参数中提取依赖项" class="headerlink" title="从函数的参数中提取依赖项"></a>从函数的参数中提取依赖项</h3><p>这种依赖注入方式，是通过 <code>annotate</code> 方法直接获取依赖注入项<br>该方式只能用在演示不能用代码压缩混淆</p>
+<h3 id="通过-inject-注入"><a href="#通过-inject-注入" class="headerlink" title="通过 $inject 注入"></a>通过 <code>$inject</code> 注入</h3><p>这种方式比较直观，将依赖注入单独分开处理<br>该方式不能使用匿名函数</p>
+<h3 id="数组内联注入式"><a href="#数组内联注入式" class="headerlink" title="数组内联注入式"></a>数组内联注入式</h3><p>这种依赖注入方式将依赖注入项和执行函数写在了同一数组中，操作便捷，可直接使用匿名函数<br>这种方式也是 Angular 官方推荐的</p>
   
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/JS/">JS</a><a href="/tags/Angular/">Angular</a>
+  </div>
 
 </div>
 
@@ -223,7 +186,7 @@ hexo server     # 开启本地服务器 在浏览器中输入 localhost:4000 即
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="https://paddywang.github.io/2016/03/10/使用hexo在GitHub上搭建自己的博客/" data-title="使用hexo在GitHub上搭建自己的博客 | Paddy的前端随笔" data-tsina="null" class="share clearfix">
+	  <div data-url="https://paddywang.github.io/2019/07/26/【Angular】之 $inject 实现原理(03)/" data-title="【Angular】之 $inject 实现原理(03) | Paddy的前端随笔" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -237,18 +200,18 @@ hexo server     # 开启本地服务器 在浏览器中输入 localhost:4000 即
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2016/03/11/【JS】值类型与引用类型/" title="JS 中的【值类型】与【引用类型】">
+ <a href="/2019/07/30/HTML5-的设计原理/" title="HTML5 的设计原理">
   <strong>上一篇：</strong><br/>
   <span>
-  JS 中的【值类型】与【引用类型】</span>
+  HTML5 的设计原理</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2016/03/06/【Git】的基本使用/"  title="【Git】的基本使用">
+<a href="/2019/07/25/What【Angular】init-before/"  title="What Angular init before do ?">
  <strong>下一篇：</strong><br/> 
- <span>【Git】的基本使用
+ <span>What Angular init before do ?
 </span>
 </a>
 </div>
@@ -259,13 +222,6 @@ hexo server     # 开启本地服务器 在浏览器中输入 localhost:4000 即
 
 </div>  
       <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
-
-  <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目录</strong>
- 
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#hexo"><span class="toc-number">1.</span> <span class="toc-text">hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装-hexo"><span class="toc-number">1.1.</span> <span class="toc-text">安装 hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装前的准备"><span class="toc-number">1.1.1.</span> <span class="toc-text">安装前的准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#npm-全局工具安装"><span class="toc-number">1.1.2.</span> <span class="toc-text">npm 全局工具安装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#搭建个人博客"><span class="toc-number">1.2.</span> <span class="toc-text">搭建个人博客</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#blog"><span class="toc-number">1.2.1.</span> <span class="toc-text">blog</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jacman-主题"><span class="toc-number">1.2.2.</span> <span class="toc-text">jacman 主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#将个人博客部署到-GitHub-上"><span class="toc-number">1.2.3.</span> <span class="toc-text">将个人博客部署到 GitHub 上</span></a></li></ol></li></ol></li></ol>
- 
-  </div>
 
 <div id="asidepart">
 <div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
@@ -409,8 +365,6 @@ $(document).ready(function(){
       m.removeClass('moveMain');
       a.css('display', 'block').removeClass('fadeOut');
       o.css('display', 'none');
-      
-      $('#toc.toc-aside').css('display', 'none');
         
     }
   });
