@@ -1,0 +1,8 @@
+/* .vitepress/theme/index.css */
+
+:root {
+  --primay: #75985d;
+  --vp-c-brand-1: var(--primay);
+  --vp-c-brand-2: var(--primay);
+  --vp-button-brand-bg: var(--primay);
+}
