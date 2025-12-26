@@ -10,7 +10,6 @@
 
   onMounted(async () => {
     const shadow = shadowBox.value.attachShadow({ mode: 'open' })
-    // console.log(await props.src.then(m => m.default))
     // @ts-ignore
     const loadSource = await props.src.then(m => m.default)
     shadow.innerHTML = loadSource

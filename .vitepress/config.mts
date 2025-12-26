@@ -45,7 +45,7 @@ export default defineConfig({
             { text: '走进浮动', link: '走进浮动' },
             { text: 'CSS 汇总', link: 'CSS 汇总' },
             { text: 'CSS 选择器', link: 'CSS 选择器' },
-            { text: 'Table', link: 'table' },
+            { text: 'Table', link: 'table/' },
           ]
         },
       ],
