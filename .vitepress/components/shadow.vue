@@ -5,12 +5,14 @@
   // @ts-ignore
   import { ref, onMounted, defineProps } from 'vue'
   
-  const props = defineProps<{src: string}>()
+  const props = defineProps<{src: any}>()
   const shadowBox = ref()
 
   onMounted(async () => {
     const shadow = shadowBox.value.attachShadow({ mode: 'open' })
-    const loadSource = await import(/* @vite-ignore */props.src).then(m => m.default)
+    // console.log(await props.src.then(m => m.default))
+    // @ts-ignore
+    const loadSource = await props.src.then(m => m.default)
     shadow.innerHTML = loadSource
     // 处理脚本
     const scriptStr = loadSource.match(/<script[^>]*>([\s\S]*?)<\/script>/)
