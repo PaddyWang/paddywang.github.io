@@ -1,10 +1,11 @@
+import { join } from 'path'
 import { defineConfig } from 'vitepress'
+import Components from 'unplugin-vue-components/vite'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  // title: `/* Paddy'知识库 */`,
   title: ' ',
-  description: `Paddy'技术博客、生活随笔、学习笔记、户外分享`,
+  description: `Paddy' 技术博客 学习随笔 户外分享`,
   titleTemplate: ':title - Paddy',
   ignoreDeadLinks: true,
   head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
@@ -14,23 +15,54 @@ export default defineConfig({
     externalLinkIcon: true,
     // 
     nav: [
-      { text: 'Blog', items: [
-        { text: '前端', link: '/blog/front/index' },
+      { text: '技术博客', items: [
+        { text: '前端专题', link: '/blog/front/index' },
         { text: 'Git', link: '/blog/git/git 基本使用' },
+      ]},
+      { text: '终身成长', items: [
+        { text: 'TODO', link: '/learning/TODO' },
+      ]},
+      { text: '户外分享', items: [
+        { text: 'TODO', link: '/outdoor/TODO' },
       ]},
     ],
 
     sidebar: {
       '/blog/front': [
+        { text: '前端专题' },
         {
-          text: '前端',
+          text: 'JavaScript',
+          base: '/blog/front/js/',
           items: [
-            { text: 'CSS 选择器', link: 'blog/front/css/CSS 选择器' },
-            { text: 'JS 函数调用模式', link: '/blog/front/js/JS 函数调用模式' },
+            { text: 'JS 函数调用模式', link: 'JS 函数调用模式' },
+          ]
+        },
+        {
+          text: 'CSS',
+          base: '/blog/front/css/',
+          items: [
+            { text: '操蛋的BFC', link: '操蛋的BFC' },
+            { text: '走进浮动', link: '走进浮动' },
+            { text: 'CSS 汇总', link: 'CSS 汇总' },
+            { text: 'CSS 选择器', link: 'CSS 选择器' },
+            { text: 'Table', link: 'table' },
+          ]
+        },
+      ],
+      '/learning': [
+        {
+          text: '终身成长',
+          items: []
+        }
+      ],
+      '/outdoor': [
+        {
+          text: '户外分享',
+          items: [
             { text: 'Markdown Examples', link: '/markdown-examples' },
             { text: 'Runtime API Examples', link: '/api-examples' },
           ]
-        },
+        }
       ]
     },
 
@@ -67,8 +99,30 @@ export default defineConfig({
     darkModeSwitchTitle: '切换到深色模式',
     skipToContentLabel: '跳转到内容',
   },
+
+  vite: {
+    plugins: [
+      Components({
+        include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
+        dirs: ['.vitepress/components'],
+      }),
+    ],
+    css: {
+      postcss: {},
+      preprocessorOptions: {
+        scss: {
+          // 如果不需要自定义 SCSS 变量，可以移除这个配置
+          charset: false
+        }
+      },
+    },
+    resolve: {
+      alias: {
+        '@': join(process.cwd(), '/'),
+      },
+    },
+    assetsInclude: ['**/*.html']
+  }
 })
 
-
-
-/**/
+/* Paddy'知识库 */

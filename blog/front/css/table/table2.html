@@ -1,0 +1,130 @@
+<style>
+  /*关键设置 tbody出现滚动条*/
+  table.table tbody {
+    display: block;
+    height: 180px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+  table.table thead,
+  table.table tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+  /*关键设置：滚动条默认宽度是16px 将thead的宽度减16px*/
+  table.table thead {
+    width: calc( 100% - 1em);
+  }
+  table.table thead th {
+    background: #ccc;
+  }
+</style>
+<table class="table">
+  <thead>
+    <tr>
+      <th>支付记录</th>
+      <th>12313</th>
+      <th>wsrsdaf</th>
+      <th>查看更多>></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2019-03-03 14:35:16</td>
+      <td>充值</td>
+      <td>充值-续费</td>
+      <td>0.01元</td>
+    </tr>
+    <tr>
+      <td>2019-01-01 01:25:09</td>
+      <td>充值</td>
+      <td>1月账单结算(包含分校)</td>
+      <td>0.85元</td>
+    </tr>
+    <tr>
+      <td>2018-12-01 01:13:00</td>
+      <td>充值</td>
+      <td>12月账单结算(包含分校)</td>
+      <td>0.17元</td>
+    </tr>
+    <tr>
+      <td>2019-03-03 10:23:00</td>
+      <td>充值</td>
+      <td>充值-续费</td>
+      <td>0.01元</td>
+    </tr>
+    <tr>
+      <td>2019-03-01 01:23:59</td>
+      <td>扣款</td>
+      <td>3月账单结算(包含分校)</td>
+      <td>0元</td>
+    </tr>
+    <tr>
+      <td>2019-02-16 11:10:15</td>
+      <td>充值</td>
+      <td>2月账单结算(包含分校)</td>
+      <td>0.01元</td>
+    </tr>
+    <tr>
+      <td>2019-02-01 01:31:37</td>
+      <td>充值</td>
+      <td>2月账单结算(包含分校)</td>
+      <td>0.1元</td>
+    </tr>
+    <tr>
+      <td>2019-01-01 01:25:09</td>
+      <td>充值</td>
+      <td>1月账单结算(包含分校)</td>
+      <td>0.85元</td>
+    </tr>
+    <tr>
+      <td>2018-12-01 01:13:00</td>
+      <td>充值</td>
+      <td>12月账单结算(包含分校)</td>
+      <td>0.17元</td>
+    </tr>
+    <tr>
+      <td>2019-03-03 10:23:00</td>
+      <td>充值</td>
+      <td>充值-续费</td>
+      <td>0.01元</td>
+    </tr>
+    <tr>
+      <td>2019-03-03 10:23:00</td>
+      <td>充值</td>
+      <td>充值-续费</td>
+      <td>0.01元</td>
+    </tr>
+    <tr>
+      <td>2019-03-01 01:23:59</td>
+      <td>扣款</td>
+      <td>3月账单结算(包含分校)</td>
+      <td>0元</td>
+    </tr>
+    <tr>
+      <td>2019-02-16 11:10:15</td>
+      <td>充值</td>
+      <td>2月账单结算(包含分校)</td>
+      <td>0.01元</td>
+    </tr>
+    <tr>
+      <td>2019-02-01 01:31:37</td>
+      <td>充值</td>
+      <td>2月账单结算(包含分校)</td>
+      <td>0.1元</td>
+    </tr>
+    <tr>
+      <td>2019-01-01 01:25:09</td>
+      <td>充值</td>
+      <td>1月账单结算(包含分校)</td>
+      <td>0.85元</td>
+    </tr>
+    <tr>
+      <td>2018-12-01 01:13:00</td>
+      <td>充值</td>
+      <td>12月账单结算(包含分校)</td>
+      <td>0.17元</td>
+    </tr>
+  </tbody>
+</table>

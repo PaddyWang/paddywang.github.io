@@ -1,7 +1,8 @@
 ---
 outline: deep
-title: 前端 JS
 ---
+
+# JS 函数调用模式
 
 在函数的调用模式中感觉最大的区别就是：
 this指向

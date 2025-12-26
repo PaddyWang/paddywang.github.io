@@ -1,0 +1,99 @@
+<style>
+  .table {
+    border: none;
+    border-collapse: separate !important;
+    border-spacing: 0;
+  }
+  .table thead {
+    background-color: #eee;
+  }
+  .table th,
+  .table td {
+    padding: 8px 12px;
+    border-top: 1px solid #999;
+  }
+  .table thead th:first-child {
+    border-radius: 6px 0 0 0;
+  }
+  .table thead th:last-child {
+    border-radius: 0 6px 0 0;
+  }
+  .table th:first-child,
+  .table td:first-child {
+    border-left: 1px solid #999;
+  }
+  .table th:last-child,
+  .table td:last-child {
+    border-right: 1px solid #999;
+  }
+  .table tbody tr:last-child td {
+    border-bottom: 1px solid #999;
+  }
+  .table tbody tr:last-child td:first-child {
+    border-radius: 0 0 0 6px;
+  }
+  .table tbody tr:last-child td:last-child {
+    border-radius: 0 0 6px 0;
+  }
+  .table tbody tr:hover td {
+    border-bottom: 1px solid red;
+    border-color: red;
+  }
+  .table tbody tr:hover + tr td {
+    border-top: none;
+  }
+</style>
+<table class="table">
+  <thead>
+    <tr>
+      <th>支付记录</th>
+      <th></th>
+      <th></th>
+      <th>查看更多>></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2019-03-03 14:35:16</td>
+      <td>充值</td>
+      <td>充值-续费</td>
+      <td>0.01元</td>
+    </tr>
+    <tr>
+      <td width="20%" class>2019-03-03 10:23:00</td>
+      <td width="20%" class>充值</td>
+      <td width="40%" class>充值-续费</td>
+      <td width="20%" class>0.01元</td>
+    </tr>
+    <tr>
+      <td width="20%" class>2019-03-01 01:23:59</td>
+      <td width="20%" class>扣款</td>
+      <td width="40%" class>3月账单结算(包含分校)</td>
+      <td width="20%" class>0元</td>
+    </tr>
+    <tr>
+      <td width="20%" class>2019-02-16 11:10:15</td>
+      <td width="20%" class>充值</td>
+      <td width="40%" class>2月账单结算(包含分校)</td>
+      <td width="20%" class>0.01元</td>
+    </tr>
+    <tr>
+      <td width="20%" class>2019-02-01 01:31:37</td>
+      <td width="20%" class>充值</td>
+      <td width="40%" class>2月账单结算(包含分校)</td>
+      <td width="20%" class>0.1元</td>
+    </tr>
+    <tr>
+      <td width="20%" class>2019-01-01 01:25:09</td>
+      <td width="20%" class>充值</td>
+      <td width="40%" class>1月账单结算(包含分校)</td>
+      <td width="20%" class>0.85元</td>
+    </tr>
+    <tr>
+      <td width="20%" class>2018-12-01 01:13:00</td>
+      <td width="20%" class>充值</td>
+      <td width="40%" class>12月账单结算(包含分校)</td>
+      <td width="20%" class>0.17元</td>
+    </tr>
+  </tbody>
+</table>
