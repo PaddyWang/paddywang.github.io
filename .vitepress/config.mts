@@ -18,7 +18,6 @@ export default defineConfig({
         { text: '前端', link: '/blog/front/index' },
         { text: 'Git', link: '/blog/git/git 基本使用' },
       ]},
-      // { text: 'Examples', link: '/markdown-examples' }
     ],
 
     sidebar: {
@@ -26,10 +25,10 @@ export default defineConfig({
         {
           text: '前端',
           items: [
-            { text: '【CSS】常用选择器', link: 'blog/front/css/CSS 选择器' },
-            { text: 'JS 的四种【函数调用模式】', link: '/blog/front/js/JS 函数调用模式' },
+            { text: 'CSS 选择器', link: 'blog/front/css/CSS 选择器' },
+            { text: 'JS 函数调用模式', link: '/blog/front/js/JS 函数调用模式' },
             { text: 'Markdown Examples', link: '/markdown-examples' },
-            { text: 'Runtime API Examples', link: '/api-examples' }
+            { text: 'Runtime API Examples', link: '/api-examples' },
           ]
         },
       ]
@@ -53,6 +52,20 @@ export default defineConfig({
     lastUpdated: {
       text: '最后更新于'
     },
+    notFound: {
+      title: '页面未找到',
+      quote:
+        '但如果你不改变方向，并且继续寻找，你可能最终会到达你所前往的地方。',
+      linkLabel: '前往首页',
+      linkText: '带我回首页'
+    },
+    langMenuLabel: '多语言',
+    returnToTopLabel: '回到顶部',
+    sidebarMenuLabel: '菜单',
+    darkModeSwitchLabel: '主题',
+    lightModeSwitchTitle: '切换到浅色模式',
+    darkModeSwitchTitle: '切换到深色模式',
+    skipToContentLabel: '跳转到内容',
   },
 })
 
