@@ -35,6 +35,10 @@ export default defineConfig({
           base: '/blog/front/js/',
           items: [
             { text: 'JS 函数调用模式', link: 'JS 函数调用模式' },
+            { text: 'JS 中的闭包', link: 'JS 中的闭包' },
+            { text: 'JS 中的递归', link: 'JS 中的递归' },
+            { text: 'JS 中的[原型]', link: 'JS 中的原型/' },
+            { text: 'JS 中的[作用域]与[作用域链]', link: 'JS 中的作用域与作用域链' }
           ]
         },
         {
