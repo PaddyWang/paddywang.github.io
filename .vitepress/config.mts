@@ -34,6 +34,7 @@ export default defineConfig({
           text: 'JavaScript',
           base: '/blog/front/js/',
           items: [
+            { text: 'JavaScript语言精粹-随笔', link: 'JavaScript语言精粹-随笔' },
             { text: 'JS 函数调用模式', link: 'JS 函数调用模式' },
             { text: 'JS 中的闭包', link: 'JS 中的闭包' },
             { text: 'JS 中的递归', link: 'JS 中的递归' },
@@ -45,6 +46,10 @@ export default defineConfig({
           text: 'CSS',
           base: '/blog/front/css/',
           items: [
+            { text: '盒模型', link: '盒模型' },
+            { text: '深入了解定位', link: '深入了解定位' },
+            { text: '有趣的线性渐变', link: '有趣的线性渐变' },
+            { text: '背景裁剪', link: '背景裁剪' },
             { text: '操蛋的BFC', link: '操蛋的BFC' },
             { text: '走进浮动', link: '走进浮动' },
             { text: 'CSS 汇总', link: 'CSS 汇总' },
@@ -52,6 +57,31 @@ export default defineConfig({
             { text: 'Table', link: 'table/' },
           ]
         },
+        {
+          text: '历史博客',
+          base: '/blog/front/old/',
+          collapsed: true,
+          items: [
+            { text: 'HTML5-的设计原理', link: 'HTML5-的设计原理' },
+            {
+              text: 'Angular 系列',
+              items: [
+                { text: 'What Angular init-before', link: '/angular/What Angular init-before' },
+                { text: 'Angular 之 $q 实现 promise 源码解读(01)', link: '/angular/Angular 之 $q 实现 promise 源码解读(01)' },
+                { text: 'Angular 之 $http 服务 源码解读(02)', link: '/angular/Angular 之 $http 服务 源码解读(02)' },
+                { text: 'Angular 之 $inject 实现原理(03)', link: '/angular/Angular 之 $inject 实现原理(03)' },
+              ],
+            },
+            { text: 'JS 之 Electron 实现跨平台客户端开发', link: 'JS 之 Electron 实现跨平台客户端开发' },
+            { text: '移动Web开发', link: '移动Web开发' },
+            { text: '移动端开发总结', link: '移动端开发总结' },
+            { text: '响应式布局', link: '响应式布局' },
+            { text: '前端模块化思想', link: '前端模块化思想' },
+            { text: '前端兼容性问题', link: '前端兼容性问题' },
+            { text: '20190302-随笔-前端系统开发月报', link: '20190302-随笔-前端系统开发月报' },
+            { text: 'JS 总结-01', link: 'JS 总结-01' },
+          ]
+        }
       ],
       '/learning': [
         {

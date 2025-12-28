@@ -1,0 +1,61 @@
+<style>
+  .sticty-table-container {
+    width: 300px;
+    height: 200px;
+    overflow: auto;
+  }
+  .sticty-table,
+  .sticty-table th,
+  .sticty-table td {
+    border: 1px solid #999;
+    padding: 4px;
+  }
+  .sticty-table {
+    width: 500px;
+    border-collapse: collapse;
+  }
+  .sticty-table tr > th:first-child,
+  .sticty-table tr > td:first-child {
+    position: -webkit-sticky;
+    position: sticky;
+    left: 0;
+  }
+  .sticty-table tr > td:first-child {
+    background-color: pink;
+  }
+  .sticty-table tr > th:first-child {
+    z-index: 1;
+  }
+  .sticty-table th {
+    width: 50px;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    background-color: skyblue;
+  }
+</style>
+<div class="sticty-table-container">
+  <table class="sticty-table">
+    <thead>
+      <tr>
+        <th>序号</th>
+        <th>姓名</th>
+        <th>班级</th>
+        <th>科目</th>
+        <th>成绩</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+      <tr><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td></tr>
+      <tr><td>3</td><td>3</td><td>3</td><td>3</td><td>3</td></tr>
+      <tr><td>4</td><td>4</td><td>4</td><td>4</td><td>4</td></tr>
+      <tr><td>5</td><td>5</td><td>5</td><td>5</td><td>5</td></tr>
+      <tr><td>6</td><td>6</td><td>6</td><td>6</td><td>6</td></tr>
+      <tr><td>7</td><td>7</td><td>7</td><td>7</td><td>7</td></tr>
+      <tr><td>8</td><td>8</td><td>8</td><td>8</td><td>8</td></tr>
+      <tr><td>9</td><td>9</td><td>9</td><td>9</td><td>9</td></tr>
+      <tr><td>10</td><td>10</td><td>10</td><td>10</td><td>10</td></tr>
+    </tbody>
+  </table>
+</div>
