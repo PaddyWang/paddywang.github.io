@@ -34,6 +34,9 @@ export default defineConfig({
           text: 'JavaScript',
           base: '/blog/front/js/',
           items: [
+            { text: '编码的前世今生', link: '编码的前世今生/' },
+            { text: 'JS 中为什么 0.1 + 0.2 != 0.3 ?', link: 'JS中为什么0.1+0.2!=0.3/' },
+            { text: '原码、反码、补码的探索', link: '原码、反码、补码的探索/' },
             { text: 'JavaScript语言精粹-随笔', link: 'JavaScript语言精粹-随笔' },
             { text: 'JS 函数调用模式', link: 'JS 函数调用模式' },
             { text: 'JS 中的闭包', link: 'JS 中的闭包' },

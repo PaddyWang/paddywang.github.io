@@ -4,16 +4,17 @@ layout: home
 title: 首页
 
 hero:
-  # name: "Paddy'知识库"
-  # text: "Paddy的技术博客、终身成长、户外分享"
-  # tagline: 技术博客、终身成长、户外分享
-  actions:
-    - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
-    - theme: alt
-      text: API Examples
-      link: /api-examples
+  name: Paddy'知识库
+  # text: Paddy的技术博客、终身成长、户外分享
+  tagline: 技术博客、终身成长、户外分享
+  image: /code.png
+  # actions:
+  #   - theme: brand
+  #     text: Markdown Examples
+  #     link: /markdown-examples
+  #   - theme: alt
+  #     text: API Examples
+  #     link: /api-examples
 
 features:
   - title: 技术博客
