@@ -461,3 +461,73 @@ CSS 以 `--` 作为命名前缀 , 用 `var()` 去引用
   文文文<br>文文文<br>文文文<br>
   字字字<br>字字字<br>字字字<br>
 </div>
+
+## 自适应的输入框
+通过CSS来实现输入框的自适应  
+
+大致思路：  
+给输入框一个绝对定位，让其宽度继承父盒子的宽度，父盒子的宽度由占位子盒子的宽度撑起  
+占位子盒子和输入框的文本格式和盒模型保持一致  
+输入框的文本同步到占位子盒子内  
+:::details code
+```html
+<style>
+  .auto-input {
+    height: 20px;
+    min-width: 50px;
+    position: relative;
+    display: inline-block;
+  }
+  .auto-input > * {
+    font-size: 14px;
+  }
+  .auto-input > .placeholder {
+    visibility: hidden;
+    padding: 3px;
+    font-family: system-ui;
+    white-space: break-spaces;
+  }
+  .auto-input > input {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    outline: none;
+    border: 1px solid;
+  }
+</style>
+<div class="auto-input">
+  <div class="placeholder"></div>
+  <input type="text" placeholder="输入" oninput="document.querySelector('.auto-input .placeholder').innerText = event.target.value">
+</div>
+```
+:::
+<style>
+  .auto-input {
+    height: 20px;
+    min-width: 50px;
+    position: relative;
+    display: inline-block;
+  }
+  .auto-input > * {
+    font-size: 14px;
+  }
+  .auto-input > .placeholder {
+    visibility: hidden;
+    padding: 3px;
+    font-family: system-ui;
+    white-space: break-spaces;
+  }
+  .auto-input > input {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    outline: none;
+    border: 1px solid;
+  }
+</style>
+<div class="auto-input">
+  <div class="placeholder"></div>
+  <input type="text" placeholder="输入" oninput="document.querySelector('.auto-input .placeholder').innerText = event.target.value">
+</div>
