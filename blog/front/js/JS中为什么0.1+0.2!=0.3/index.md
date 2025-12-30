@@ -11,13 +11,6 @@ outline: deep
 双精度(64位)：第1位为符号位，第2～12位为指数位，剩余52位为小数位  
 在JS中采用的是双精度浮点数，所以不管是整数还是小数在JS中都是双精度的浮点数  
 ![](./imgs/image.png)
-<style>
-  .img-alt {
-    text-align: center;
-    font-size: 13px;
-    color: #999;
-  }
-</style>
 <div class="img-alt">单精度浮点数</div>
 
 ![](./imgs/image.1.png)

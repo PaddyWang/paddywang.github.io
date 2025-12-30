@@ -31,6 +31,15 @@ export default defineConfig({
       '/blog/front': [
         { text: '前端专题' },
         {
+          text: 'React 系列',
+          base: '/blog/front/react/',
+          items: [
+            { text: '践行 Toy React Hooks', link: '践行ToyReactHooks/' },
+            { text: '初识 React hooks', link: '初识Reacthooks/' },
+            { text: 'React新手眼中的Fiber', link: 'React新手眼中的Fiber/' },
+          ],
+        },
+        {
           text: 'JavaScript',
           base: '/blog/front/js/',
           items: [

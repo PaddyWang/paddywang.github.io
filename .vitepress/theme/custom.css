@@ -6,3 +6,10 @@
   --vp-c-brand-2: var(--primay);
   --vp-button-brand-bg: var(--primay);
 }
+
+.img-alt {
+  text-align: center;
+  color: #999;
+  font-size: 13px;
+  line-height: 1;
+}

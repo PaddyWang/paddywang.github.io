@@ -1,6 +1,5 @@
 ---
 outline: deep
-title: Git
 ---
 
 # git 基本使用
