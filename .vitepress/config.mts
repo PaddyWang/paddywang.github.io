@@ -17,7 +17,7 @@ export default defineConfig({
     nav: [
       { text: '技术博客', items: [
         { text: '前端专题', link: '/blog/front/index' },
-        { text: 'Git', link: '/blog/git/git 基本使用' },
+        { text: 'Git', link: '/blog/git/git基本使用' },
       ]},
       { text: '终身成长', items: [
         { text: 'TODO', link: '/learning/TODO' },
@@ -29,7 +29,8 @@ export default defineConfig({
 
     sidebar: {
       '/blog/front': [
-        { text: '前端专题' },
+        // { text: '前端专题' },
+        { text: '超级小编译器', link: 'the-super-tiny-compiler/' },
         {
           text: 'React 系列',
           base: '/blog/front/react/',
@@ -45,24 +46,24 @@ export default defineConfig({
           items: [
             { text: '编码的前世今生', link: '编码的前世今生/' },
             { text: 'JS 中为什么 0.1 + 0.2 != 0.3 ?', link: 'JS中为什么0.1+0.2!=0.3/' },
-            { text: '原码、反码、补码的探索', link: '原码、反码、补码的探索/' },
+            { text: '原码、反码、补码的探索', link: '原码反码补码的探索/' },
             { text: 'JavaScript语言精粹-随笔', link: 'JavaScript语言精粹-随笔' },
-            { text: 'JS 函数调用模式', link: 'JS 函数调用模式' },
-            { text: 'JS 中的闭包', link: 'JS 中的闭包' },
-            { text: 'JS 中的递归', link: 'JS 中的递归' },
-            { text: 'JS 中的[原型]', link: 'JS 中的原型/' },
-            { text: 'JS 中的[作用域]与[作用域链]', link: 'JS 中的作用域与作用域链' }
+            { text: 'JS 函数调用模式', link: 'JS函数调用模式' },
+            { text: 'JS 中的闭包', link: 'JS中的闭包' },
+            { text: 'JS 中的递归', link: 'JS中的递归' },
+            { text: 'JS 中的[原型]', link: 'JS中的原型/' },
+            { text: 'JS 中的[作用域]与[作用域链]', link: 'JS中的作用域与作用域链' }
           ]
         },
         {
           text: 'CSS',
           base: '/blog/front/css/',
           items: [
-            { text: 'CSS 汇总', link: 'CSS 汇总' },
-            { text: 'CSS 选择器', link: 'CSS 选择器' },
+            { text: 'CSS 汇总', link: 'CSS汇总' },
+            { text: 'CSS 选择器', link: 'CSS选择器' },
             { text: '强大的CSS动画', link: '强大的CSS动画' },
-            { text: '[译]A Complete Guide to Flexbox', link: '[译]A Complete Guide to Flexbox/' },
-            { text: '揭开 baseline & line-height & vertical-align 的面纱', link: '揭开 baseline & line-height & vertical-align 的面纱/' },
+            { text: '[译]A Complete Guide to Flexbox', link: '[译]A-Complete-Guide-to-Flexbox/' },
+            { text: '揭开 baseline & line-height & vertical-align 的面纱', link: '揭开baseline&line-height&vertical-align的面纱/' },
             { text: '盒模型', link: '盒模型' },
             { text: '深入了解定位', link: '深入了解定位' },
             { text: '有趣的线性渐变', link: '有趣的线性渐变' },
@@ -81,20 +82,20 @@ export default defineConfig({
             {
               text: 'Angular 系列',
               items: [
-                { text: 'What Angular init-before', link: '/angular/What Angular init-before' },
-                { text: 'Angular 之 $q 实现 promise 源码解读(01)', link: '/angular/Angular 之 $q 实现 promise 源码解读(01)' },
-                { text: 'Angular 之 $http 服务 源码解读(02)', link: '/angular/Angular 之 $http 服务 源码解读(02)' },
-                { text: 'Angular 之 $inject 实现原理(03)', link: '/angular/Angular 之 $inject 实现原理(03)' },
+                { text: 'What Angular init-before', link: '/angular/What-Angular-init-before' },
+                { text: 'Angular 之 $q 实现 promise 源码解读(01)', link: '/angular/Angular之$q实现promise源码解读(01)' },
+                { text: 'Angular 之 $http 服务 源码解读(02)', link: '/angular/Angular之$http服务源码解读(02)' },
+                { text: 'Angular 之 $inject 实现原理(03)', link: '/angular/Angular之$inject实现原理(03)' },
               ],
             },
-            { text: 'JS 之 Electron 实现跨平台客户端开发', link: 'JS 之 Electron 实现跨平台客户端开发' },
+            { text: 'JS 之 Electron 实现跨平台客户端开发', link: 'JS之Electron实现跨平台客户端开发' },
             { text: '移动Web开发', link: '移动Web开发' },
             { text: '移动端开发总结', link: '移动端开发总结' },
             { text: '响应式布局', link: '响应式布局' },
             { text: '前端模块化思想', link: '前端模块化思想' },
             { text: '前端兼容性问题', link: '前端兼容性问题' },
             { text: '20190302-随笔-前端系统开发月报', link: '20190302-随笔-前端系统开发月报' },
-            { text: 'JS 总结-01', link: 'JS 总结-01' },
+            { text: 'JS 总结-01', link: 'JS总结-01' },
           ]
         }
       ],
