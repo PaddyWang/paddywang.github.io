@@ -20,7 +20,7 @@ export default defineConfig({
         { text: 'Git', link: '/blog/git/git基本使用' },
       ]},
       { text: '终身成长', items: [
-        { text: 'TODO', link: '/learning/TODO' },
+        { text: '人生伴侣', link: '/learning/mate/人生伴侣' },
       ]},
       { text: '户外分享', items: [
         { text: 'TODO', link: '/outdoor/TODO' },
@@ -30,7 +30,7 @@ export default defineConfig({
     sidebar: {
       '/blog/front': [
         // { text: '前端专题' },
-        { text: '超级小编译器', link: 'the-super-tiny-compiler/' },
+        { text: '超级小编译器', link: '/blog/front/the-super-tiny-compiler/' },
         {
           text: 'React 系列',
           base: '/blog/front/react/',
@@ -101,8 +101,11 @@ export default defineConfig({
       ],
       '/learning': [
         {
-          text: '终身成长',
-          items: []
+          base: '/learning/mate/',
+          items: [
+            { text: '人生伴侣', link: '人生伴侣' },
+            { text: '如何选择人生伴侣?', link: '如何选择人生伴侣' },
+          ]
         }
       ],
       '/outdoor': [
