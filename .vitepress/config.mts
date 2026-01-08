@@ -1,5 +1,6 @@
 import { join } from 'path'
 import { defineConfig } from 'vitepress'
+import tailwindcss from '@tailwindcss/vite'
 import Components from 'unplugin-vue-components/vite'
 
 // https://vitepress.dev/reference/site-config
@@ -103,7 +104,7 @@ export default defineConfig({
         {
           base: '/learning/mate/',
           items: [
-            { text: '人生伴侣', link: '人生伴侣' },
+            { text: '人生伴侣', link: '人生伴侣/' },
             { text: '如何选择人生伴侣?', link: '如何选择人生伴侣' },
           ]
         }
@@ -155,6 +156,7 @@ export default defineConfig({
 
   vite: {
     plugins: [
+      tailwindcss(),
       Components({
         include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
         dirs: ['.vitepress/components'],
