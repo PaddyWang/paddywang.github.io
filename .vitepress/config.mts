@@ -3,6 +3,8 @@ import { defineConfig } from 'vitepress'
 import tailwindcss from '@tailwindcss/vite'
 import Components from 'unplugin-vue-components/vite'
 
+import markmapPreprocess from './plugins/markmap'
+
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: ' ',
@@ -104,7 +106,7 @@ export default defineConfig({
         {
           base: '/learning/mate/',
           items: [
-            { text: '人生伴侣', link: '人生伴侣/' },
+            { text: '人生伴侣', link: '人生伴侣' },
             { text: '如何选择人生伴侣?', link: '如何选择人生伴侣' },
           ]
         }
@@ -154,8 +156,42 @@ export default defineConfig({
     skipToContentLabel: '跳转到内容',
   },
 
+  markdown: {
+    config: (md) => {
+      // // 保存原始解析函数
+      // const originalParse = md.parse
+      
+      // md.parse = function(src, env) {
+      //   // 预处理，将 :::markmap 内容转换为代码块
+      //   const processedSrc = src.replace(
+      //     /^:::\s*markmap\s*[a-zA-Z0-9:%]*\s*\n([\s\S]*?)\n:::\s*$/gm,
+      //     (match, content) => {
+      //       console.log(match.match(/^:::\s*markmap\s*([a-zA-Z0-9:%]*)\s*\n([\s\S]*?)\n:::\s*$/gm))
+      //       return `\n\`\`\`markmap-md\n${content.trim()}\n\`\`\`\n`
+      //     }
+      //   )
+        
+      //   // 使用原始解析函数
+      //   return originalParse.call(this, processedSrc, env)
+      // }
+      
+      // // 处理 raw-md 代码块
+      // md.renderer.rules.fence = (function(original: any) {
+      //   return function(tokens, idx, options, env, self) {
+      //     const token = tokens[idx]
+      //     if (token.info === 'markmap-md') {
+      //       const escaped = md.utils.escapeHtml(token.content)
+      //       return `<markmap><pre class="markmap-pre">${escaped}</pre></markmap>`
+      //     }
+      //     return original(tokens, idx, options, env, self)
+      //   }
+      // })(md.renderer.rules.fence)
+    }
+  },
+
   vite: {
     plugins: [
+      markmapPreprocess(),
       tailwindcss(),
       Components({
         include: [/\.vue$/, /\.vue\?vue/, /\.md$/],

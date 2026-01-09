@@ -2,6 +2,9 @@
   <div class="overflow-auto">
     <svg ref="svgRef" class="markmap-svg" :style="`width: ${handleSize(props.width)}; height: ${handleSize(props.height ?? '500px')};`"></svg>
   </div>
+  <div ref="contentRef" class="markmap-pre">
+    <slot />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -20,13 +23,18 @@ const props = defineProps<Props>()
 const handleSize = (size: any = '100%') => /%|px|rem$/.test(String(size)) ? size : `${size}px`
 
 const svgRef = ref(null)
+const contentRef = ref<HTMLDivElement>()
 
 onMounted(async () => {
   const transformer = new Transformer()
-  // @ts-ignore
-  const loadSource = await props.src.then(m => m.default)
+  let loadSource = ''
+  if (props.src) {
+    loadSource = await props.src.then((m: any) => m.default)
+  } else {
+    loadSource = contentRef.value?.querySelector('pre')?.innerHTML || ''
+  }
   const { root } = transformer.transform(loadSource)
-  const markmap = Markmap.create(svgRef.value, {
+  Markmap.create(svgRef.value, {
     color: () => 'var(--primay)',
     zoom: false,
     spacingHorizontal: 24,
@@ -44,5 +52,8 @@ onMounted(async () => {
 }
 .markmap {
   color: var(--vp-c-text-1) !important;
+}
+.markmap-pre {
+  display: none;
 }
 </style>
