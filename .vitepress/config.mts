@@ -3,7 +3,8 @@ import { defineConfig } from 'vitepress'
 import tailwindcss from '@tailwindcss/vite'
 import Components from 'unplugin-vue-components/vite'
 
-import markmapPreprocess from './plugins/markmap'
+// import markmapPreprocess from './plugins/markmap'
+import markmapPlugin from '@vitepress-plugin/markmap'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -158,40 +159,12 @@ export default defineConfig({
 
   markdown: {
     config: (md) => {
-      // // 保存原始解析函数
-      // const originalParse = md.parse
-      
-      // md.parse = function(src, env) {
-      //   // 预处理，将 :::markmap 内容转换为代码块
-      //   const processedSrc = src.replace(
-      //     /^:::\s*markmap\s*[a-zA-Z0-9:%]*\s*\n([\s\S]*?)\n:::\s*$/gm,
-      //     (match, content) => {
-      //       console.log(match.match(/^:::\s*markmap\s*([a-zA-Z0-9:%]*)\s*\n([\s\S]*?)\n:::\s*$/gm))
-      //       return `\n\`\`\`markmap-md\n${content.trim()}\n\`\`\`\n`
-      //     }
-      //   )
-        
-      //   // 使用原始解析函数
-      //   return originalParse.call(this, processedSrc, env)
-      // }
-      
-      // // 处理 raw-md 代码块
-      // md.renderer.rules.fence = (function(original: any) {
-      //   return function(tokens, idx, options, env, self) {
-      //     const token = tokens[idx]
-      //     if (token.info === 'markmap-md') {
-      //       const escaped = md.utils.escapeHtml(token.content)
-      //       return `<markmap><pre class="markmap-pre">${escaped}</pre></markmap>`
-      //     }
-      //     return original(tokens, idx, options, env, self)
-      //   }
-      // })(md.renderer.rules.fence)
     }
   },
 
   vite: {
     plugins: [
-      markmapPreprocess(),
+      markmapPlugin(),
       tailwindcss(),
       Components({
         include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
