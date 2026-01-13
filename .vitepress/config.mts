@@ -2,14 +2,12 @@ import { join } from 'path'
 import { defineConfig } from 'vitepress'
 import tailwindcss from '@tailwindcss/vite'
 import Components from 'unplugin-vue-components/vite'
-
-// import markmapPreprocess from './plugins/markmap'
 import markmapPlugin from '@vitepress-plugin/markmap'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: ' ',
-  description: `Paddy' 技术博客 学习随笔 户外分享`,
+  description: `Paddy' 技术博客 学习随笔 户外分享 开源贡献`,
   titleTemplate: ':title - Paddy',
   ignoreDeadLinks: true,
   head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
@@ -22,6 +20,10 @@ export default defineConfig({
       { text: '技术博客', items: [
         { text: '前端专题', link: '/blog/front/index' },
         { text: 'Git', link: '/blog/git/git基本使用' },
+      ]},
+      { text: '开源贡献', items: [
+        { text: 'Chrome插件通信模型', link: 'https://www.npmjs.com/package/crx-message' },
+        { text: 'vitepress脑图插件', link: 'https://paddywang.github.io/vitepress-plugin/markmap/' },
       ]},
       { text: '终身成长', items: [
         { text: '人生伴侣', link: '/learning/mate/人生伴侣' },
@@ -128,7 +130,7 @@ export default defineConfig({
     ],
 
     footer: {
-      message: '打怪升级',
+      message: '终身成长',
       copyright: 'Copyright © 2025 PaddyWang'
     },
     docFooter: {
