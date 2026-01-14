@@ -20,7 +20,7 @@
     "vitepress": "2.0.0-alpha.15"
   },
   "dependencies": {
-    "@vitepress-plugin/markmap": "^1.1.3",
+    "@vitepress-plugin/markmap": "^1.2.0",
     "vue": "^3.5.26"
   }
 }
