@@ -27,6 +27,7 @@ export default defineConfig({
       ]},
       { text: '终身成长', items: [
         { text: '人生伴侣', link: '/learning/mate/人生伴侣' },
+        { text: '随笔', link: '/learning/essay/' },
       ]},
       { text: '户外分享', items: [
         { text: 'TODO', link: '/outdoor/TODO' },
@@ -111,6 +112,16 @@ export default defineConfig({
           items: [
             { text: '人生伴侣', link: '人生伴侣' },
             { text: '如何选择人生伴侣?', link: '如何选择人生伴侣' },
+          ]
+        }
+      ],
+      '/learning/essay': [
+        {
+          text: '随笔',
+          base: '/learning/essay/',
+          items: [
+            { text: '人生三次祛魅', link: '祛魅' },
+            { text: '纽约时间', link: '纽约时间' },
           ]
         }
       ],
