@@ -3,6 +3,7 @@ import { defineConfig } from 'vitepress'
 import tailwindcss from '@tailwindcss/vite'
 import Components from 'unplugin-vue-components/vite'
 import markmapPlugin from '@vitepress-plugin/markmap'
+import mermaidPlugin from '@vitepress-plugin/mermaid'
 
 import outdoorData from '../outdoor/data'
 
@@ -24,8 +25,9 @@ export default defineConfig({
         { text: 'Git', link: '/blog/git/git基本使用' },
       ]},
       { text: '开源贡献', items: [
+        { text: 'vitepress图表(mermaid)插件', link: 'https://paddywang.github.io/vitepress-plugin/mermaid/' },
+        { text: 'vitepress脑图(markmap)插件', link: 'https://paddywang.github.io/vitepress-plugin/markmap/' },
         { text: 'Chrome插件通信模型', link: 'https://www.npmjs.com/package/crx-message' },
-        { text: 'vitepress脑图插件', link: 'https://paddywang.github.io/vitepress-plugin/markmap/' },
       ]},
       { text: '终身成长', items: [
         { text: '人生伴侣', link: '/learning/mate/人生伴侣' },
@@ -170,6 +172,7 @@ export default defineConfig({
   vite: {
     plugins: [
       markmapPlugin(),
+      mermaidPlugin(),
       tailwindcss(),
       Components({
         include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
