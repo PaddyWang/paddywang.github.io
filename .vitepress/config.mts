@@ -121,6 +121,7 @@ export default defineConfig({
         {
           text: '随笔',
           base: '/learning/essay/',
+          link: '/',
           items: [
             { text: '知识模型', link: '知识模型' },
             { text: '人生三次祛魅', link: '祛魅' },
