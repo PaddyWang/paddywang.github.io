@@ -127,7 +127,10 @@ BFC([Block formatting contexts](https://www.w3.org/TR/CSS2/visuren.html#block-fo
 可以利用 BFC 创建新的渲染区域来进行多列分割  
 固定+自适应布局  
 其中自适应的盒子需要放在包含块最底部  
-```html
+:::codeview
+---
+lang: html
+---
 <style>
   .bfc-box-2 {
     width: 50px;
@@ -168,44 +171,4 @@ BFC([Block formatting contexts](https://www.w3.org/TR/CSS2/visuren.html#block-fo
     <div class="bfc-box-2 right m-l-12">right 3 </div>
   </div>
 </div>
-```
-<style>
-  .bfc-box-2 {
-    width: 50px;
-    height: 100px;
-    background: pink;
-  }
-  .bfc-box-overflow {
-    height: 100px;
-    overflow: hidden;
-    background: skyblue;
-  }
-  .left { float: left; }
-  .right { float: right; }
-  .m-l-12 { margin-left: 12px; }
-  .m-r-12 { margin-right: 12px; }
-  .m-t-12 { margin-top: 12px; }
-  .border { border: 1px solid; }
-</style>
-<div>
-  <div class="border">
-    <div class="bfc-box-2 left">left 1 </div>
-    <div class="bfc-box-overflow m-l-12">自适应盒子 2</div>
-  </div>
-  <div class="border m-t-12">
-    <div class="bfc-box-2 left m-r-12">left 1 </div>
-    <div class="bfc-box-overflow">自适应盒子 2</div>
-  </div>
-  <div class="border m-t-12">
-    <div class="bfc-box-2 left m-r-12">left 1 </div>
-    <div class="bfc-box-2 right m-l-12">right 3 </div>
-    <div class="bfc-box-overflow">自适应盒子 2</div>
-  </div>
-  <div class="border m-t-12">
-    <div class="bfc-box-2 left m-r-12">left 1 </div>
-    <div class="bfc-box-overflow">自适应盒子 2 <br>
-      当自适应的盒子放在没有出现在包含块最后时，渲染就会按顺序，把自适应的盒子渲染完毕再去渲染 right 3 盒子，所以就会把 right 3 挤下去
-    </div>
-    <div class="bfc-box-2 right m-l-12">right 3 </div>
-  </div>
-</div>
+:::

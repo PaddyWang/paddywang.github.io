@@ -9,8 +9,10 @@ outline: deep
 ## transition
 transition用于将一个状态由瞬间完成转换成一段时间完成  
 如下面的对照:  
-:::details code
-```html
+:::codeview
+---
+lang: html
+---
 <style>
   .transition-01 {
     width: 200px;
@@ -25,39 +27,16 @@ transition用于将一个状态由瞬间完成转换成一段时间完成
 </style>
 <div class="transition-01">鼠标移过来看效果</div>
 <div class="transition-01" style="transition: 1s;">鼠标移过来看效果(动画)</div>
-
-```
 :::
-<style>
-  .transition-01 {
-    width: 200px;
-    height: 50px;
-    border: 1px dashed #999;
-    margin: 10px;
-  }
-  .transition-01:hover {
-    width: 300px;
-    height: 80px;
-  }
-</style>
-<div class="transition-01">鼠标移过来看效果</div>
-<div class="transition-01" style="transition: 1s;">鼠标移过来看效果(动画)</div>
+
 
 ### transition-delay
 延时 `transition` 的第二个参数  
-:::details code
-```html
+:::codeview
+---
+lang: html
+---
 <style>
-  .transition-01 {
-    width: 200px;
-    height: 50px;
-    border: 1px dashed #999;
-    margin: 10px;
-  }
-  .transition-01:hover {
-    width: 300px;
-    height: 80px;
-  }
   .transition-02 {
     transition: 1s width, 1s 1s height;
   }
@@ -66,23 +45,15 @@ transition用于将一个状态由瞬间完成转换成一段时间完成
   <div>鼠标移过来看效果(动画)</div>
   <div>先变宽再变高</div>
 </div>
-```
 :::
-<style>
-  .transition-02 {
-    transition: 1s width, 1s 1s height;
-  }
-</style>
-<div class="transition-01 transition-02">
-  <div>鼠标移过来看效果(动画)</div>
-  <div>先变宽再变高</div>
-</div>
 
 
 ### transition-timing-function
 时间变换函数  
-:::details code
-```html
+:::codeview
+---
+lang: html
+---
 <style>
   .transition-03 {
     display: flex;
@@ -123,48 +94,8 @@ transition用于将一个状态由瞬间完成转换成一段时间完成
   <div>steps(4, end)<div style="transition-timing-function: steps(4, end)"></div></div>
   <div>cubic-bezier(0.1, 0.7, 1.0, 0.1)<div style="transition-timing-function: cubic-bezier(0.1, 0.7, 1.0, 0.1)"></div></div>
 </div>
-```
 :::
-<style>
-  .transition-03 {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  .transition-03 > div {
-    width: 150px;
-    height: 150px;
-    border: 1px solid #333;
-    margin: 8px;
-    position: relative;
-  }
-  .transition-03 > div > div {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 20px;
-    height: 20px;
-    background-color: pink;
-    transition: 2s;
-    z-index: -1;
-  }
-  .transition-03:hover > div > div {
-    width: 50px;
-    height: 50px;
-    top: 100px;
-    left: 100px;
-  }
-</style>
-<div class="transition-03">
-  <div>ease<div style="transition-timing-function: ease"></div></div>
-  <div>ease-in<div style="transition-timing-function: ease-in"></div></div>
-  <div>ease-out<div style="transition-timing-function: ease-out"></div></div>
-  <div>ease-in-out<div style="transition-timing-function: ease-in-out"></div></div>
-  <div>linear<div style="transition-timing-function: linear"></div></div>
-  <div>step-start<div style="transition-timing-function: step-start"></div></div>
-  <div>step-end<div style="transition-timing-function: step-end"></div></div>
-  <div>steps(4, end)<div style="transition-timing-function: steps(4, end)"></div></div>
-  <div>cubic-bezier(0.1, 0.7, 1.0, 0.1)<div style="transition-timing-function: cubic-bezier(0.1, 0.7, 1.0, 0.1)"></div></div>
-</div>
+
 
 ### 汇总
 **属性分解**  
@@ -181,6 +112,9 @@ transition用于将一个状态由瞬间完成转换成一段时间完成
 ## animation
 `animation` 定义了如何用关键帧来随时间推移对CSS属性的值进行动画处理。关键帧动画的行为可以通过指定它们的持续时间，它们的重复次数以及它们如何重复来控制  
 `animation-timing-function` & `animation-delay` 同 `transition`  
+
+下面是 animation 的公共样式
+```html
 <style>
   [class|=animation] {
     height: 10px;
@@ -197,13 +131,28 @@ transition用于将一个状态由瞬间完成转换成一段时间完成
     to { transform: scaleX(1); }
   }
 </style>
-:::details code
-```css{2}
-.animation-01:hover > div {
-  animation: 3s animation;
-}
 ```
-:::
+<style>
+  [class|=animation] {
+    height: 10px;
+    background-color: #eee;
+  }
+  [class|=animation] > div {
+    height: 100%;
+    background-color: pink;
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  @keyframes animation {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+</style>
+
+:::codeview
+---
+lang: html{3}
+---
 <style>
   .animation-01:hover > div {
     animation: 3s animation;
@@ -211,22 +160,15 @@ transition用于将一个状态由瞬间完成转换成一段时间完成
 </style>
 <div>鼠标移动到下面↓↓</div>
 <div class="animation-01"><div></div></div>
+:::
+
 
 ### animation-iteration-count
 定义动画在结束前运行的次数 可以是N次 无限循环  
-:::details code
-```css{2,5,8}
-.example-animation-iteration-count:hover .animation-iteration-count-infinite {
-  animation: 3s animation infinite;
-}
-.example-animation-iteration-count:hover .animation-iteration-count-1-5 {
-  animation: 3s animation 1.5;
-}
-.example-animation-iteration-count:hover .animation-iteration-count-2 {
-  animation: 3s animation 2;
-}
-```
-:::
+:::codeview
+---
+lang: html{3,6,9}
+---
 <style>
   .example-animation-iteration-count:hover .animation-iteration-count-infinite {
     animation: 3s animation infinite;
@@ -253,22 +195,15 @@ transition用于将一个状态由瞬间完成转换成一段时间完成
     <div class="animation-iteration-count-2"></div>
   </div>
 </div>
+:::
+
 
 ### animation-fill-mode
 动画结束以后，会立即从结束状态跳回到起始状态。如果想让动画保持在结束状态，需要使用 `animation-fill-mode` 属性  
-:::details code
-```css{2,5,8}
-.example-animation-fill-mode:hover .animation-fill-mode-forwards {
-  animation: 2s animation 1 forwards;
-}
-.example-animation-fill-mode:hover .animation-fill-mode-backwards {
-  animation: 2s animation 1 backwards;
-}
-.example-animation-fill-mode:hover .animation-fill-mode-both {
-  animation: 2s animation 1 both;
-}
-```
-:::
+:::codeview
+---
+lang: html{3,6,9}
+---
 <style>
   .example-animation-fill-mode:hover .animation-fill-mode-forwards {
     animation: 2s animation 1 forwards;
@@ -295,25 +230,15 @@ transition用于将一个状态由瞬间完成转换成一段时间完成
     <div class="animation-fill-mode-both"></div>
   </div>
 </div>
+:::
+
 
 ### animation-direction
 描述了动画的播放时间轴方向  
-:::details code
-```css{2,5,8,11}
-.animation:hover .animation-direction-normal {
-  animation: 2s animation infinite normal;
-}
-.animation:hover .animation-direction-reverse {
-  animation: 2s animation infinite reverse;
-}
-.animation:hover .animation-direction-alternate {
-  animation: 2s animation infinite alternate;
-}
-.animation:hover .animation-direction-alternate-reverse {
-  animation: 2s animation infinite alternate-reverse;
-}
-```
-:::
+:::codeview
+---
+lang: html{21,24,27,30}
+---
 <style>
   [class|=bgc] {
     height: 10px;
@@ -369,24 +294,16 @@ transition用于将一个状态由瞬间完成转换成一段时间完成
     <div class="animation-direction-alternate-reverse"></div>
   </div>
 </div>
+:::
+
 
 ### animation-play-state
 属性定义一个动画是否运行或者暂停。可以通过查询它来确定动画是否正在运行  
 另外，它的值可以被设置为暂停和恢复的动画的重放  
-:::details code
-```css{3,6}
-.example-animation-play-state .animation-play-state {
-  animation: 2s animation infinite;
-  animation-play-state: paused;
-}
-.example-animation-play-state:hover .animation-play-state {
-  animation-play-state: running;
-}
-.example-animation-play-state:hover .animation-play-state-normal {
-  animation: 2s animation infinite;
-}
-```
-:::
+:::codeview
+---
+lang: html{4,7}
+---
 <style>
   .example-animation-play-state .animation-play-state {
     animation: 2s animation infinite;
@@ -410,10 +327,14 @@ transition用于将一个状态由瞬间完成转换成一段时间完成
     <div class="animation-play-state-normal"></div>
   </div>
 </div>
+:::
+
 
 ## 应用：步进输入文字效果
-:::details code
-```html
+:::codeview
+---
+lang: html
+---
 <style>
   .demo-01 {
     font: bold 200% Consolas, Monaco, monospace;
@@ -433,26 +354,5 @@ transition用于将一个状态由瞬间完成转换成一段时间完成
   @keyframes blink-caret { 50% { border-color: transparent; } }
 </style>
 <div class="demo-01">Typing animation by Lea Verou.</div>
-<div onclick="document.querySelector('.demo-01').className += ' demo-01-animation'">点击查看</div>
-```
+<div onclick="document.querySelector('.demo-01').className += ' demo-01-animation'">点击查看效果</div>
 :::
-<style>
-  .demo-01 {
-    font: bold 200% Consolas, Monaco, monospace;
-    border-right: .1em solid;
-    width: 16.5em; /* fallback */
-    width: 30ch; /* # of chars */
-    margin: 2em 1em;
-    white-space: nowrap;
-    overflow: hidden;
-  }
-  .demo-01-animation {
-    animation:
-        typing 20s steps(30, end), /* # of steps = # of chars */
-        blink-caret .5s step-end infinite alternate;
-  }
-  @keyframes typing { from { width: 0; } }
-  @keyframes blink-caret { 50% { border-color: transparent; } }
-</style>
-<div class="demo-01">Typing animation by Lea Verou.</div>
-<div onclick="document.querySelector('.demo-01').className += ' demo-01-animation'">点击查看</div>
