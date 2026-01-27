@@ -7,8 +7,7 @@ outline: deep
 ## 圆角表格
 以前总以为表格不可以做圆角效果，原因是因为设置`border-collapse: collapse;`后不可做圆角，这个属性：合并边框模型  
 
-<shadow :src="import('./table1.html?raw')" />
-::: details code
+:::codeview
 <<< ./table1.html
 :::
 
@@ -17,8 +16,7 @@ outline: deep
 这种方式对于固定宽度的单元格的表格可行，但是对于自适应的就不行了，会出现错位的现象，而且不支持横向滚动  
 于是网上搜寻到了下面的一个方案  
 
-<shadow :src="import('./table2.html?raw')" />
-::: details code
+:::codeview
 <<< ./table2.html
 :::
 
@@ -37,7 +35,6 @@ outline: deep
 不过也发现了一个小小的问题：  
 如果设置`border-collapse: collapse;`后，则会出现`thead`的边框消失(跟随内容上移)了  
 
-<shadow :src="import('./table3.html?raw')" />
-::: details code
+:::codeview
 <<< ./table3.html
 :::

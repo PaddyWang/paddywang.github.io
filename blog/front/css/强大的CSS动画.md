@@ -12,6 +12,7 @@ transition用于将一个状态由瞬间完成转换成一段时间完成
 :::codeview
 ---
 lang: html
+shadow: true
 ---
 <style>
   .transition-01 {
@@ -35,8 +36,19 @@ lang: html
 :::codeview
 ---
 lang: html
+shadow: true
 ---
 <style>
+  .transition-01 {
+    width: 200px;
+    height: 50px;
+    border: 1px dashed #999;
+    margin: 10px;
+  }
+  .transition-01:hover {
+    width: 300px;
+    height: 80px;
+  }
   .transition-02 {
     transition: 1s width, 1s 1s height;
   }
@@ -53,6 +65,7 @@ lang: html
 :::codeview
 ---
 lang: html
+shadow: true
 ---
 <style>
   .transition-03 {
@@ -132,6 +145,13 @@ lang: html
   }
 </style>
 ```
+
+
+:::codeview
+---
+lang: html
+shadow: true
+---
 <style>
   [class|=animation] {
     height: 10px;
@@ -148,11 +168,6 @@ lang: html
     to { transform: scaleX(1); }
   }
 </style>
-
-:::codeview
----
-lang: html{3}
----
 <style>
   .animation-01:hover > div {
     animation: 3s animation;
@@ -167,8 +182,25 @@ lang: html{3}
 定义动画在结束前运行的次数 可以是N次 无限循环  
 :::codeview
 ---
-lang: html{3,6,9}
+lang: html
+shadow: true
 ---
+<style>
+  [class|=animation] {
+    height: 10px;
+    background-color: #eee;
+  }
+  [class|=animation] > div {
+    height: 100%;
+    background-color: pink;
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  @keyframes animation {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+</style>
 <style>
   .example-animation-iteration-count:hover .animation-iteration-count-infinite {
     animation: 3s animation infinite;
@@ -202,8 +234,25 @@ lang: html{3,6,9}
 动画结束以后，会立即从结束状态跳回到起始状态。如果想让动画保持在结束状态，需要使用 `animation-fill-mode` 属性  
 :::codeview
 ---
-lang: html{3,6,9}
+lang: html
+shadow: true
 ---
+<style>
+  [class|=animation] {
+    height: 10px;
+    background-color: #eee;
+  }
+  [class|=animation] > div {
+    height: 100%;
+    background-color: pink;
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  @keyframes animation {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+</style>
 <style>
   .example-animation-fill-mode:hover .animation-fill-mode-forwards {
     animation: 2s animation 1 forwards;
@@ -237,8 +286,25 @@ lang: html{3,6,9}
 描述了动画的播放时间轴方向  
 :::codeview
 ---
-lang: html{21,24,27,30}
+lang: html
+shadow: true
 ---
+<style>
+  [class|=animation] {
+    height: 10px;
+    background-color: #eee;
+  }
+  [class|=animation] > div {
+    height: 100%;
+    background-color: pink;
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  @keyframes animation {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+</style>
 <style>
   [class|=bgc] {
     height: 10px;
@@ -302,8 +368,25 @@ lang: html{21,24,27,30}
 另外，它的值可以被设置为暂停和恢复的动画的重放  
 :::codeview
 ---
-lang: html{4,7}
+lang: html
+shadow: true
 ---
+<style>
+  [class|=animation] {
+    height: 10px;
+    background-color: #eee;
+  }
+  [class|=animation] > div {
+    height: 100%;
+    background-color: pink;
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  @keyframes animation {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+</style>
 <style>
   .example-animation-play-state .animation-play-state {
     animation: 2s animation infinite;
@@ -334,6 +417,7 @@ lang: html{4,7}
 :::codeview
 ---
 lang: html
+shadow: true
 ---
 <style>
   .demo-01 {

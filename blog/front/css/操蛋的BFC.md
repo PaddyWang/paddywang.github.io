@@ -130,6 +130,7 @@ BFC([Block formatting contexts](https://www.w3.org/TR/CSS2/visuren.html#block-fo
 :::codeview
 ---
 lang: html
+shadow: true
 ---
 <style>
   .bfc-box-2 {

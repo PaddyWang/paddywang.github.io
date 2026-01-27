@@ -15,12 +15,12 @@
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.18",
     "@types/node": "^25.0.3",
-    "@vitepress-plugin/codeview": "^1.0.0",
     "tailwindcss": "^4.1.18",
     "unplugin-vue-components": "^30.0.0",
     "vitepress": "2.0.0-alpha.15"
   },
   "dependencies": {
+    "@vitepress-plugin/codeview": "^1.1.0",
     "@vitepress-plugin/markmap": "^1.3.0",
     "@vitepress-plugin/mermaid": "^1.0.0",
     "vue": "^3.5.26"
