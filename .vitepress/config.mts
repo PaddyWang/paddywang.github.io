@@ -52,6 +52,13 @@ export default defineConfig({
           ],
         },
         {
+          text: 'Demo',
+          base: '/blog/front/demo/',
+          items: [
+            { text: '视频帧渲染', link: 'video-frame/' },
+          ],
+        },
+        {
           text: 'JavaScript',
           base: '/blog/front/js/',
           items: [
