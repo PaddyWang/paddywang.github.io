@@ -1,393 +1,158 @@
-<style></style>
-
-<div>
-  <div>
-    <input type="file" accept="video/*" id="file">
-    <video id="video"></video>
-    <canvas id="canvas"></canvas>
+<div class="container">
+  <div class="content">
+    <div>
+      <h3>
+        先选择一个视频
+        <input type="file" accept="video/*" id="file">
+      </h3>
+      <video id="video" controls></video>
+    </div>
+    <div>
+      <h3>渲染正在播放的视频帧</h3>
+      <canvas id="playing-frame" height="500"></canvas>
+    </div>
   </div>
+  <h3>渲染全部视频帧 <span>(最后一帧可能渲染不全,下一页解决)</span></h3>
+  <canvas id="video-frame"></canvas>
 </div>
 
 <script>
   const videoEl = document.querySelector('#video');
-  const canvasEl = document.querySelector('#canvas');
-  const ctx = canvasEl.getContext('2d');
+  const playingFrameEl = document.querySelector('#playing-frame');
+  const playCtx = playingFrameEl.getContext('2d');
+  // 获取视频容器的宽高 后面所有的容器都是基于视频容器的宽高进行自适应
+  const { width: videoContainerW, height: videoContainerH } = videoEl.getBoundingClientRect();
+  playingFrameEl.setAttribute('width', videoContainerW);
+
+  let renderWidth = 0;
+  let renderHeight = 0;
+  let renderX = 0;
+  let renderY = 0;
 
   document.querySelector('#file').addEventListener('change', (event) => {
-    console.log('>>>event', event.target);
+    const url = URL.createObjectURL(event.target.files[0]);
+    videoEl.src = url;
   });
 
-  /*
-import { type IMediaRecord } from '@/services/media';
-
-import { maxUnitDuration, framePositionY, frameHeight, audioWaveformHeight } from './constants';
-
-export function formatTime (seconds: number) {
-  const mins = Math.floor(seconds / 60);
-  const secs = Math.floor(seconds % 60);
-  return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-}
-
-export class AudioPlayer {
-  audio = new Audio;
-  waveformCanvas: HTMLCanvasElement;
-  waveformLightCanvas: HTMLCanvasElement;
-
-  timeline: Timeline;
-
-  constructor (props: { timeline: Timeline, waveformCanvas: HTMLCanvasElement, waveformLightCanvas: HTMLCanvasElement }) {
-    const {
-      timeline,
-      waveformCanvas,
-      waveformLightCanvas,
-    } = props;
-
-    this.waveformCanvas = waveformCanvas;
-    this.waveformLightCanvas = waveformLightCanvas;
-    this.timeline = timeline;
-  }
-
-  async loadAudio (record: IMediaRecord) {
-    await this.drawWaveform(record);
-
-    await new Promise((resolve) => {
-      this.audio.src = record.url;
-      this.audio.load();
-      const loadedmetadata = () => {
-        this.audio.removeEventListener('loadedmetadata', loadedmetadata);
-        resolve(this.audio);
-      };
-      this.audio.addEventListener('loadedmetadata', loadedmetadata);
-    });
-  }
-
-  clear () {
-    const ctx = this.waveformCanvas.getContext('2d');
-    const lightCtx = this.waveformLightCanvas.getContext('2d');
-    if (!ctx || !lightCtx) return;
-    const { width, height } = this.waveformCanvas.getBoundingClientRect();
-    ctx.clearRect(0, 0, width, height);
-    lightCtx.clearRect(0, 0, width, height);
-  }
-
-  // 绘制波形图
-  async drawWaveform (record: IMediaRecord) {
-    // 获取音频数据
-    const response = await fetch(record.url);
-    const arrayBuffer = await response.arrayBuffer();
-    // 解码音频
-    const audioContext = new AudioContext();
-    const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
-
-    // 获取声道数据
-    const channelData = audioBuffer.getChannelData(0);
-    const ctx = this.waveformCanvas.getContext('2d');
-    const lightCtx = this.waveformLightCanvas.getContext('2d');
-    const duration = Number(record.duration);
-    const width = this.timeline.unitWidth * duration;
-    const height = audioWaveformHeight;
-
-    this.waveformCanvas.setAttribute('width', String(width));
-    this.waveformCanvas.setAttribute('height', String(height));
-    this.waveformLightCanvas.setAttribute('width', String(width));
-    this.waveformLightCanvas.setAttribute('height', String(height));
-
-    if (!ctx || !lightCtx) return;
-    // 设置背景
-    ctx.fillStyle = '#434343';
-    ctx.fillRect(0, 0, width, height);
-    lightCtx.fillStyle = '#434343';
-    lightCtx.fillRect(0, 0, width, height);
+  videoEl.addEventListener('timeupdate', (event) => {
+    playCtx.drawImage(videoEl, renderX, renderY, renderWidth, renderHeight);
+  });
+  /* 渲染视频第一帧 */
+  videoEl.requestVideoFrameCallback(() => {
+    // 等待视频就绪，获取正确的原始尺寸
+    if (videoEl.videoWidth === 0 || videoEl.videoHeight === 0) return;
     
-    // 绘制波形
-    ctx.beginPath();
-    ctx.lineWidth = 2;
-    ctx.strokeStyle = '#999';
-    lightCtx.beginPath();
-    lightCtx.lineWidth = 2;
-    lightCtx.strokeStyle = '#00a63e';
+    // 使用 videoWidth/videoHeight（原始解码尺寸）
+    const videoWidth = videoEl.videoWidth;
+    const videoHeight = videoEl.videoHeight;
+    const canvasWidth = videoContainerW;
+    const canvasHeight = videoContainerH;
     
-    const step = Math.ceil(channelData.length / width);
-    const amp = height / 2;
+    // 计算缩放比例
+    const videoAspect = videoWidth / videoHeight;
+    const canvasAspect = canvasWidth / canvasHeight;
     
-    for (let i = 0; i < width; i+=4) {
-        let min = 1.0;
-        let max = -1.0;
-        
-        // 获取该像素点对应的音频数据范围
-        for (let j = 0; j < step; j++) {
-            const datum = channelData[(i * step) + j];
-            if (datum < min) min = datum;
-            if (datum > max) max = datum;
-        }
-        
-        ctx.moveTo(i, (1 + min) * amp);
-        ctx.lineTo(i, (1 + max) * amp);
-        lightCtx.moveTo(i, (1 + min) * amp);
-        lightCtx.lineTo(i, (1 + max) * amp);
-    }
-    
-    ctx.stroke();
-    lightCtx.stroke();
-  }
-
-  play (currentTime?: number) {
-    if (typeof currentTime === 'number') {
-      this.audio.currentTime = currentTime;
-    }
-    this.audio?.play();
-  }
-
-  pause() {
-    this.audio?.pause();
-  }
-}
-
-export class Timeline {
-  container: HTMLElement;
-  timelineCanvas: HTMLCanvasElement;
-  timelineCtx: CanvasRenderingContext2D | null;
-  previewContainer: HTMLElement;
-
-  video = document.createElement('video');
-  frameImages: { time: number; imageData: ImageData }[] = [];
-
-  // 容器宽度
-  containerWidth = 0;
-  // 时间轴宽度
-  timelineWidth = 0;
-  // 每一秒时间宽度
-  unitWidth = 0;
-
-  loaded = false;
-
-  constructor (container: HTMLElement, previewContainer: HTMLElement, timelineCanvas: HTMLCanvasElement) {
-    this.container = container;
-    this.previewContainer = previewContainer;
-    this.timelineCanvas = timelineCanvas;
-    this.timelineCtx = timelineCanvas.getContext('2d');
-
-    this.video.muted = true;
-    this.video.preload = 'auto';
-    this.video.playsInline = true;
-    this.video.setAttribute('crossorigin', 'anonymous');
-
-    this.onVideoLoadedmetadata = this.onVideoLoadedmetadata.bind(this);
-    this.video.addEventListener('loadedmetadata', this.onVideoLoadedmetadata);
-
-    this.onVideoTimeupdate = this.onVideoTimeupdate.bind(this);
-    this.video.addEventListener('timeupdate', this.onVideoTimeupdate);
-
-    this.onVideoEnded = this.onVideoEnded.bind(this);
-    this.video.addEventListener('ended', this.onVideoEnded);
-  }
-
-  protected _onVideoLoaded?: (video: HTMLVideoElement, context: Timeline) => void;
-  protected _onVideoTimeupdate?: (video: HTMLVideoElement) => void;
-  protected _onVideoEnded?: (video: HTMLVideoElement) => void;
-  // 加载视频
-  loadVideo (url: string) {
-    this.loaded = false;
-    this.previewContainer.innerHTML = '';
-    this.video.src = url;
-    this.video.load();
-
-    const obj = {
-      onLoaded: (callback: (video: HTMLVideoElement, context: Timeline) => void) => {
-        this._onVideoLoaded = callback;
-        return obj;
-      },
-      onTimeupdate: (callback: (video: HTMLVideoElement) => void) => {
-        this._onVideoTimeupdate = callback;
-        return obj;
-      },
-      onEnded: (callback: (video: HTMLVideoElement) => void) => {
-        this._onVideoEnded = callback;
-        return obj;
-      }
-    };
-
-    return obj;
-  }
-
-  play () {
-    this.video.play();
-  }
-
-  pause () {
-    this.video.pause();
-  }
-
-  setCurrentTime (current: number) {
-    this.video.currentTime = current;
-  }
-
-  protected async onVideoLoadedmetadata () {
-    this.initTimelineCanvas();
-    this.drawTimeline();
-    await this.drawFrame();
-    // 获取完帧后再渲染
-    this.initPreviewVideo();
-    this._onVideoLoaded?.(this.video, this);
-    this.loaded = true;
-  }
-  // 对外暴露视频播放时间更新监听
-  protected onVideoTimeupdate () {
-    if (this.loaded) {
-      this._onVideoTimeupdate?.(this.video);
-    }
-  }
-
-  protected onVideoEnded () {
-    if (this.loaded) {
-      this._onVideoEnded?.(this.video);
-    }
-  }
-
-  protected initPreviewVideo () {
-    const { width, height } = this.previewContainer.getBoundingClientRect();
-    this.video.style.width = width + 'px';
-    this.video.style.height = height + 'px';
-    this.video.currentTime = 0;
-    this.previewContainer.appendChild(this.video);
-  }
-
-  // 初始化 canvas
-  protected initTimelineCanvas () {
-    const duration = this.video.duration;
-
-    const { width } = this.container.getBoundingClientRect();
-    this.containerWidth = width;
-    if (duration <= maxUnitDuration) {
-      this.timelineWidth = this.containerWidth;
+    if (videoAspect > canvasAspect) {
+      // 视频比画布更宽
+      renderWidth = canvasWidth;
+      renderHeight = canvasWidth / videoAspect;
+      renderX = 0;
+      renderY = (canvasHeight - renderHeight) / 2;
     } else {
-      this.timelineWidth = this.containerWidth / maxUnitDuration * duration;
+      // 视频比画布更高
+      renderHeight = canvasHeight;
+      renderWidth = canvasHeight * videoAspect;
+      renderX = (canvasWidth - renderWidth) / 2;
+      renderY = 0;
     }
+    
+    console.log('视频宽高比:', videoAspect.toFixed(2));
+    console.log('画布宽高比:', canvasAspect.toFixed(2));
+    console.log('渲染尺寸:', renderWidth, renderHeight);
+    console.log('渲染位置:', renderX, renderY);
+    
+    // 清除画布
+    playCtx.clearRect(0, 0, canvasWidth, canvasHeight);
+    
+    // 绘制视频帧
+    playCtx.drawImage(
+      videoEl,
+      renderX, renderY, renderWidth, renderHeight, // 目标绘制区域
+    );
+  });
 
-    this.timelineCanvas.setAttribute('width', String(this.timelineWidth));
-  }
+  /* 渲染视频帧 */
+  const videoFrameEl = document.querySelector('#video-frame');
+  const videoCtx = videoFrameEl.getContext('2d');
+  const videoFrameW = videoContainerW * 2 + 20;
+  const videoFrameH = 80;
+  videoFrameEl.setAttribute('width', videoFrameW);
+  videoFrameEl.setAttribute('height', videoFrameH);
 
-  // 绘制视频帧
-  protected async drawFrame () {
-    const positionX = 0;
-    const videoWidth = this.video.videoWidth;
-    const videoHeight = this.video.videoHeight;
-    const previewWidth = videoWidth * frameHeight / videoHeight;
-    const duration = this.video.duration;
+  videoEl.addEventListener('loadedmetadata', async () => {
+    const videoWidth = videoEl.videoWidth;
+    const videoHeight = videoEl.videoHeight;
+    const previewWidth = videoWidth * videoFrameH / videoHeight;
+    const duration = videoEl.duration;
 
     // 计算时间轴需要多少帧
-    const frameCount = Math.ceil(this.timelineWidth / previewWidth);
-
-    if (!this.timelineCtx) return;
-    // 清除Canvas
-    this.timelineCtx.clearRect(positionX, framePositionY, this.timelineWidth, frameHeight);
-
+    const frameCount = Math.ceil(videoFrameW / previewWidth);
     // 计算帧间隔
     const interval = duration / frameCount;
-    
-    // 创建离屏Canvas用于处理帧
-    const offscreenCanvas = document.createElement('canvas');
-    const offscreenCtx = offscreenCanvas.getContext('2d');
-    if (!offscreenCtx) return;
-    
-    // 设置离屏Canvas尺寸
-    offscreenCanvas.width = previewWidth;
-    offscreenCanvas.height = frameHeight;
+   
+    videoCtx.clearRect(0, 0, videoFrameW, videoFrameH);
 
-    // 生成帧预览
     for (let i = 0; i < frameCount; i++) {
       try {
         // 跳转到指定时间点
-        this.video.currentTime = i * interval;
+        videoEl.currentTime = i * interval;
         
         // 等待视频帧可用
         await new Promise((resolve) => {
           const onSeeked = () => {
-            this.video.removeEventListener('seeked', onSeeked);
+            videoEl.removeEventListener('seeked', onSeeked);
             
-            // 绘制帧到离屏Canvas
-            offscreenCtx.drawImage(this.video, 0, 0, previewWidth, frameHeight);
-            
-            // 将帧图像保存到数组
-            this.frameImages.push({
-                time: i * interval,
-                imageData: offscreenCtx.getImageData(0, 0, previewWidth, frameHeight)
-            });
+            // 绘制帧到Canvas
+            videoCtx.drawImage(videoEl, i * previewWidth, 0, previewWidth, videoFrameH);
             
             resolve(true);
           };
           
-          this.video.addEventListener('seeked', onSeeked);
+          videoEl.addEventListener('seeked', onSeeked);
         });
-        
-        // 更新进度显示
-        this.timelineCtx.clearRect(positionX, framePositionY, this.timelineWidth, frameHeight);
-        this.timelineCtx.fillStyle = '#00a63e';
-        this.timelineCtx.font = '16px Arial';
-        this.timelineCtx.textAlign = 'center';
-        this.timelineCtx.fillText(`正在生成帧预览 ${i+1}/${frameCount}`, this.containerWidth / 2, framePositionY + frameHeight / 2);
       } catch (error) {
         console.error('生成帧预览时出错:', error);
       }
     }
-    // 绘制每个帧
-    this.frameImages.forEach((frame: any, index: number) => {
-      this.timelineCtx?.putImageData(frame.imageData, index * previewWidth, framePositionY);
-    });
-  }
-
-  // 绘制时间轴
-  protected drawTimeline () {
-    const duration = this.video.duration;
-    // 时间轴刻度高度
-    const timeHeight = 32;
-    // 长时间刻度高度
-    const longTimeHeight = 10;
-    
-    if (duration <= 10) {
-      this.unitWidth = this.containerWidth / duration;
-    } else {
-      this.unitWidth = this.containerWidth / 10;
-    }
-    const times: { time: number; position: number }[] = [];
-    let i = 0;
-    for (; i <= duration; i++) {
-      times.push({
-        time: i,
-        position: i * this.unitWidth,
-      });
-    }
-
-    // 开始绘制
-    const timelineCtx = this.timelineCtx;
-    if (!timelineCtx) return;
-    timelineCtx.clearRect(0, 0, this.timelineWidth, timeHeight);
-    timelineCtx.fillStyle = '#0F0F12';
-    timelineCtx.fillRect(0, 0, this.timelineWidth, timeHeight);
-
-    timelineCtx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
-    timelineCtx.lineWidth = 1;
-    times.forEach((point, index) => {
-      // 绘制刻度
-      timelineCtx.fillStyle = '#282828';
-      timelineCtx.fillRect(point.position, timeHeight - longTimeHeight, 1, longTimeHeight);
-      // 绘制小刻度
-      for (let i = 1; i < 5; i++) {
-        timelineCtx.fillRect(point.position + i * this.unitWidth / 4, timeHeight - longTimeHeight + longTimeHeight / 2, 1, longTimeHeight / 2);
-      }
-      // 绘制时间点
-      timelineCtx.fillStyle = 'rgba(255, 255, 255, 0.45)';
-      timelineCtx.font = '10px Arial';
-      if (index === 0) {
-        timelineCtx.textAlign = 'left';
-      } else if (index === times.length - 1) {
-        timelineCtx.textAlign = 'right';
-      } else {
-        timelineCtx.textAlign = 'center';
-      }
-      timelineCtx.fillText(formatTime(point.time), point.position, 12);
-    });
-  }
-}
-  */
+    videoEl.currentTime = 0;
+  });
 </script>
+
+<style>
+  .container {
+    padding: 20px;
+  }
+  .content {
+    display: flex;
+    gap: 20px;
+  }
+  .content > div {
+    flex: 1;
+  }
+  #video {
+    width: 100%;
+    height: 500px;
+    background-color: black;
+  }
+  #playing-frame {
+    height: 500px;
+    background-color: #999;
+  }
+  #video-frame {
+    background-color: #999;
+  }
+  span {
+    font-size: 14px;
+    color: #333;
+  }
+</style>
