@@ -1,0 +1,479 @@
+<div class="container">
+  <div class="content">
+    <div>
+      <h3>
+        先选择一个视频
+        <input type="file" accept="video/*" id="file">
+      </h3>
+      <div id="video-container"></div>
+    </div>
+    <div>
+      <h3>渲染正在播放的视频帧</h3>
+      <div id="play-frame-container"></div>
+    </div>
+  </div>
+  
+  <h3>渲染全部视频帧 <span>(最后一帧可能渲染不全)</span></h3>
+  <div id="frame-container">
+    <div class="play-line"></div>
+  </div>
+
+  <h3>渲染全部视频帧 <span>(处理最后一帧可能渲染不全问题)</span></h3>
+  <div id="frame-container-full">
+    <div class="play-line"></div>
+  </div>
+</div>
+
+<script>
+  const onFileChange = (callback) => {
+    if (onFileChange._callbacks) onFileChange._callbacks.push(callback);
+    else (onFileChange._callbacks = [callback]);
+  };
+  shadowDocument.querySelector('#file').addEventListener('change', (event) => {
+    const url = URL.createObjectURL(event.target.files[0]);
+    onFileChange._callbacks?.forEach((callback) => callback(url));
+  });
+
+  (() => {
+    class FrameVideo {
+      video = document.createElement('video');
+      status = 'init';
+      frameCanvas = document.createElement('canvas');
+      frameCtx = this.frameCanvas.getContext('2d');
+      // 播放帧
+      playFrameCanvas = document.createElement('canvas');
+      palyFrameCtx = this.playFrameCanvas.getContext('2d');
+      palyFrameRenderX = 0;
+      playFrameRenderY = 0;
+      playFrameRenderWidth = 0;
+      playFrameRenderHeight = 0;
+      unitWidth = 0;
+
+
+      // 渲染视频全部帧容器
+      frameContainer = null;
+      // 视频容器
+      videoContainer = null;
+      // 渲染当前播放帧容器
+      playFrameContainer = null;
+
+      constructor ({ frameContainer, videoContainer, playFrameContainer }) {
+        this.frameContainer = frameContainer;
+        this.videoContainer = videoContainer;
+        this.playFrameContainer = playFrameContainer;
+        this.frameContainer?.appendChild(this.frameCanvas);
+        this.playFrameContainer?.appendChild(this.playFrameCanvas);
+        this.video.style.cssText = 'width: 100%; height: 100%;';
+        this.video.setAttribute('controls', true);
+
+        this._onTimeupdate = this._onTimeupdate.bind(this);
+        this.video.addEventListener('timeupdate', this._onTimeupdate);
+        this._onLoadedmetadata = this._onLoadedmetadata.bind(this);
+        this.video.addEventListener('loadedmetadata', this._onLoadedmetadata);
+      }
+
+      onTimeupdate (callback) {
+        this.__onTimeupdate = callback;
+      }
+      _onTimeupdate (event) {
+        if (this.status === 'frameRendered') {
+          this.renderPlayFrame();
+          this.__onTimeupdate?.(event);
+        }
+      }
+
+      onLoadedmetadata (callback) {
+        this.__onLoadedmetadata = callback;
+      }
+      async _onLoadedmetadata (event) {
+        this.__onLoadedmetadata?.(event);
+        await this.renderFrame();
+        this.videoContainer?.appendChild(this.video);
+      }
+
+      async load (url) {
+        this.status = 'loadeding';
+        this.video.src = url;
+        this.video.load();
+        this.video.parentElement?.removeChild(this.video);
+        await new Promise((resolve, reject) => {
+          const _loadedmetadata = () => {
+            this.video.removeEventListener('loadedmetadata', _loadedmetadata);
+            this.status = 'loaded';
+            resolve(true);
+          };
+          const _error = () => {
+            this.video.removeEventListener('error', _error);
+            reject(false);
+          };
+          this.video.addEventListener('loadedmetadata', _loadedmetadata);
+          this.video.addEventListener('error', _error);
+        });
+      }
+
+      async renderFrame () {
+        const videoWidth = this.video.videoWidth;
+        const videoHeight = this.video.videoHeight;
+        const duration = this.video.duration;
+        if (!this.frameContainer) return;
+        // 帧容器宽高度
+        const { width: containerW, height: containerH } = this.frameContainer.getBoundingClientRect();
+        this.frameCanvas.setAttribute('width', containerW);
+        this.frameCanvas.setAttribute('height', containerH);
+        this.unitWidth = containerW / duration;
+        const frameHeight = containerH;
+        const frameWidth = videoWidth * frameHeight / videoHeight;
+
+        // 计算时间轴需要多少帧
+        const frameCount = Math.ceil(containerW / frameWidth);
+        // 计算帧间隔
+        const interval = duration / frameCount;
+      
+        this.frameCtx.clearRect(0, 0, containerW, frameHeight);
+
+        for (let i = 0; i < frameCount; i++) {
+          try {
+            // 跳转到指定时间点
+            this.video.currentTime = i * interval;
+            
+            // 等待视频帧可用
+            await new Promise((resolve) => {
+              const onSeeked = () => {
+                this.video.removeEventListener('seeked', onSeeked);
+                
+                // 绘制帧到Canvas
+                this.frameCtx.drawImage(
+                  this.video,
+                  i * frameWidth,
+                  0,
+                  frameWidth,
+                  frameHeight,
+                );
+                if (i === 0) {
+                  this.renderFirstFrame();
+                  this.status = 'firstFrameRendered';
+                }
+                
+                resolve(true);
+              };
+              
+              this.video.addEventListener('seeked', onSeeked);
+            });
+          } catch (error) {
+            console.error('生成帧预览时出错:', error);
+          }
+        }
+        // 重置视频播放位置
+        this.video.currentTime = 0;
+        this.status = 'frameRendered';
+      }
+
+      // 渲染当前播放帧
+      renderFirstFrame () {
+        if (!this.playFrameContainer) return;
+        const { width: canvasWidth, height: canvasHeight } = this.playFrameContainer.getBoundingClientRect();
+        this.playFrameCanvas.setAttribute('width', canvasWidth);
+        this.playFrameCanvas.setAttribute('height', canvasHeight);
+        // 使用 videoWidth/videoHeight（原始解码尺寸）
+        const videoWidth = this.video.videoWidth;
+        const videoHeight = this.video.videoHeight;
+        
+        // 计算缩放比例
+        const videoAspect = videoWidth / videoHeight;
+        const canvasAspect = canvasWidth / canvasHeight;
+        
+        if (videoAspect > canvasAspect) {
+          // 视频比画布更宽
+          this.playFrameRenderWidth = canvasWidth;
+          this.playFrameRenderHeight = canvasWidth / videoAspect;
+          this.palyFrameRenderX = 0;
+          this.playFrameRenderY = (canvasHeight - this.playFrameRenderHeight) / 2;
+        } else {
+          // 视频比画布更高
+          this.playFrameRenderHeight = canvasHeight;
+          this.playFrameRenderWidth = canvasHeight * videoAspect;
+          this.palyFrameRenderX = (canvasWidth - this.playFrameRenderWidth) / 2;
+          this.playFrameRenderY = 0;
+        }
+        
+        console.log('视频宽高比:', videoAspect.toFixed(2));
+        console.log('画布宽高比:', canvasAspect.toFixed(2));
+        console.log('渲染尺寸:', this.playFrameRenderWidth, this.playFrameRenderHeight);
+        console.log('渲染位置:', this.palyFrameRenderX, this.playFrameRenderY);
+        
+        // 清除画布
+        this.palyFrameCtx.clearRect(0, 0, canvasWidth, canvasHeight);
+        
+        // 绘制视频帧
+        this.renderPlayFrame();
+      }
+
+      // 渲染实时播放帧
+      renderPlayFrame () {
+        this.palyFrameCtx.drawImage(
+          this.video,
+          this.palyFrameRenderX, this.playFrameRenderY,
+          this.playFrameRenderWidth, this.playFrameRenderHeight,
+        );
+      }
+    }
+
+    // 因为是在shadow环境 所以这里使用了注入进来的 shadowDocument 去获取元素
+    const videoContainer = shadowDocument.querySelector('#video-container');
+    const playFrameContainer = shadowDocument.querySelector('#play-frame-container');
+    const frameContainer = shadowDocument.querySelector('#frame-container');
+
+    onFileChange((url) => {
+      const frameVideo = new FrameVideo({
+        videoContainer,
+        frameContainer,
+        playFrameContainer,
+      });
+      frameVideo.load(url);
+      frameVideo.onTimeupdate(() => {
+        shadowDocument.querySelectorAll('.play-line').forEach((el) => {
+          el.style.transform = `translateX(${frameVideo.video.currentTime * frameVideo.unitWidth}px)`;
+        });
+      });
+    });
+  })();
+
+  /* ================ 处理最后一帧可能渲染不全问题 ================ */
+  (() => {
+    class FrameVideo {
+      video = document.createElement('video');
+      status = 'init';
+      frameCanvas = document.createElement('canvas');
+      frameCtx = this.frameCanvas.getContext('2d');
+      // 播放帧
+      playFrameCanvas = document.createElement('canvas');
+      palyFrameCtx = this.playFrameCanvas.getContext('2d');
+      palyFrameRenderX = 0;
+      playFrameRenderY = 0;
+      playFrameRenderWidth = 0;
+      playFrameRenderHeight = 0;
+      unitWidth = 0;
+
+
+      // 渲染视频全部帧容器
+      frameContainer = null;
+      // 视频容器
+      videoContainer = null;
+      // 渲染当前播放帧容器
+      playFrameContainer = null;
+
+      constructor ({ frameContainer, videoContainer, playFrameContainer }) {
+        this.frameContainer = frameContainer;
+        this.videoContainer = videoContainer;
+        this.playFrameContainer = playFrameContainer;
+        this.frameContainer?.appendChild(this.frameCanvas);
+        this.playFrameContainer?.appendChild(this.playFrameCanvas);
+        this.video.style.cssText = 'width: 100%; height: 100%;';
+        this.video.setAttribute('controls', true);
+
+        this._onTimeupdate = this._onTimeupdate.bind(this);
+        this.video.addEventListener('timeupdate', this._onTimeupdate);
+        this._onLoadedmetadata = this._onLoadedmetadata.bind(this);
+        this.video.addEventListener('loadedmetadata', this._onLoadedmetadata);
+      }
+
+      onTimeupdate (callback) {
+        this.__onTimeupdate = callback;
+      }
+      _onTimeupdate (event) {
+        this.__onTimeupdate?.(event);
+        this.status === 'frameRendered' && this.renderPlayFrame();
+      }
+
+      onLoadedmetadata (callback) {
+        this.__onLoadedmetadata = callback;
+      }
+      async _onLoadedmetadata (event) {
+        this.__onLoadedmetadata?.(event);
+        await this.renderFrame();
+        this.videoContainer?.appendChild(this.video);
+      }
+
+      async load (url) {
+        this.status = 'loadeding';
+        this.video.src = url;
+        this.video.load();
+        this.video.parentElement?.removeChild(this.video);
+        await new Promise((resolve, reject) => {
+          const _loadedmetadata = () => {
+            this.video.removeEventListener('loadedmetadata', _loadedmetadata);
+            this.status = 'loaded';
+            resolve(true);
+          };
+          const _error = () => {
+            this.video.removeEventListener('error', _error);
+            reject(false);
+          };
+          this.video.addEventListener('loadedmetadata', _loadedmetadata);
+          this.video.addEventListener('error', _error);
+        });
+      }
+
+      async renderFrame () {
+        const videoWidth = this.video.videoWidth;
+        const videoHeight = this.video.videoHeight;
+        const duration = this.video.duration;
+        if (!this.frameContainer) return;
+        // 帧容器宽高度
+        const { width: containerW, height: containerH } = this.frameContainer.getBoundingClientRect();
+        this.frameCanvas.setAttribute('width', containerW);
+        this.frameCanvas.setAttribute('height', containerH);
+        this.unitWidth = containerW / duration;
+        let frameHeight = containerH;
+        let frameWidth = videoWidth * frameHeight / videoHeight;
+
+        // 计算时间轴需要多少帧
+        const frameCount = Math.ceil(containerW / frameWidth);
+        // 计算帧间隔
+        const interval = duration / frameCount;
+        // 根据总帧数 重新计算每一帧宽度
+        frameWidth = containerW / frameCount; // [!code ++]
+        frameHeight = videoHeight / videoWidth * frameWidth; // [!code ++]
+      
+        this.frameCtx.clearRect(0, 0, containerW, frameHeight);
+
+        for (let i = 0; i < frameCount; i++) {
+          try {
+            // 跳转到指定时间点
+            this.video.currentTime = i * interval;
+            
+            // 等待视频帧可用
+            await new Promise((resolve) => {
+              const onSeeked = () => {
+                this.video.removeEventListener('seeked', onSeeked);
+                
+                // 绘制帧到Canvas
+                this.frameCtx.drawImage(
+                  this.video,
+                  i * frameWidth,
+                  (containerH - frameHeight) / 2, // [!code highlight]
+                  frameWidth,
+                  frameHeight,
+                );
+                if (i === 0) {
+                  this.renderFirstFrame();
+                  this.status = 'firstFrameRendered';
+                }
+                
+                resolve(true);
+              };
+              
+              this.video.addEventListener('seeked', onSeeked);
+            });
+          } catch (error) {
+            console.error('生成帧预览时出错:', error);
+          }
+        }
+        // 重置视频播放位置
+        this.video.currentTime = 0;
+        this.status = 'frameRendered';
+      }
+
+      // 渲染当前播放帧
+      renderFirstFrame () {
+        if (!this.playFrameContainer) return;
+        const { width: canvasWidth, height: canvasHeight } = this.playFrameContainer.getBoundingClientRect();
+        this.playFrameCanvas.setAttribute('width', canvasWidth);
+        this.playFrameCanvas.setAttribute('height', canvasHeight);
+        // 使用 videoWidth/videoHeight（原始解码尺寸）
+        const videoWidth = this.video.videoWidth;
+        const videoHeight = this.video.videoHeight;
+        
+        // 计算缩放比例
+        const videoAspect = videoWidth / videoHeight;
+        const canvasAspect = canvasWidth / canvasHeight;
+        
+        if (videoAspect > canvasAspect) {
+          // 视频比画布更宽
+          this.playFrameRenderWidth = canvasWidth;
+          this.playFrameRenderHeight = canvasWidth / videoAspect;
+          this.palyFrameRenderX = 0;
+          this.playFrameRenderY = (canvasHeight - this.playFrameRenderHeight) / 2;
+        } else {
+          // 视频比画布更高
+          this.playFrameRenderHeight = canvasHeight;
+          this.playFrameRenderWidth = canvasHeight * videoAspect;
+          this.palyFrameRenderX = (canvasWidth - this.playFrameRenderWidth) / 2;
+          this.playFrameRenderY = 0;
+        }
+        
+        console.log('视频宽高比:', videoAspect.toFixed(2));
+        console.log('画布宽高比:', canvasAspect.toFixed(2));
+        console.log('渲染尺寸:', this.playFrameRenderWidth, this.playFrameRenderHeight);
+        console.log('渲染位置:', this.palyFrameRenderX, this.playFrameRenderY);
+        
+        // 清除画布
+        this.palyFrameCtx.clearRect(0, 0, canvasWidth, canvasHeight);
+        
+        // 绘制视频帧
+        this.renderPlayFrame();
+      }
+
+      // 渲染实时播放帧
+      renderPlayFrame () {
+        this.palyFrameCtx.drawImage(
+          this.video,
+          this.palyFrameRenderX, this.playFrameRenderY,
+          this.playFrameRenderWidth, this.playFrameRenderHeight,
+        );
+      }
+    }
+
+    // 因为是在shadow环境 所以这里使用了注入进来的 shadowDocument 去获取元素
+    const frameContainer = shadowDocument.querySelector('#frame-container-full');
+
+    onFileChange((url) => {
+      const frameVideo = new FrameVideo({
+        frameContainer,
+      });
+      frameVideo.load(url);
+    });
+  })();
+</script>
+
+<style>
+  .container {
+    padding: 20px;
+  }
+  .content {
+    display: flex;
+    gap: 20px;
+  }
+  .content > div {
+    flex: 1;
+  }
+  #video-container {
+    width: 100%;
+    height: 500px;
+    background-color: black;
+  }
+  #play-frame-container {
+    height: 500px;
+    background-color: #999;
+  }
+  #frame-container,
+  #frame-container-full {
+    position: relative;
+    height: 80px;
+    background-color: #999;
+  }
+  .play-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 1px;
+    height: 100%;
+    background: red;
+    transition: transform 0.25s linear;
+  }
+  span {
+    font-size: 14px;
+    color: #333;
+  }
+</style>
