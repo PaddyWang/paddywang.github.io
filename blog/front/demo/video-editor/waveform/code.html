@@ -1,0 +1,121 @@
+<div class="container">
+  <h3>先选择一个音频/视频</h3>
+  <input type="file" accept="video/*,audio/*" id="file">
+  <h3>渲染波形图</h3>
+  <div id="waveform-container"></div>
+</div>
+
+<script>
+  const onFileChange = (callback) => {
+    if (onFileChange._callbacks) onFileChange._callbacks.push(callback);
+    else (onFileChange._callbacks = [callback]);
+  };
+  shadowDocument.querySelector('#file').addEventListener('change', (event) => {
+    const url = URL.createObjectURL(event.target.files[0]);
+    onFileChange._callbacks?.forEach((callback) => callback(url));
+  });
+
+  (() => {
+    class Waveform {
+      audio = new Audio;
+      waveformCanvas = document.createElement('canvas');
+      waveformCtx = this.waveformCanvas.getContext('2d');
+      waveformContainer = null;
+
+      constructor ({ waveformContainer }) {
+        this.waveformContainer = waveformContainer;
+      }
+
+      async load (url) {
+        await this.renderWaveform(url);
+
+        await new Promise((resolve) => {
+          this.audio.src = url;
+          this.audio.load();
+          const loadedmetadata = () => {
+            this.audio.removeEventListener('loadedmetadata', loadedmetadata);
+            resolve(this.audio);
+          };
+          this.audio.addEventListener('loadedmetadata', loadedmetadata);
+        });
+      }
+
+      clear () {
+        const ctx = this.waveformCtx;
+        if (!ctx) return;
+        const { width, height } = this.waveformCanvas.getBoundingClientRect();
+        ctx.clearRect(0, 0, width, height);
+      }
+
+      // 绘制波形图
+      async renderWaveform (url) {
+        const ctx = this.waveformCtx;
+        if (!ctx || !this.waveformContainer) return;
+        // 获取音频数据
+        // const response = await fetch(url);
+        // const arrayBuffer = await response.arrayBuffer();
+        // 解码音频
+        const audioContext = new AudioContext();
+        const audioBuffer = await audioContext.decodeAudioData(this.audio);
+
+        // 获取声道数据
+        const channelData = audioBuffer.getChannelData(0);
+        const duration = this.audio.duration;
+        console.dir(this.audio.duration);
+        const { width, height } = this.waveformContainer.getBoundingClientRect();
+
+        this.waveformCanvas.setAttribute('width', String(width));
+        this.waveformCanvas.setAttribute('height', String(height));
+
+        // 设置背景
+        ctx.fillStyle = '#434343';
+        ctx.fillRect(0, 0, width, height);
+        
+        // 绘制波形
+        ctx.beginPath();
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = '#00a63e';
+        
+        const step = Math.ceil(channelData.length / width);
+        const amp = height / 2;
+        
+        for (let i = 0; i < width; i+=4) {
+            let min = 1.0;
+            let max = -1.0;
+            
+            // 获取该像素点对应的音频数据范围
+            for (let j = 0; j < step; j++) {
+                const datum = channelData[(i * step) + j];
+                if (datum < min) min = datum;
+                if (datum > max) max = datum;
+            }
+            
+            ctx.moveTo(i, (1 + min) * amp);
+            ctx.lineTo(i, (1 + max) * amp);
+        }
+        
+        ctx.stroke();
+      }
+    }
+    // 因为是在shadow环境 所以这里使用了注入进来的 shadowDocument 去获取元素
+    const waveformContainer = shadowDocument.querySelector('#waveform-container');
+
+    onFileChange((url) => {
+      const waveform = new Waveform({
+        waveformContainer,
+      });
+      waveform.load(url);
+    });
+  })();
+</script>
+
+<style>
+  .container {
+    padding: 20px;
+  }
+  #waveform-container {
+    position: relative;
+    height: 80px;
+    background-color: #999;
+  }
+</style>
