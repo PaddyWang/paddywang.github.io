@@ -2,7 +2,42 @@
   <h3>先选择一个音频/视频</h3>
   <input type="file" accept="video/*,audio/*" id="file">
   <h3>渲染波形图</h3>
+  <form id="config-form">
+    <ul>
+      <li>
+        <label>magnify</label>
+        <input type="checkbox" id="magnify">
+      </li>
+      <li>
+        <label>barColor</label>
+        <input type="color" id="barColor" value="#22c55e">
+      </li>
+      <li>
+        <label>barWidth</label>
+        <input type="range" id="barWidth" value="2" min="1" max="10" step="1">
+      </li>
+      <li>
+        <label>barGap</label>
+        <input type="range" id="barGap" value="1" min="0" max="10" step="1">
+      </li>
+      <li>
+        <label>layout</label>
+        <select id="layout">
+          <option value="center">center</option>
+          <option value="top">top</option>
+          <option value="bottom">bottom</option>
+        </select>
+      </li>
+    </ul>
+  </form>
+  <ul>
+    <li>
+      <label>unitWidth</label>
+      <input type="range" id="unitWidth" min="1" max="3" step="0.3" value="1">
+    </li>
+  </ul>
   <div id="waveform-container"></div>
+  <pre id="code-config"></pre>
 </div>
 
 <script>
@@ -15,98 +50,199 @@
     onFileChange._callbacks?.forEach((callback) => callback(url));
   });
 
-  (() => {
-    class Waveform {
-      audio = new Audio;
-      waveformCanvas = document.createElement('canvas');
-      waveformCtx = this.waveformCanvas.getContext('2d');
-      waveformContainer = null;
+  class Waveform {
+    channelData = null;
+    waveformData = null;
+    maxChannelValue = 0;
+    duration = 0;
 
-      constructor ({ waveformContainer }) {
-        this.waveformContainer = waveformContainer;
-      }
+    canvas = document.createElement('canvas');
 
-      async load (url) {
-        await this.renderWaveform(url);
+    barWidth = 2;
+    barGap = this.barWidth / 2;
+    barColor = '#22c55e';
+    layout = 'center'; // top | bottom
+    // 是否放大波形图
+    magnify = false;
+    // 每秒宽度
+    unitWidth = 0;
 
-        await new Promise((resolve) => {
-          this.audio.src = url;
-          this.audio.load();
-          const loadedmetadata = () => {
-            this.audio.removeEventListener('loadedmetadata', loadedmetadata);
-            resolve(this.audio);
-          };
-          this.audio.addEventListener('loadedmetadata', loadedmetadata);
-        });
-      }
 
-      clear () {
-        const ctx = this.waveformCtx;
-        if (!ctx) return;
-        const { width, height } = this.waveformCanvas.getBoundingClientRect();
-        ctx.clearRect(0, 0, width, height);
-      }
-
-      // 绘制波形图
-      async renderWaveform (url) {
-        const ctx = this.waveformCtx;
-        if (!ctx || !this.waveformContainer) return;
-        // 获取音频数据
-        // const response = await fetch(url);
-        // const arrayBuffer = await response.arrayBuffer();
-        // 解码音频
-        const audioContext = new AudioContext();
-        const audioBuffer = await audioContext.decodeAudioData(this.audio);
-
-        // 获取声道数据
-        const channelData = audioBuffer.getChannelData(0);
-        const duration = this.audio.duration;
-        console.dir(this.audio.duration);
-        const { width, height } = this.waveformContainer.getBoundingClientRect();
-
-        this.waveformCanvas.setAttribute('width', String(width));
-        this.waveformCanvas.setAttribute('height', String(height));
-
-        // 设置背景
-        ctx.fillStyle = '#434343';
-        ctx.fillRect(0, 0, width, height);
-        
-        // 绘制波形
-        ctx.beginPath();
-        ctx.lineWidth = 2;
-        ctx.strokeStyle = '#00a63e';
-        
-        const step = Math.ceil(channelData.length / width);
-        const amp = height / 2;
-        
-        for (let i = 0; i < width; i+=4) {
-            let min = 1.0;
-            let max = -1.0;
-            
-            // 获取该像素点对应的音频数据范围
-            for (let j = 0; j < step; j++) {
-                const datum = channelData[(i * step) + j];
-                if (datum < min) min = datum;
-                if (datum > max) max = datum;
-            }
-            
-            ctx.moveTo(i, (1 + min) * amp);
-            ctx.lineTo(i, (1 + max) * amp);
-        }
-        
-        ctx.stroke();
-      }
+    constructor ({
+      width,
+      height,
+      container,
+      url,
+      barWidth = this.barWidth,
+      barGap = this.barGap,
+      barColor = this.barColor,
+      layout = this.layout,
+      magnify = this.magnify,
+      unitWidth = this.unitWidth,
+    }) {
+      this.barWidth = barWidth;
+      this.barGap = barGap;
+      this.barColor = barColor;
+      this.layout = layout;
+      this.magnify = magnify;
+      this.unitWidth = unitWidth;
+      const { width: containerWidth, height: containerHeight } = container.getBoundingClientRect();
+      this.canvas.width = width ?? containerWidth;
+      this.canvas.height = height ?? containerHeight;
+      container.appendChild(this.canvas);
+      url && this.load(url);
     }
-    // 因为是在shadow环境 所以这里使用了注入进来的 shadowDocument 去获取元素
-    const waveformContainer = shadowDocument.querySelector('#waveform-container');
 
-    onFileChange((url) => {
-      const waveform = new Waveform({
-        waveformContainer,
-      });
-      waveform.load(url);
-    });
-  })();
+    async load ({ url, width, height }) {
+      if (width) {
+        this.canvas.width = width;
+      }
+      if (height) {
+        this.canvas.height = height;
+      }
+
+      await this.getChannelData(url);
+      this.renderWaveform();
+    }
+
+    clear () {
+      const ctx = this.canvas.getContext('2d');
+      if (!ctx) return;
+      ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+
+    async getChannelData (url) {
+      const res = await fetch(url);
+      const arrayBuffer = await res.arrayBuffer();
+
+      const audioCtx = new AudioContext();
+      const audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
+      this.duration = audioBuffer.duration;
+      this.channelData = audioBuffer.getChannelData(0);
+      if (this.unitWidth) {
+        this.canvas.width = this.unitWidth * this.duration;
+      }
+      return this.channelData;
+    }
+
+    renderWaveform ({
+      width = this.canvas.width,
+      height = this.canvas.height,
+      unitWidth = this.unitWidth,
+      ...props
+    } = {}) {
+      if (unitWidth) {
+        width = unitWidth * this.duration;
+      }
+      if (props.canvas) {
+        props.canvas.width = width;
+        props.canvas.height = height;
+      } else {
+        this.canvas.width = width;
+      }
+      this.getWaveformData(width);
+      this.drawWaveform(props);
+    }
+
+    getWaveformData (width = this.canvas.width) {
+      if (!this.channelData) return null;
+
+      const blockSize = Math.floor(this.channelData.length / width);
+      this.maxChannelValue = 0;
+      this.waveformData = new Float32Array(width);
+
+      for (let i = 0; i < width; i++) {
+        let sum = 0;
+        for (let j = 0; j < blockSize; j++) {
+          sum += Math.abs(this.channelData[i * blockSize + j] ?? 0);
+        }
+
+        this.waveformData[i] = sum / blockSize;
+        this.maxChannelValue = Math.max(this.waveformData[i] ?? 0, this.maxChannelValue);
+      }
+      return this.waveformData;
+    }
+
+    drawWaveform ({
+      canvas = this.canvas,
+      barWidth = this.barWidth,
+      barGap = this.barGap,
+      barColor = this.barColor,
+      layout = this.layout,
+      magnify = this.magnify,
+    } = {}) {
+      const width = canvas.width;
+      const height = canvas.height;
+      const ctx = canvas.getContext('2d');
+      if (!ctx || !this.waveformData) return;
+      const mid = layout === 'center' ? height / 2 : height;
+      const interval = barWidth + barGap;
+
+      ctx.clearRect(0, 0, width, height);
+      ctx.beginPath();
+      ctx.lineWidth = barWidth;
+      ctx.strokeStyle = barColor;
+
+      for (let i = 0; i < this.waveformData.length; i+=interval) {
+        let val = this.waveformData[i];
+        for (let j = i + 1; j < i + interval; j++) {
+          val += this.waveformData[j];
+        }
+        // 取平均值
+        val /= interval;
+        // 放大值
+        if (magnify) {
+          val = (mid - 4) / this.maxChannelValue * val;
+        } else {
+          val *= mid;
+        }
+
+        if (layout === 'center') {
+          ctx.moveTo(i, mid - val);
+          ctx.lineTo(i, mid + val);
+        } else if (layout === 'top') {
+          ctx.moveTo(i, 0);
+          ctx.lineTo(i, val);
+        } else if (layout === 'bottom') {
+          ctx.moveTo(i, height);
+          ctx.lineTo(i, height - val);
+        }
+      }
+
+      ctx.stroke();
+    }
+  }
+
+  // 因为是在shadow环境 所以这里使用了注入进来的 shadowDocument 去获取元素
+  const waveformContainer = shadowDocument.querySelector('#waveform-container');
+  const waveform = new Waveform({
+    container: waveformContainer,
+  });
+  const config = {};
+
+  const render = () => {
+    waveform.renderWaveform(config);
+    shadowDocument.querySelector('#code-config').innerHTML = JSON.stringify(config, undefined, 2);
+  }
+  shadowDocument.querySelector('#config-form').addEventListener('change', ({ target }) => {
+    const id = target.id;
+    if (id === 'magnify') {
+      config[id] = target.checked;
+    } else if (target.type === 'range') {
+      config[id] = target.valueAsNumber;
+    } else {
+      config[id] = target.value;
+    }
+    render();
+  });
+  const { width: containerWidth } = waveformContainer.getBoundingClientRect();
+  shadowDocument.querySelector('#unitWidth').addEventListener('input', ({ target }) => {
+    config.unitWidth = target.valueAsNumber * containerWidth / waveform.duration;
+    render();
+  });
+  onFileChange((url) => {
+    waveform.load({ url });
+  });
 </script>
 
 <style>
@@ -115,6 +251,7 @@
   }
   #waveform-container {
     position: relative;
+    overflow-x: auto;
     height: 80px;
     background-color: #999;
   }
