@@ -56,6 +56,7 @@ export default defineConfig({
           base: '/blog/front/demo/',
           items: [
             { text: '视频帧渲染', link: 'video-editor/video-frame/' },
+            { text: '视频帧渲染2', link: 'video-editor/video-frame2/' },
             { text: '音视频波形图渲染', link: 'video-editor/waveform/' },
           ],
         },

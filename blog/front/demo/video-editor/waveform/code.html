@@ -93,16 +93,19 @@
       url && this.load(url);
     }
 
-    async load ({ url, width, height }) {
+    async load ({ url, width, height, unitWidth }) {
       if (width) {
         this.canvas.width = width;
       }
       if (height) {
         this.canvas.height = height;
       }
+      if (unitWidth) {
+        this.unitWidth = unitWidth;
+      }
 
       await this.getChannelData(url);
-      this.renderWaveform();
+      this.render();
     }
 
     clear () {
@@ -125,7 +128,7 @@
       return this.channelData;
     }
 
-    renderWaveform ({
+    render ({
       width = this.canvas.width,
       height = this.canvas.height,
       unitWidth = this.unitWidth,
@@ -221,7 +224,7 @@
   const config = {};
 
   const render = () => {
-    waveform.renderWaveform(config);
+    waveform.render(config);
     shadowDocument.querySelector('#code-config').innerHTML = JSON.stringify(config, undefined, 2);
   }
   shadowDocument.querySelector('#config-form').addEventListener('change', ({ target }) => {

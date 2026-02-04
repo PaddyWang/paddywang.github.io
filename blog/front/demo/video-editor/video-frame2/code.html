@@ -1,0 +1,200 @@
+<div class="container">
+  <div>
+    <h3>
+      先选择一个视频
+      <input type="file" accept="video/*" id="file">
+    </h3>
+  </div>
+
+  <h3>渲染全部视频帧</h3>
+  <div id="frame-container">
+    <div class="play-line"></div>
+  </div>
+</div>
+
+<script>
+  const onFileChange = (callback) => {
+    if (onFileChange._callbacks) onFileChange._callbacks.push(callback);
+    else (onFileChange._callbacks = [callback]);
+  };
+  shadowDocument.querySelector('#file').addEventListener('change', (event) => {
+    const url = URL.createObjectURL(event.target.files[0]);
+    onFileChange._callbacks?.forEach((callback) => callback(url));
+  });
+
+  class VideoFrame {
+    video = document.createElement('video');
+    canvas = document.createElement('canvas');
+    status = 'init';
+    frameList = [];
+
+    // 渲染视频全部帧容器
+    container = null;
+    // 每秒像素
+    pxPerSecond = 0;
+
+    constructor ({
+      container,
+      width,
+      height,
+      pxPerSecond,
+      url,
+    }) {
+      this.container = container;
+      const { width: containerWidth, height: containerHeight } = container.getBoundingClientRect();
+      this.canvas.width = width ?? containerWidth;
+      this.canvas.height = height ?? containerHeight;
+      pxPerSecond && (this.pxPerSecond = pxPerSecond);
+
+      container.appendChild(this.canvas);
+
+      this.onLoadedmetadata = this.onLoadedmetadata.bind(this);
+      this.video.addEventListener('loadedmetadata', this.onLoadedmetadata);
+      url && this.load(url);
+    }
+
+    async onLoadedmetadata () {
+      this.status = 'loaded';
+      this.pxPerSecond && (this.canvas.width = this.pxPerSecond * this.video.duration);
+      await this.getFrameData();
+      this.drawFrame();
+    }
+
+    async load ({ url, width, height, pxPerSecond }) {
+      this.status = 'loadeding';
+      this.video.src = url;
+      this.video.load();
+
+      if (width) {
+        this.canvas.width = width;
+      }
+      if (height) {
+        this.canvas.height = height;
+      }
+      if (pxPerSecond) {
+        this.pxPerSecond = pxPerSecond;
+      }
+
+      await new Promise((resolve, reject) => {
+        const _loadedmetadata = () => {
+          this.video.removeEventListener('loadedmetadata', _loadedmetadata);
+          resolve(true);
+        };
+        const _error = () => {
+          this.video.removeEventListener('error', _error);
+          reject(false);
+        };
+        this.video.addEventListener('loadedmetadata', _loadedmetadata);
+        this.video.addEventListener('error', _error);
+      });
+    }
+
+    async render ({
+      width = this.canvas.width,
+      height = this.canvas.height,
+      pxPerSecond = this.pxPerSecond,
+      ...props
+    } = {}) {
+      if (pxPerSecond) {
+        width = pxPerSecond * this.video.duration;
+      }
+      if (props.canvas) {
+        props.canvas.width = width;
+        props.canvas.height = height;
+      } else {
+        this.canvas.width = width;
+      }
+      await this.getFrameData(width);
+      this.drawFrame();
+    }
+
+    async getFrameData (width = this.canvas.width) {
+      const videoWidth = this.video.videoWidth;
+      const videoHeight = this.video.videoHeight;
+      const duration = this.video.duration;
+      const canvasWidth = width ?? this.canvas.width;
+      const canvasHeight = this.canvas.height;
+
+      const frameHeight = canvasHeight;
+      const frameWidth = videoWidth * frameHeight / videoHeight;
+
+      // 计算时间轴需要多少帧
+      const frameCount = Math.ceil(canvasWidth / frameWidth);
+      // 计算帧间隔
+      const interval = duration / frameCount;
+      this.frameList = [];
+
+      // 创建离屏canvas
+      const offscreenCanvas = document.createElement('canvas');
+      const offscreenCtx = offscreenCanvas.getContext('2d');
+      offscreenCanvas.width = frameWidth;
+      offscreenCanvas.height = frameHeight;
+
+      for (let i = 0; i < frameCount; i++) {
+        try {
+          // 跳转到指定时间点
+          this.video.currentTime = i * interval;
+          
+          // 等待视频帧可用
+          await new Promise((resolve) => {
+            const onSeeked = () => {
+              this.video.removeEventListener('seeked', onSeeked);
+              
+              offscreenCtx.drawImage(
+                this.video,
+                0,
+                0,
+                frameWidth,
+                frameHeight,
+              );
+              this.frameList.push({
+                width: frameWidth,
+                height: frameHeight,
+                frame: offscreenCtx.getImageData(0, 0, frameWidth, frameHeight),
+              });
+              
+              resolve(true);
+            };
+            
+            this.video.addEventListener('seeked', onSeeked);
+          });
+        } catch (error) {
+          console.error('生成帧预览时出错:', error);
+        }
+      }
+      this.status = 'frameRendered';
+    }
+
+    drawFrame ({
+      canvas = this.canvas,
+    } = {}) {
+      const ctx = canvas.getContext('2d');
+      this.frameList.forEach(({ width, height, frame }, index) => {
+        ctx.putImageData(frame, width * index, 0);
+      });
+    }
+  }
+
+  // 因为是在shadow环境 所以这里使用了注入进来的 shadowDocument 去获取元素
+  const frameContainer = shadowDocument.querySelector('#frame-container');
+
+  const videoFrame = new VideoFrame({
+    container: frameContainer,
+  });
+
+  onFileChange((url) => {
+    videoFrame.load({ url });
+  });
+</script>
+
+<style>
+  .container {
+    padding: 20px;
+  }
+  #frame-container,
+  #frame-container-full {
+    position: relative;
+    height: 80px;
+    background-color: #999;
+  }
+</style>
