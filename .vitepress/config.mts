@@ -23,6 +23,7 @@ export default defineConfig({
     nav: [
       { text: '技术博客', items: [
         { text: '前端专题', link: '/blog/front/index' },
+        { text: 'TS专题', link: '/blog/ts/keyof/' },
         { text: 'Git', link: '/blog/git/git基本使用' },
       ]},
       { text: '开源贡献', items: [
@@ -39,6 +40,16 @@ export default defineConfig({
     ],
 
     sidebar: {
+      '/blog/ts': [
+        {
+          text: 'TS系列',
+          base: '/blog/ts/',
+          items: [
+            { text: 'keyof', link: 'keyof/' },
+            { text: 'typeof', link: 'typeof/' },
+          ],
+        },
+      ],
       '/blog/front': [
         // { text: '前端专题' },
         { text: '超级小编译器', link: '/blog/front/the-super-tiny-compiler/' },
