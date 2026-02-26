@@ -47,6 +47,7 @@ export default defineConfig({
           items: [
             { text: 'keyof', link: 'keyof/' },
             { text: 'typeof', link: 'typeof/' },
+            { text: '索引访问类型', link: 'Indexed-Access-Types/'},
           ],
         },
       ],
