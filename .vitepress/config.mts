@@ -23,7 +23,7 @@ export default defineConfig({
     nav: [
       { text: '技术博客', items: [
         { text: '前端专题', link: '/blog/front/index' },
-        { text: 'TS专题', link: '/blog/ts/知识点/' },
+        { text: 'TS专题', link: '/blog/ts/速查表/' },
         { text: 'Git', link: '/blog/git/git基本使用' },
       ]},
       { text: '开源贡献', items: [
@@ -45,6 +45,8 @@ export default defineConfig({
           text: 'TS系列',
           base: '/blog/ts/',
           items: [
+            { text: '速查表', link: '速查表/' },
+            { text: '内置类型', link: '内置类型/' },
             { text: '知识点', link: '知识点/' },
             { text: 'keyof', link: 'keyof/' },
             { text: 'typeof', link: 'typeof/' },
