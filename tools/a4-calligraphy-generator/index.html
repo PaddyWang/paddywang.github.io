@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>A4 字帖生成器</title>
+<style>
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", "PingFang SC", sans-serif;
+    background: #eceff3;
+    color: #1f2328;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .layout { display: flex; align-items: flex-start; }
+
+  /* ============ 控制面板 ============ */
+  .panel {
+    position: sticky;
+    top: 0;
+    width: 320px;
+    flex: 0 0 320px;
+    height: 100vh;
+    overflow-y: auto;
+    background: #fff;
+    border-right: 1px solid #e2e6ec;
+    padding: 22px 20px 40px;
+  }
+
+  .panel h1 {
+    font-size: 17px;
+    margin: 0 0 22px;
+    letter-spacing: .5px;
+    color: #111827;
+  }
+
+  .field { margin-bottom: 18px; }
+
+  .field > label,
+  .label-row {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #4b5563;
+    margin-bottom: 9px;
+  }
+
+  .label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .label-row .val {
+    font-weight: 700;
+    color: #2563eb;
+    font-variant-numeric: tabular-nums;
+  }
+
+  input[type="range"] {
+    width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    border-radius: 2px;
+    background: #dfe4ea;
+    outline: none;
+    cursor: pointer;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: #2563eb;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 1px #2563eb;
+    cursor: pointer;
+  }
+  input[type="range"]::-moz-range-thumb {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: #2563eb;
+    border: 2px solid #fff;
+    cursor: pointer;
+  }
+
+  .seg {
+    display: flex;
+    background: #f1f3f6;
+    border-radius: 9px;
+    padding: 3px;
+    gap: 3px;
+  }
+  .seg button {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 8px 0;
+    font-size: 13px;
+    border-radius: 7px;
+    cursor: pointer;
+    color: #4b5563;
+    font-family: inherit;
+    white-space: nowrap;
+    transition: background .15s, color .15s, box-shadow .15s;
+  }
+  .seg button.active {
+    background: #fff;
+    color: #2563eb;
+    font-weight: 600;
+    box-shadow: 0 1px 3px rgba(0,0,0,.1);
+  }
+
+  /* 颜色选择器行 */
+  .color-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 8px 12px;
+    background: #f6f8fa;
+    border-radius: 9px;
+    margin-bottom: 8px;
+  }
+  .color-row:last-child { margin-bottom: 0; }
+
+  .color-row .color-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #4b5563;
+    flex: 1;
+  }
+
+  .color-row .color-value {
+    font-size: 11px;
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    color: #9aa3af;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+  }
+
+  .color-row input[type="color"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 38px;
+    height: 26px;
+    border: 1px solid #d8dee7;
+    border-radius: 6px;
+    padding: 0;
+    background: #fff;
+    cursor: pointer;
+    overflow: hidden;
+    flex: 0 0 auto;
+  }
+  .color-row input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 2px;
+  }
+  .color-row input[type="color"]::-webkit-color-swatch {
+    border: none;
+    border-radius: 4px;
+  }
+  .color-row input[type="color"]::-moz-color-swatch {
+    border: none;
+    border-radius: 4px;
+  }
+
+  .reset-colors {
+    width: 100%;
+    margin-top: 8px;
+    padding: 8px;
+    border: 1px solid #d8dee7;
+    border-radius: 8px;
+    background: #fff;
+    color: #4b5563;
+    font-size: 12px;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .15s, border-color .15s;
+  }
+  .reset-colors:hover {
+    background: #f6f8fa;
+    border-color: #2563eb;
+    color: #2563eb;
+  }
+
+  textarea {
+    width: 100%;
+    height: 150px;
+    resize: vertical;
+    padding: 10px 12px;
+    border: 1px solid #d8dee7;
+    border-radius: 9px;
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.75;
+    outline: none;
+    color: #1f2328;
+    background: #fff;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  textarea:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37,99,235,.12);
+  }
+
+  .check-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #4b5563;
+    cursor: pointer;
+    user-select: none;
+    margin-bottom: 0;
+  }
+  .check-row input[type="checkbox"] {
+    width: 16px; height: 16px;
+    accent-color: #2563eb;
+    cursor: pointer;
+    flex: 0 0 auto;
+  }
+
+  #dateControls { margin-top: 10px; transition: opacity .15s; }
+  #dateControls.disabled {
+    opacity: .45;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  input[type="date"] {
+    width: 100%;
+    margin-top: 10px;
+    padding: 9px 12px;
+    border: 1px solid #d8dee7;
+    border-radius: 9px;
+    font-family: inherit;
+    font-size: 14px;
+    color: #1f2328;
+    background: #fff;
+    outline: none;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  input[type="date"]:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37,99,235,.12);
+  }
+
+  .info {
+    font-size: 12px;
+    color: #6b7280;
+    background: #f6f8fa;
+    padding: 10px 12px;
+    border-radius: 9px;
+    margin-bottom: 14px;
+    line-height: 1.7;
+  }
+
+  .primary {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 10px;
+    background: #2563eb;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background .15s;
+  }
+  .primary:hover { background: #1d4ed8; }
+  .primary:active { transform: translateY(1px); }
+
+  .hint {
+    font-size: 12px;
+    color: #9aa3af;
+    line-height: 1.7;
+    margin: 11px 0 0;
+  }
+
+  /* ============ 预览区 ============ */
+  .preview {
+    flex: 1;
+    min-width: 0;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    overflow-x: auto;
+  }
+
+  .page {
+    width: 210mm;
+    height: 297mm;
+    flex: 0 0 auto;
+    background: #fff;
+    box-shadow: 0 4px 22px rgba(15,23,42,.14);
+    padding: 12mm;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .page-header {
+    width: 100%;
+    height: 9mm;
+    flex: 0 0 9mm;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-family: "KaiTi", "STKaiti", "楷体", "Kaiti SC", serif;
+    font-size: 10.5pt;
+    line-height: 1;
+    color: #7a7a7a;
+    letter-spacing: .5px;
+    white-space: nowrap;
+  }
+
+  .handwrite-blank {
+    display: inline-block;
+    width: 50mm;
+    height: 1em;
+    border-bottom: 1px solid #aaa;
+    vertical-align: baseline;
+  }
+
+  .page-body {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .grid {
+    display: grid;
+    gap: 0;
+  }
+
+  .cell {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+  }
+
+  .cell-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible;
+  }
+
+  .glyph {
+    position: relative;
+    line-height: 1;
+    user-select: none;
+    white-space: nowrap;
+  }
+
+  /* 颜色由 JS 内联样式控制，这里只定义结构 */
+  .glyph.solid { }
+
+  .glyph.hollow {
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* ============ 打印 / 导出 PDF ============ */
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
+  @media print {
+    html, body {
+      background: #fff !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    .layout { display: block; }
+    .panel { display: none !important; }
+    .preview {
+      display: block;
+      padding: 0 !important;
+      margin: 0 !important;
+      gap: 0;
+      overflow: visible;
+      background: #fff;
+    }
+    .page {
+      box-shadow: none !important;
+      margin: 0 !important;
+      break-after: page;
+      page-break-after: always;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+    .page:last-child {
+      break-after: auto;
+      page-break-after: auto;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="layout">
+  <aside class="panel">
+    <h1>📝 A4 字帖生成器</h1>
+
+    <div class="field">
+      <div class="label-row">
+        <label for="colsRange">每行字数</label>
+        <span class="val" id="colsVal">10</span>
+      </div>
+      <input type="range" id="colsRange" min="5" max="20" step="1" value="10" />
+    </div>
+
+    <div class="field">
+      <label>格线类型</label>
+      <div class="seg" id="segGrid">
+        <button class="active" data-val="cross">十字</button>
+        <button data-val="mi">米字</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>字型</label>
+      <div class="seg" id="segFill">
+        <button class="active" data-val="hollow">空心</button>
+        <button data-val="solid">实心</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>字体</label>
+      <div class="seg" id="segFont">
+        <button class="active" data-val="kai">楷书</button>
+        <button data-val="xing">行楷</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>颜色配置</label>
+
+      <div class="color-row">
+        <span class="color-label">字体颜色</span>
+        <span class="color-value" id="fontColorVal">#6A6A6A</span>
+        <input type="color" id="fontColor" value="#6a6a6a" />
+      </div>
+
+      <div class="color-row">
+        <span class="color-label">田字格外框</span>
+        <span class="color-value" id="frameColorVal">#B0B0B0</span>
+        <input type="color" id="frameColor" value="#b0b0b0" />
+      </div>
+
+      <div class="color-row">
+        <span class="color-label">内部虚线</span>
+        <span class="color-value" id="dashColorVal">#C8C8C8</span>
+        <input type="color" id="dashColor" value="#c8c8c8" />
+      </div>
+
+      <button class="reset-colors" id="resetColors">恢复默认颜色</button>
+    </div>
+
+    <div class="field">
+      <label class="check-row">
+        <input type="checkbox" id="showDate" checked />
+        <span>页眉显示日期</span>
+      </label>
+
+      <div id="dateControls">
+        <div class="seg" id="segDateMode" style="margin-top:10px">
+          <button class="active" data-val="picker">打印日期</button>
+          <button data-val="manual">留空手填</button>
+        </div>
+        <input type="date" id="dateInput" />
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="content">字帖内容</label>
+      <textarea id="content" spellcheck="false" placeholder="在此输入字帖内容，自动分页…"></textarea>
+    </div>
+
+    <div class="info" id="info"></div>
+
+    <button class="primary" id="exportBtn">导出 PDF / 打印</button>
+    <p class="hint">
+      点击后在打印窗口中选择「目标打印机 → 另存为 PDF」，<br />
+      纸张 A4、边距「无」、勾选「背景图形」。<br />
+      页眉日期可选「打印日期」或「留空手填」（留出横线，打印后手写）。
+    </p>
+  </aside>
+
+  <main class="preview" id="preview"></main>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  const NS = 'http://www.w3.org/2000/svg';
+  const PAGE_W = 210;
+  const PAGE_H = 297;
+  const PAD = 12;
+  const HEADER_H = 9;
+
+  /* 默认颜色 */
+  const DEFAULTS = {
+    fontColor:  '#6a6a6a',
+    frameColor: '#b0b0b0',
+    dashColor:  '#c8c8c8'
+  };
+
+  const previewEl      = document.getElementById('preview');
+  const infoEl         = document.getElementById('info');
+  const contentEl      = document.getElementById('content');
+  const colsRange      = document.getElementById('colsRange');
+  const colsVal        = document.getElementById('colsVal');
+  const showDateEl     = document.getElementById('showDate');
+  const dateControlsEl = document.getElementById('dateControls');
+  const dateInput      = document.getElementById('dateInput');
+  const segDateMode    = document.getElementById('segDateMode');
+
+  const fontColorEl  = document.getElementById('fontColor');
+  const frameColorEl = document.getElementById('frameColor');
+  const dashColorEl  = document.getElementById('dashColor');
+  const fontColorVal = document.getElementById('fontColorVal');
+  const frameColorVal= document.getElementById('frameColorVal');
+  const dashColorVal = document.getElementById('dashColorVal');
+  const resetColors  = document.getElementById('resetColors');
+
+  /* ---------------- 日期工具 ---------------- */
+  function todayISO() {
+    const d = new Date();
+    const p = function (n) { return String(n).padStart(2, '0'); };
+    return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate());
+  }
+
+  function formatDate(iso) {
+    if (!iso) return '';
+    const parts = iso.split('-');
+    if (parts.length !== 3) return iso;
+    return parts[0] + '年' + parseInt(parts[1], 10) + '月' + parseInt(parts[2], 10) + '日';
+  }
+
+  /* ---------------- 状态 ---------------- */
+  const state = {
+    cols: 10,
+    grid: 'cross',
+    fill: 'hollow',
+    font: 'kai',
+    fontColor:  DEFAULTS.fontColor,
+    frameColor: DEFAULTS.frameColor,
+    dashColor:  DEFAULTS.dashColor,
+    showDate: true,
+    dateMode: 'picker',
+    date: todayISO(),
+    content: '床前明月光，疑是地上霜。\n举头望明月，低头思故乡。'
+  };
+
+  /* ---------------- 字体栈 ---------------- */
+  function fontStack(type) {
+    if (type === 'xing') {
+      return '"STXingkai","华文行楷","Xingkai SC","行楷","KaiTi","楷体","STKaiti",serif';
+    }
+    return '"KaiTi","STKaiti","楷体","Kaiti SC","TW-Kai","AR PL UKai CN",serif';
+  }
+
+  /* ---------------- 页眉左侧是否需要 ---------------- */
+  function hasHeaderLeftContent() {
+    if (!state.showDate) return false;
+    if (state.dateMode === 'manual') return true;
+    return formatDate(state.date).trim() !== '';
+  }
+
+  /* ---------------- SVG 绘制 ---------------- */
+  function makeSVG() {
+    const svg = document.createElementNS(NS, 'svg');
+    svg.setAttribute('viewBox', '0 0 100 100');
+    svg.setAttribute('preserveAspectRatio', 'none');
+    svg.setAttribute('class', 'cell-svg');
+    return svg;
+  }
+
+  function addRect(svg) {
+    const r = document.createElementNS(NS, 'rect');
+    r.setAttribute('x', '0');
+    r.setAttribute('y', '0');
+    r.setAttribute('width', '100');
+    r.setAttribute('height', '100');
+    r.setAttribute('fill', 'none');
+    r.setAttribute('stroke', state.frameColor);
+    r.setAttribute('stroke-width', '1.5');
+    r.setAttribute('vector-effect', 'non-scaling-stroke');
+    svg.appendChild(r);
+  }
+
+  function addDashedLine(svg, x1, y1, x2, y2) {
+    const l = document.createElementNS(NS, 'line');
+    l.setAttribute('x1', x1);
+    l.setAttribute('y1', y1);
+    l.setAttribute('x2', x2);
+    l.setAttribute('y2', y2);
+    l.setAttribute('stroke', state.dashColor);
+    l.setAttribute('stroke-width', '0.8');
+    l.setAttribute('stroke-dasharray', '6 5');
+    l.setAttribute('vector-effect', 'non-scaling-stroke');
+    svg.appendChild(l);
+  }
+
+  /* ---------------- 单元格 ---------------- */
+  function buildCell(ch, cellSize) {
+    const cell = document.createElement('div');
+    cell.className = 'cell';
+
+    const svg = makeSVG();
+    addRect(svg);
+    addDashedLine(svg, 0, 50, 100, 50);
+    addDashedLine(svg, 50, 0, 50, 100);
+    if (state.grid === 'mi') {
+      addDashedLine(svg, 0, 0, 100, 100);
+      addDashedLine(svg, 100, 0, 0, 100);
+    }
+    cell.appendChild(svg);
+
+    if (ch) {
+      const g = document.createElement('span');
+      g.className = 'glyph ' + state.fill;
+      g.textContent = ch;
+      g.style.fontSize = (cellSize * 0.76).toFixed(3) + 'mm';
+      g.style.fontFamily = fontStack(state.font);
+
+      if (state.fill === 'solid') {
+        g.style.color = state.fontColor;
+      } else {
+        // 空心：用描边色
+        g.style.color = 'transparent';
+        g.style.webkitTextFillColor = 'transparent';
+        g.style.webkitTextStroke = '1px ' + state.fontColor;
+      }
+      cell.appendChild(g);
+    }
+    return cell;
+  }
+
+  /* ---------------- 页眉左侧 ---------------- */
+  function buildHeaderLeft() {
+    const wrap = document.createElement('span');
+    if (!state.showDate) return wrap;
+
+    if (state.dateMode === 'manual') {
+      const blank = document.createElement('span');
+      blank.className = 'handwrite-blank';
+      wrap.appendChild(blank);
+    } else {
+      wrap.textContent = formatDate(state.date);
+    }
+    return wrap;
+  }
+
+  /* ---------------- 整页 ---------------- */
+  function buildPage(chars, cols, rows, cellSize, perPage, pageIndex, pageCount, hasHeader) {
+    const page = document.createElement('div');
+    page.className = 'page';
+
+    if (hasHeader) {
+      const header = document.createElement('div');
+      header.className = 'page-header';
+      header.appendChild(buildHeaderLeft());
+
+      const right = document.createElement('span');
+      right.textContent = pageCount > 1 ? (pageIndex + 1) + ' / ' + pageCount : '';
+      header.appendChild(right);
+      page.appendChild(header);
+    }
+
+    const body = document.createElement('div');
+    body.className = 'page-body';
+
+    const grid = document.createElement('div');
+    grid.className = 'grid';
+    grid.style.gridTemplateColumns = 'repeat(' + cols + ', ' + cellSize.toFixed(4) + 'mm)';
+    grid.style.gridAutoRows = cellSize.toFixed(4) + 'mm';
+    grid.style.gap = '0';
+
+    for (let i = 0; i < perPage; i++) {
+      grid.appendChild(buildCell(chars[i] || '', cellSize));
+    }
+
+    body.appendChild(grid);
+    page.appendChild(body);
+    return page;
+  }
+
+  /* ---------------- 主生成逻辑 ---------------- */
+  function generate() {
+    previewEl.innerHTML = '';
+
+    const cols     = state.cols;
+    const availW   = PAGE_W - PAD * 2;
+    const cellSize = availW / cols;
+
+    const chars = Array.from(state.content.replace(/\s+/g, ''));
+    const total = chars.length;
+
+    const leftNeeded = hasHeaderLeftContent();
+
+    let hasHeader = leftNeeded;
+    let rows = 1, perPage = 1, pageCount = 1;
+
+    for (let iter = 0; iter < 8; iter++) {
+      const availH = PAGE_H - PAD * 2 - (hasHeader ? HEADER_H : 0);
+      rows = Math.max(1, Math.floor(availH / cellSize));
+      perPage = cols * rows;
+      pageCount = Math.max(1, Math.ceil(total / perPage));
+
+      const need = leftNeeded || pageCount > 1;
+      if (need === hasHeader) break;
+      hasHeader = need;
+    }
+
+    const frag = document.createDocumentFragment();
+    for (let p = 0; p < pageCount; p++) {
+      const slice = chars.slice(p * perPage, (p + 1) * perPage);
+      frag.appendChild(
+        buildPage(slice, cols, rows, cellSize, perPage, p, pageCount, hasHeader)
+      );
+    }
+    previewEl.appendChild(frag);
+
+    let infoHtml =
+      '每行 <b>' + cols + '</b> 字 · 每页 <b>' + rows + '</b> 行 · ' +
+      '共 <b>' + total + '</b> 字 · <b>' + pageCount + '</b> 页';
+
+    if (hasHeader) {
+      const parts = [];
+      if (state.showDate) {
+        parts.push(state.dateMode === 'picker'
+          ? formatDate(state.date)
+          : '（留空手填）');
+      }
+      if (pageCount > 1) parts.push('页码 1/' + pageCount);
+      if (parts.length) infoHtml += '<br />页眉：' + parts.join(' · ');
+    }
+    infoEl.innerHTML = infoHtml;
+  }
+
+  /* ---------------- 颜色控制 ---------------- */
+  function updateColorDisplay() {
+    fontColorVal.textContent  = state.fontColor.toUpperCase();
+    frameColorVal.textContent = state.frameColor.toUpperCase();
+    dashColorVal.textContent  = state.dashColor.toUpperCase();
+  }
+
+  function bindColor(inputEl, key) {
+    inputEl.addEventListener('input', function () {
+      state[key] = this.value;
+      updateColorDisplay();
+      generate();
+    });
+  }
+  bindColor(fontColorEl,  'fontColor');
+  bindColor(frameColorEl, 'frameColor');
+  bindColor(dashColorEl,  'dashColor');
+
+  resetColors.addEventListener('click', function () {
+    state.fontColor  = DEFAULTS.fontColor;
+    state.frameColor = DEFAULTS.frameColor;
+    state.dashColor  = DEFAULTS.dashColor;
+
+    fontColorEl.value  = DEFAULTS.fontColor;
+    frameColorEl.value = DEFAULTS.frameColor;
+    dashColorEl.value  = DEFAULTS.dashColor;
+
+    updateColorDisplay();
+    generate();
+  });
+
+  /* ---------------- 控件绑定 ---------------- */
+  colsRange.addEventListener('input', function () {
+    state.cols = parseInt(this.value, 10);
+    colsVal.textContent = state.cols;
+    generate();
+  });
+
+  function bindSegment(id, key) {
+    const el = document.getElementById(id);
+    el.addEventListener('click', function (e) {
+      const btn = e.target.closest('button');
+      if (!btn) return;
+      el.querySelectorAll('button').forEach(function (b) {
+        b.classList.toggle('active', b === btn);
+      });
+      state[key] = btn.dataset.val;
+      generate();
+    });
+  }
+  bindSegment('segGrid', 'grid');
+  bindSegment('segFill', 'fill');
+  bindSegment('segFont', 'font');
+
+  segDateMode.addEventListener('click', function (e) {
+    const btn = e.target.closest('button');
+    if (!btn) return;
+    segDateMode.querySelectorAll('button').forEach(function (b) {
+      b.classList.toggle('active', b === btn);
+    });
+    state.dateMode = btn.dataset.val;
+    syncDateInputs();
+    generate();
+  });
+
+  function syncDateInputs() {
+    dateInput.style.display = (state.dateMode === 'picker') ? '' : 'none';
+  }
+
+  function updateDateEnabled() {
+    const on = state.showDate;
+    dateControlsEl.classList.toggle('disabled', !on);
+    dateInput.disabled = !on;
+  }
+
+  showDateEl.addEventListener('change', function () {
+    state.showDate = this.checked;
+    updateDateEnabled();
+    generate();
+  });
+
+  dateInput.addEventListener('change', function () {
+    state.date = this.value || todayISO();
+    generate();
+  });
+
+  let timer = null;
+  contentEl.addEventListener('input', function () {
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      state.content = contentEl.value;
+      generate();
+    }, 150);
+  });
+
+  document.getElementById('exportBtn').addEventListener('click', function () {
+    window.print();
+  });
+
+  /* ---------------- 初始化 ---------------- */
+  contentEl.value      = state.content;
+  colsVal.textContent  = state.cols;
+  dateInput.value      = state.date;
+  fontColorEl.value    = state.fontColor;
+  frameColorEl.value   = state.frameColor;
+  dashColorEl.value    = state.dashColor;
+  updateColorDisplay();
+  syncDateInputs();
+  updateDateEnabled();
+  generate();
+})();
+</script>
+</body>
+</html>

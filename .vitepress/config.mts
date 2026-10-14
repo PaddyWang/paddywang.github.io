@@ -21,6 +21,9 @@ export default defineConfig({
     externalLinkIcon: true,
     // 
     nav: [
+      { text: '小工具', items: [
+        { text: 'A4 字帖生成器', link: '/tools/a4-calligraphy-generator/' },
+      ]},
       { text: '技术博客', items: [
         { text: '前端专题', link: '/blog/front/index' },
         { text: 'TS专题', link: '/blog/ts/速查表/' },
