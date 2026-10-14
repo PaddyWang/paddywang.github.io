@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>A4 字帖生成器</title>
 <style>
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", "PingFang SC", sans-serif;
+    background: #eceff3;
+    color: #1f2328;
+    -webkit-font-smoothing: antialiased;
+  }
 
   .layout { display: flex; align-items: flex-start; }
 
@@ -26,7 +35,19 @@
     margin: 0 0 22px;
     letter-spacing: .5px;
     color: #111827;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
+
+  .saved-tip {
+    font-size: 11px;
+    font-weight: 500;
+    color: #16a34a;
+    opacity: 0;
+    transition: opacity .3s;
+  }
+  .saved-tip.show { opacity: 1; }
 
   .field { margin-bottom: 18px; }
 
@@ -105,7 +126,6 @@
     box-shadow: 0 1px 3px rgba(0,0,0,.1);
   }
 
-  /* 颜色选择器行 */
   .color-row {
     display: flex;
     align-items: center;
@@ -116,7 +136,7 @@
     border-radius: 9px;
     margin-bottom: 8px;
   }
-  .color-row:last-child { margin-bottom: 0; }
+  .color-row:last-of-type { margin-bottom: 0; }
 
   .color-row .color-label {
     font-size: 13px;
@@ -146,9 +166,7 @@
     overflow: hidden;
     flex: 0 0 auto;
   }
-  .color-row input[type="color"]::-webkit-color-swatch-wrapper {
-    padding: 2px;
-  }
+  .color-row input[type="color"]::-webkit-color-swatch-wrapper { padding: 2px; }
   .color-row input[type="color"]::-webkit-color-swatch {
     border: none;
     border-radius: 4px;
@@ -158,7 +176,7 @@
     border-radius: 4px;
   }
 
-  .reset-colors {
+  .minor-btn {
     width: 100%;
     margin-top: 8px;
     padding: 8px;
@@ -170,12 +188,17 @@
     font-family: inherit;
     font-weight: 600;
     cursor: pointer;
-    transition: background .15s, border-color .15s;
+    transition: background .15s, border-color .15s, color .15s;
   }
-  .reset-colors:hover {
+  .minor-btn:hover {
     background: #f6f8fa;
     border-color: #2563eb;
     color: #2563eb;
+  }
+  .minor-btn.danger:hover {
+    border-color: #dc2626;
+    color: #dc2626;
+    background: #fef2f2;
   }
 
   textarea {
@@ -361,7 +384,6 @@
     white-space: nowrap;
   }
 
-  /* 颜色由 JS 内联样式控制，这里只定义结构 */
   .glyph.solid { }
 
   .glyph.hollow {
@@ -412,7 +434,10 @@
 
 <div class="layout">
   <aside class="panel">
-    <h1>📝 A4 字帖生成器</h1>
+    <h1>
+      <span>📝 A4 字帖生成器</span>
+      <span class="saved-tip" id="savedTip">已保存</span>
+    </h1>
 
     <div class="field">
       <div class="label-row">
@@ -467,7 +492,7 @@
         <input type="color" id="dashColor" value="#c8c8c8" />
       </div>
 
-      <button class="reset-colors" id="resetColors">恢复默认颜色</button>
+      <button class="minor-btn" id="resetColors">恢复默认颜色</button>
     </div>
 
     <div class="field">
@@ -493,10 +518,15 @@
     <div class="info" id="info"></div>
 
     <button class="primary" id="exportBtn">导出 PDF / 打印</button>
+
+    <button class="minor-btn danger" id="resetAll" style="margin-top:10px">
+      重置所有配置
+    </button>
+
     <p class="hint">
       点击后在打印窗口中选择「目标打印机 → 另存为 PDF」，<br />
       纸张 A4、边距「无」、勾选「背景图形」。<br />
-      页眉日期可选「打印日期」或「留空手填」（留出横线，打印后手写）。
+      <b style="color:#16a34a">所有配置已自动保存在本地，下次打开会自动恢复。</b>
     </p>
   </aside>
 
@@ -513,11 +543,20 @@
   const PAD = 12;
   const HEADER_H = 9;
 
-  /* 默认颜色 */
+  const STORAGE_KEY = 'zitie-config-v1';
+
+  /* 默认值 */
   const DEFAULTS = {
+    cols: 10,
+    grid: 'cross',
+    fill: 'hollow',
+    font: 'kai',
     fontColor:  '#6a6a6a',
     frameColor: '#b0b0b0',
-    dashColor:  '#c8c8c8'
+    dashColor:  '#c8c8c8',
+    showDate: true,
+    dateMode: 'picker',
+    content: '床前明月光，疑是地上霜。\n举头望明月，低头思故乡。'
   };
 
   const previewEl      = document.getElementById('preview');
@@ -537,6 +576,8 @@
   const frameColorVal= document.getElementById('frameColorVal');
   const dashColorVal = document.getElementById('dashColorVal');
   const resetColors  = document.getElementById('resetColors');
+  const resetAll     = document.getElementById('resetAll');
+  const savedTip     = document.getElementById('savedTip');
 
   /* ---------------- 日期工具 ---------------- */
   function todayISO() {
@@ -554,18 +595,85 @@
 
   /* ---------------- 状态 ---------------- */
   const state = {
-    cols: 10,
-    grid: 'cross',
-    fill: 'hollow',
-    font: 'kai',
-    fontColor:  DEFAULTS.fontColor,
-    frameColor: DEFAULTS.frameColor,
-    dashColor:  DEFAULTS.dashColor,
-    showDate: true,
-    dateMode: 'picker',
-    date: todayISO(),
-    content: '床前明月光，疑是地上霜。\n举头望明月，低头思故乡。'
+    cols:        DEFAULTS.cols,
+    grid:        DEFAULTS.grid,
+    fill:        DEFAULTS.fill,
+    font:        DEFAULTS.font,
+    fontColor:   DEFAULTS.fontColor,
+    frameColor:  DEFAULTS.frameColor,
+    dashColor:   DEFAULTS.dashColor,
+    showDate:    DEFAULTS.showDate,
+    dateMode:    DEFAULTS.dateMode,
+    date:        todayISO(),
+    content:     DEFAULTS.content
   };
+
+  /* ---------------- 本地存储 ---------------- */
+  let saveTimer = null;
+  let tipTimer  = null;
+
+  function showSavedTip() {
+    savedTip.classList.add('show');
+    clearTimeout(tipTimer);
+    tipTimer = setTimeout(function () {
+      savedTip.classList.remove('show');
+    }, 1200);
+  }
+
+  function saveState() {
+    try {
+      const data = {
+        cols:       state.cols,
+        grid:       state.grid,
+        fill:       state.fill,
+        font:       state.font,
+        fontColor:  state.fontColor,
+        frameColor: state.frameColor,
+        dashColor:  state.dashColor,
+        showDate:   state.showDate,
+        dateMode:   state.dateMode,
+        date:       state.date,
+        content:    state.content
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      showSavedTip();
+    } catch (e) {
+      console.warn('保存配置失败：', e);
+    }
+  }
+
+  // 文本/滑块高频改动，稍作延迟再写
+  function saveStateDebounced() {
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(saveState, 350);
+  }
+
+  function loadState() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      const saved = JSON.parse(raw);
+
+      // 逐项安全合并
+      if (typeof saved.cols === 'number' && saved.cols >= 5 && saved.cols <= 20) {
+        state.cols = saved.cols;
+      }
+      if (saved.grid === 'cross' || saved.grid === 'mi') state.grid = saved.grid;
+      if (saved.fill === 'hollow' || saved.fill === 'solid') state.fill = saved.fill;
+      if (saved.font === 'kai' || saved.font === 'xing') state.font = saved.font;
+      if (typeof saved.fontColor  === 'string') state.fontColor  = saved.fontColor;
+      if (typeof saved.frameColor === 'string') state.frameColor = saved.frameColor;
+      if (typeof saved.dashColor  === 'string') state.dashColor  = saved.dashColor;
+      if (typeof saved.showDate   === 'boolean') state.showDate = saved.showDate;
+      if (saved.dateMode === 'picker' || saved.dateMode === 'manual') {
+        state.dateMode = saved.dateMode;
+      }
+      if (typeof saved.date === 'string' && saved.date) state.date = saved.date;
+      if (typeof saved.content === 'string') state.content = saved.content;
+    } catch (e) {
+      console.warn('加载配置失败：', e);
+    }
+  }
 
   /* ---------------- 字体栈 ---------------- */
   function fontStack(type) {
@@ -642,7 +750,6 @@
       if (state.fill === 'solid') {
         g.style.color = state.fontColor;
       } else {
-        // 空心：用描边色
         g.style.color = 'transparent';
         g.style.webkitTextFillColor = 'transparent';
         g.style.webkitTextStroke = '1px ' + state.fontColor;
@@ -754,7 +861,7 @@
     infoEl.innerHTML = infoHtml;
   }
 
-  /* ---------------- 颜色控制 ---------------- */
+  /* ---------------- 颜色 ---------------- */
   function updateColorDisplay() {
     fontColorVal.textContent  = state.fontColor.toUpperCase();
     frameColorVal.textContent = state.frameColor.toUpperCase();
@@ -766,6 +873,7 @@
       state[key] = this.value;
       updateColorDisplay();
       generate();
+      saveStateDebounced();
     });
   }
   bindColor(fontColorEl,  'fontColor');
@@ -783,6 +891,7 @@
 
     updateColorDisplay();
     generate();
+    saveState();
   });
 
   /* ---------------- 控件绑定 ---------------- */
@@ -790,6 +899,7 @@
     state.cols = parseInt(this.value, 10);
     colsVal.textContent = state.cols;
     generate();
+    saveStateDebounced();
   });
 
   function bindSegment(id, key) {
@@ -802,6 +912,7 @@
       });
       state[key] = btn.dataset.val;
       generate();
+      saveState();
     });
   }
   bindSegment('segGrid', 'grid');
@@ -817,6 +928,7 @@
     state.dateMode = btn.dataset.val;
     syncDateInputs();
     generate();
+    saveState();
   });
 
   function syncDateInputs() {
@@ -833,37 +945,93 @@
     state.showDate = this.checked;
     updateDateEnabled();
     generate();
+    saveState();
   });
 
   dateInput.addEventListener('change', function () {
     state.date = this.value || todayISO();
     generate();
+    saveState();
   });
 
-  let timer = null;
   contentEl.addEventListener('input', function () {
+    state.content = contentEl.value;
     clearTimeout(timer);
     timer = setTimeout(function () {
-      state.content = contentEl.value;
       generate();
-    }, 150);
+      saveState();
+    }, 180);
+  });
+  let timer = null;
+
+  /* ---------------- 恢复 UI ---------------- */
+  function restoreUI() {
+    // 滑块
+    colsRange.value = state.cols;
+    colsVal.textContent = state.cols;
+
+    // segment 按钮
+    document.querySelectorAll('#segGrid button').forEach(function (b) {
+      b.classList.toggle('active', b.dataset.val === state.grid);
+    });
+    document.querySelectorAll('#segFill button').forEach(function (b) {
+      b.classList.toggle('active', b.dataset.val === state.fill);
+    });
+    document.querySelectorAll('#segFont button').forEach(function (b) {
+      b.classList.toggle('active', b.dataset.val === state.font);
+    });
+    document.querySelectorAll('#segDateMode button').forEach(function (b) {
+      b.classList.toggle('active', b.dataset.val === state.dateMode);
+    });
+
+    // 颜色
+    fontColorEl.value  = state.fontColor;
+    frameColorEl.value = state.frameColor;
+    dashColorEl.value  = state.dashColor;
+    updateColorDisplay();
+
+    // 日期
+    showDateEl.checked = state.showDate;
+    dateInput.value    = state.date;
+
+    // 文本
+    contentEl.value = state.content;
+
+    // 联动状态
+    syncDateInputs();
+    updateDateEnabled();
+  }
+
+  /* ---------------- 重置所有 ---------------- */
+  resetAll.addEventListener('click', function () {
+    if (!confirm('确定要恢复所有默认配置吗？此操作会清空已保存的设置。')) return;
+
+    state.cols       = DEFAULTS.cols;
+    state.grid       = DEFAULTS.grid;
+    state.fill       = DEFAULTS.fill;
+    state.font       = DEFAULTS.font;
+    state.fontColor  = DEFAULTS.fontColor;
+    state.frameColor = DEFAULTS.frameColor;
+    state.dashColor  = DEFAULTS.dashColor;
+    state.showDate   = DEFAULTS.showDate;
+    state.dateMode   = DEFAULTS.dateMode;
+    state.date       = todayISO();
+    state.content    = DEFAULTS.content;
+
+    restoreUI();
+    generate();
+    saveState();
   });
 
+  /* ---------------- 导出 PDF ---------------- */
   document.getElementById('exportBtn').addEventListener('click', function () {
     window.print();
   });
 
   /* ---------------- 初始化 ---------------- */
-  contentEl.value      = state.content;
-  colsVal.textContent  = state.cols;
-  dateInput.value      = state.date;
-  fontColorEl.value    = state.fontColor;
-  frameColorEl.value   = state.frameColor;
-  dashColorEl.value    = state.dashColor;
-  updateColorDisplay();
-  syncDateInputs();
-  updateDateEnabled();
-  generate();
+  loadState();      // 先读取本地配置
+  restoreUI();      // 再同步到 UI 控件
+  generate();       // 最后渲染
 })();
 </script>
 </body>
